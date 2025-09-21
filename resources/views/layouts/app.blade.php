@@ -9,17 +9,18 @@
   @livewireStyles
 </head>
 <body class="min-h-screen bg-gray-50 text-gray-900">
+  @php
+    $is = fn(string $name) => request()->routeIs($name) ? 'text-azulchile underline' : 'hover:underline';
+  @endphp
   <header class="bg-white border-b">
     <nav class="container mx-auto flex items-center justify-between p-4">
       <a href="{{ route('home') }}" class="font-bold text-lg">Profe Nicolás</a>
       <ul class="flex gap-4 text-sm">
-        <li><a href="{{ route('materials.index') }}" class="hover:underline">Materiales</a></li>
-        <li><a href="{{ route('about') }}" class="hover:underline">Sobre mí</a></li>
-        <li><a href="{{ route('services') }}" class="hover:underline">Servicios</a></li>
-        <li><a href="{{ route('contact') }}" class="hover:underline">Contacto</a></li>
-        {{-- Enlace al panel admin (Filament). Usamos /admin para evitar depender de nombres de ruta) --}}
-        <li><a href="/admin" class="hover:underline">Admin</a></li>
-      </ul>
+        <li><a class="{{ $is('materials.index') }}" href="{{ route('materials.index') }}">Materiales</a></li>
+        <li><a class="{{ $is('about') }}" href="{{ route('about') }}">Sobre mí</a></li>
+        <li><a class="{{ $is('services') }}" href="{{ route('services') }}">Servicios</a></li>
+        <li><a class="{{ $is('contact') }}" href="{{ route('contact') }}">Contacto</a></li>
+      </ul>`
     </nav>
   </header>
 

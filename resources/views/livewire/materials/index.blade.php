@@ -23,16 +23,14 @@
 
   <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
     @foreach($materials as $m)
-      <a wire:navigate href="{{ route('materials.show',$m->code) }}"
-         class="block border rounded-xl p-4 hover:shadow bg-white">
-        <div class="text-sm text-gray-500">{{ $m->code }}</div>
-        <div class="font-semibold">{{ $m->title }}</div>
-        <div class="text-xs text-gray-600">
-          {{ strtoupper($m->level) }} • {{ $m->subject }}
-          @if($m->year) • {{ $m->year }}@endif
-          @if($m->semester) - S{{ $m->semester }}@endif
-        </div>
-      </a>
+      <a wire:navigate href="{{ route('materials.show',$m->code) }}" class="card hover:shadow">
+          <div c`lass="text-sm muted">{{ $m->code }}</div>
+          <div class="font-semibold">{{ $m->title }}</div>
+          <div class="text-xs muted mt-1">
+            {{ strtoupper($m->level) }} • {{ $m->subject }}
+            @if($m->year) • {{ $m->year }}@endif @if($m->semester) - S{{ $m->semester }}@endif
+          </div>
+        </a>
     @endforeach
   </div>
 
