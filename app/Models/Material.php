@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
 use Laravel\Scout\Attributes\SearchUsingFullText;
 use Laravel\Scout\Attributes\SearchUsingPrefix;
+use Illuminate\Database\Eloquent\Builder;
 
 class Material extends Model
 {
@@ -24,6 +25,7 @@ class Material extends Model
         'year' => 'integer',
         'semester' => 'integer',
         'size_kb' => 'integer',
+        'tags' => 'array',
     ];
 
     // Para usar {material:code} en las rutas
@@ -50,4 +52,39 @@ class Material extends Model
             'type'        => $this->type,
         ];
     }
+
+    protected function getTipoAttribute()
+    {
+        if($this->type == 'html'){
+            return 'Presentación HTML';
+        }
+
+        if($this->type == 'other'){
+            return 'Otros';
+        }
+
+        if($this->type == 'pdf'){
+            return 'PDF';
+        }
+
+        return ucfirst($this->type);
+    }
+
+    protected function getNivelAttribute()
+    {
+        if($this->level == 'cft') {
+            return '<span class="badge text-bg-primary">' . strtoupper($this->level) . '</span>';
+        }
+
+        if($this->level == 'colegio') {
+            return '<span class="badge text-bg-warning">' . strtoupper($this->level) . '</span>';
+        }
+
+        if($this->level == 'particulares') {
+            return '<span class="badge text-bg-success">' . strtoupper($this->level) . '</span>';
+        }
+
+        return '<span class="badge text-bg-info">' . strtoupper($this->level) . '</span>';
+    }
+
 }

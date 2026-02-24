@@ -18,10 +18,11 @@
         "lightningcss-linux-x64-gnu": "^1.29.1"
     },
     "devDependencies": {
+        "@popperjs/core": "^2.11.8",
         "@tailwindcss/cli": "^4.1.13",
         "@tailwindcss/forms": "^0.5.10",
-        "autoprefixer": "^10.4.21",
-        "postcss": "^8.5.6",
-        "tailwindcss": "^4.1.13"
+        "bootstrap": "^5.3.3",
+        "bootstrap-icons": "^1.13.1",
+        "sass": "^1.93.0"
     }
 }

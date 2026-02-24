@@ -1,0 +1,13 @@
+@use "variables" as *;      // tus overrides (si usas _variables.scss)
+@use "bootstrap/scss/bootstrap";
+
+// Si instalaste bootstrap-icons:
+@use "bootstrap-icons/font/bootstrap-icons.css";
+
+/* Estilos propios mínimos */
+:root {
+  scroll-behavior: smooth;
+}
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
