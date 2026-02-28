@@ -31,11 +31,15 @@
             </div>
         </nav>
     </header>
-    <main class="py-4 bg-body-tertiary">
-        <div class="container">
-            {{ $slot ?? '' }}
-            @yield('content')
-        </div>
+    <main class="@yield('main_class', 'py-4 bg-body-tertiary')">
+        @hasSection('full_content')
+            @yield('full_content')
+        @else
+            <div class="container">
+                {{ $slot ?? '' }}
+                @yield('content')
+            </div>
+        @endif
     </main>
 
     <footer class="border-top py-4">
