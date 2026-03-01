@@ -7,9 +7,11 @@ use App\Models\Material;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Forms\Get;
+use Filament\Forms\Set;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Support\HtmlString;
+use Illuminate\Support\Str;
 
 class MaterialResource extends \Filament\Resources\Resource
 {
@@ -18,6 +20,40 @@ class MaterialResource extends \Filament\Resources\Resource
     protected static ?string $navigationGroup = 'Contenido';
     protected static ?string $navigationLabel = 'Materiales';
 
+    /**
+     * Genera un código URL-safe único a partir de los campos del material.
+     * Si el slug base ya existe, agrega -2, -3, … (estilo WordPress).
+     *
+     * @param  array       $data      Datos del formulario (level, subject, course, year, semester, title)
+     * @param  int|null    $ignoreId  ID del registro actual en edición (para no colisionar consigo mismo)
+     */
+    public static function generateUniqueCode(array $data, ?int $ignoreId = null): string
+    {
+        $parts = array_filter([
+            $data['level']    ?? null,
+            $data['subject']  ?? null,
+            $data['course']   ?? null,
+            $data['year']     ?? null,
+            isset($data['semester']) && $data['semester'] ? 's' . $data['semester'] : null,
+            $data['title']    ?? null,
+        ], fn($v) => $v !== null && $v !== '');
+
+        $base = Str::slug(implode(' ', $parts)) ?: 'material';
+
+        $code = $base;
+        $n    = 2;
+
+        while (
+            Material::where('code', $code)
+                ->when($ignoreId, fn($q) => $q->where('id', '!=', $ignoreId))
+                ->exists()
+        ) {
+            $code = $base . '-' . $n++;
+        }
+
+        return $code;
+    }
+
     public static function form(Form $form): Form
     {
         return $form->schema([
@@ -25,7 +61,27 @@ class MaterialResource extends \Filament\Resources\Resource
                 ->label('Código')
                 ->required()
                 ->unique(ignoreRecord: true)
-                ->maxLength(100),
+                ->maxLength(100)
+                ->hint(fn($record) => $record ? 'Cambiar este valor modifica la URL pública del material.' : null)
+                ->hintColor('warning')
+                ->hintIcon(fn($record) => $record ? 'heroicon-o-exclamation-triangle' : null)
+                ->placeholder('Se generará automáticamente al guardar')
+                ->suffixAction(
+                    Forms\Components\Actions\Action::make('generate_code')
+                        ->icon('heroicon-o-arrow-path')
+                        ->tooltip('Generar código desde los campos del formulario')
+                        ->action(function (Set $set, Get $get, Forms\Components\Component $component) {
+                            $record = $component->getLivewire()->record ?? null;
+                            $set('code', MaterialResource::generateUniqueCode([
+                                'level'    => $get('level'),
+                                'subject'  => $get('subject'),
+                                'course'   => $get('course'),
+                                'year'     => $get('year'),
+                                'semester' => $get('semester'),
+                                'title'    => $get('title'),
+                            ], $record?->id));
+                        })
+                ),
 
             Forms\Components\TextInput::make('title')
                 ->label('Título')

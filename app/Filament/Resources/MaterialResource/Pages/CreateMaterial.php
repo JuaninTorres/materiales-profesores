@@ -11,6 +11,15 @@ class CreateMaterial extends CreateRecord
 {
     protected static string $resource = MaterialResource::class;
 
+    protected function mutateFormDataBeforeCreate(array $data): array
+    {
+        if (empty($data['code'])) {
+            $data['code'] = MaterialResource::generateUniqueCode($data);
+        }
+
+        return $data;
+    }
+
     protected function afterCreate(): void
     {
         $this->updateFileMeta($this->record);
