@@ -29,16 +29,25 @@ class MaterialController extends Controller
         return view('materiales.index', compact('materials'));
     }
 
+    public function content(Material $material)
+    {
+        abort_unless($material->published && $material->type === 'html' && $material->file_path, 404);
+
+        $content = \Illuminate\Support\Facades\Storage::disk('public')->get($material->file_path);
+        abort_if($content === null, 404);
+
+        return response($content, 200)->header('Content-Type', 'text/html; charset=utf-8');
+    }
+
     public function show(Material $material)
     {
-        // Aquí puedes cargar relacionados si quieres:
-        // $related = Material::where('course',$material->course)
-        //     ->whereKeyNot($material->getKey())
-        //     ->latest('id')->take(6)->get();
+        $related = Material::where('published', true)
+            ->where('course', $material->course)
+            ->whereKeyNot($material->getKey())
+            ->latest('id')
+            ->take(4)
+            ->get();
 
-        return view('materiales.show', [
-            'material' => $material,
-            // 'related'  => $related,
-        ]);
+        return view('materiales.show', compact('material', 'related'));
     }
 }
