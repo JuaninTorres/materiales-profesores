@@ -19,7 +19,7 @@
 
     {{-- Clases particulares --}}
     <div class="col-lg-4">
-        <div class="card border-0 shadow-sm h-100">
+        <div class="card border-0 shadow-sm h-100 card-hover">
             <div class="card-body p-4 d-flex flex-column">
                 <div class="mb-3">
                     <i class="bi bi-journal-text display-5 text-primary" aria-hidden="true"></i>
@@ -53,11 +53,11 @@
 
     {{-- Preparación PAES --}}
     <div class="col-lg-4">
-        <div class="card border-0 shadow-sm h-100 border-top border-4 border-primary">
+        <div class="card border-0 shadow-sm h-100 border-top border-4 border-primary card-hover">
             <div class="card-body p-4 d-flex flex-column">
                 <div class="mb-3 d-flex align-items-start justify-content-between">
-                    <i class="bi bi-trophy display-5 text-primary" aria-hidden="true"></i>
-                    <span class="badge text-bg-primary">Más solicitado</span>
+                    <i class="bi bi-trophy display-5 text-warning" aria-hidden="true"></i>
+                    <span class="badge text-bg-warning text-white">Más solicitado</span>
                 </div>
                 <h2 class="h5 fw-bold mb-2">Preparación PAES</h2>
                 <p class="text-muted mb-3">
@@ -88,10 +88,10 @@
 
     {{-- Material personalizado --}}
     <div class="col-lg-4">
-        <div class="card border-0 shadow-sm h-100">
+        <div class="card border-0 shadow-sm h-100 card-hover">
             <div class="card-body p-4 d-flex flex-column">
                 <div class="mb-3">
-                    <i class="bi bi-file-earmark-ruled display-5 text-primary" aria-hidden="true"></i>
+                    <i class="bi bi-file-earmark-ruled display-5 text-success" aria-hidden="true"></i>
                 </div>
                 <h2 class="h5 fw-bold mb-2">Material personalizado</h2>
                 <p class="text-muted mb-3">
@@ -157,7 +157,7 @@
         </div>
         <div class="col-sm-6 col-lg-3">
             <div class="d-flex align-items-start gap-3">
-                <i class="bi bi-calendar-month-fill text-primary fs-5 flex-shrink-0 mt-1" aria-hidden="true"></i>
+                <i class="bi bi-calendar-week-fill text-primary fs-5 flex-shrink-0 mt-1" aria-hidden="true"></i>
                 <div>
                     <div class="fw-semibold mb-1">Paquetes mensuales</div>
                     <span class="text-muted small">Disponibles para quienes prefieren planificar sus clases mes a mes.</span>

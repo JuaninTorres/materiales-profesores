@@ -6,7 +6,7 @@
 @section('full_content')
 
 {{-- ================================================================
-     HERO
+     HERO — sin AOS (sobre el fold, visible de inmediato)
 ================================================================ --}}
 <section class="bg-primary text-white py-5">
     <div class="container py-4">
@@ -48,7 +48,7 @@
 <section class="py-5">
     <div class="container py-3">
         <div class="row g-4 text-center">
-            <div class="col-md-4">
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="0">
                 <div class="p-3">
                     <i class="bi bi-file-earmark-text display-4 text-primary mb-3 d-block" aria-hidden="true"></i>
                     <h2 class="h5 fw-bold">Material organizado y gratuito</h2>
@@ -58,7 +58,7 @@
                     </p>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
                 <div class="p-3">
                     <i class="bi bi-people display-4 text-primary mb-3 d-block" aria-hidden="true"></i>
                     <h2 class="h5 fw-bold">Para todos los niveles</h2>
@@ -68,7 +68,7 @@
                     </p>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
                 <div class="p-3">
                     <i class="bi bi-person-check display-4 text-primary mb-3 d-block" aria-hidden="true"></i>
                     <h2 class="h5 fw-bold">Asesorías personalizadas</h2>
@@ -87,28 +87,28 @@
 ================================================================ --}}
 <section class="py-5 bg-body-tertiary">
     <div class="container py-3">
-        <h2 class="h3 fw-bold text-center mb-2">¿En qué nivel estás?</h2>
-        <p class="text-center text-muted mb-5">
+        <h2 class="h3 fw-bold text-center mb-2" data-aos="fade-up">¿En qué nivel estás?</h2>
+        <p class="text-center text-muted mb-5" data-aos="fade-up" data-aos-delay="50">
             Tengo material y clases disponibles para tres contextos distintos.
         </p>
         <div class="row g-4">
-            <div class="col-md-4">
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="0">
                 <div class="card h-100 border-0 shadow-sm">
                     <div class="card-body p-4 text-center d-flex flex-column">
-                        <i class="bi bi-building display-5 text-warning mb-3" aria-hidden="true"></i>
+                        <i class="bi bi-building display-5 text-success mb-3" aria-hidden="true"></i>
                         <h3 class="h5 fw-bold">Colegio</h3>
                         <p class="text-muted flex-grow-1">
                             7° básico a 4° medio. Guías, ejercicios y materia
                             de cada unidad, ordenados por curso.
                         </p>
                         <a href="{{ route('materials.index') }}"
-                           class="btn btn-outline-warning btn-sm">
+                           class="btn btn-outline-success btn-sm">
                             Ver materiales
                         </a>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
                 <div class="card h-100 border-0 shadow-sm">
                     <div class="card-body p-4 text-center d-flex flex-column">
                         <i class="bi bi-tools display-5 text-primary mb-3" aria-hidden="true"></i>
@@ -124,17 +124,17 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
                 <div class="card h-100 border-0 shadow-sm">
                     <div class="card-body p-4 text-center d-flex flex-column">
-                        <i class="bi bi-trophy display-5 text-success mb-3" aria-hidden="true"></i>
+                        <i class="bi bi-trophy display-5 text-warning mb-3" aria-hidden="true"></i>
                         <h3 class="h5 fw-bold">PAES · Particulares</h3>
                         <p class="text-muted flex-grow-1">
                             Preparación intensiva para la prueba de selección universitaria.
                             Ensayos, estrategias y resolución de problemas reales.
                         </p>
                         <a href="{{ route('materials.index') }}"
-                           class="btn btn-outline-success btn-sm">
+                           class="btn btn-outline-warning btn-sm">
                             Ver materiales
                         </a>
                     </div>
@@ -150,7 +150,7 @@
 @if($recentMaterials->isNotEmpty())
 <section class="py-5">
     <div class="container py-3">
-        <div class="d-flex justify-content-between align-items-center mb-4">
+        <div class="d-flex justify-content-between align-items-center mb-4" data-aos="fade-up">
             <h2 class="h3 fw-bold mb-0">Últimos materiales</h2>
             <a href="{{ route('materials.index') }}" class="btn btn-outline-primary btn-sm">
                 Ver todos <i class="bi bi-arrow-right ms-1" aria-hidden="true"></i>
@@ -158,7 +158,7 @@
         </div>
         <div class="row g-4">
             @foreach($recentMaterials as $m)
-                <div class="col-md-6 col-xl-3">
+                <div class="col-md-6 col-xl-3" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
                     <div class="card h-100 shadow-sm border-0 position-relative">
                         <div class="card-body p-4 d-flex flex-column">
                             <div class="mb-2">{!! $m->nivel !!}</div>
@@ -189,7 +189,7 @@
 <section class="py-5 bg-body-tertiary">
     <div class="container py-3">
         <div class="row align-items-center g-5">
-            <div class="col-lg-7">
+            <div class="col-lg-7" data-aos="fade-right">
                 <h2 class="h3 fw-bold mb-3">Un poco sobre mí</h2>
                 <p class="lead text-muted mb-4">
                     Soy profesor de Matemática egresado de la
@@ -219,7 +219,7 @@
                     Saber más sobre mí <i class="bi bi-arrow-right ms-1" aria-hidden="true"></i>
                 </a>
             </div>
-            <div class="col-lg-5">
+            <div class="col-lg-5" data-aos="fade-left">
                 <div class="row g-3 text-center">
                     <div class="col-6">
                         <div class="p-4 bg-white rounded-3 shadow-sm h-100">
@@ -255,7 +255,7 @@
      CTA FINAL
 ================================================================ --}}
 <section class="py-5 bg-primary text-white text-center">
-    <div class="container py-4">
+    <div class="container py-4" data-aos="fade-up">
         <i class="bi bi-chat-heart-fill display-3 mb-3 d-block opacity-75" aria-hidden="true"></i>
         <h2 class="display-6 fw-bold mb-3">¿Tienes dudas con la materia?</h2>
         <p class="lead mb-4 opacity-75">
