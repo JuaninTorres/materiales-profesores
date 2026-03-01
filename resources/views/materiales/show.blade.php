@@ -149,7 +149,7 @@
             @foreach($related as $rel)
                 <div class="col-md-6 col-xl-3">
                     <a href="{{ route('materials.show', $rel) }}"
-                       class="card border-0 bg-body-tertiary h-100 text-decoration-none text-body">
+                       class="card border-0 bg-body-tertiary h-100 text-decoration-none text-body card-hover">
                         <div class="card-body p-3">
                             <div class="mb-1">{!! $rel->nivel !!}</div>
                             <div class="fw-semibold small mb-1">{{ $rel->title }}</div>
