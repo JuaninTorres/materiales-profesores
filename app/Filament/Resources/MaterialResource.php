@@ -85,6 +85,11 @@ class MaterialResource extends \Filament\Resources\Resource
             Forms\Components\TextInput::make('size_kb')->label('Tamaño (KB)')->disabled(),
             Forms\Components\TextInput::make('link_url')->label('URL (si es enlace)')->url(),
 
+            Forms\Components\TagsInput::make('tags')
+                ->label('Tags')
+                ->columnSpanFull()
+                ->placeholder('Agrega un tag y presiona Enter'),
+
             Forms\Components\Toggle::make('published')->label('Publicado')->default(true),
         ])->columns(2);
     }
@@ -93,25 +98,37 @@ class MaterialResource extends \Filament\Resources\Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('code')->label('Código')->searchable(),
-                Tables\Columns\TextColumn::make('title')->label('Título')->searchable()->limit(40),
+                Tables\Columns\TextColumn::make('code')->label('Código')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('title')->label('Título')->searchable()->sortable()->limit(40),
                 Tables\Columns\BadgeColumn::make('subject')->label('Asignatura'),
-                Tables\Columns\BadgeColumn::make('level')->label('Nivel'),
-                Tables\Columns\TextColumn::make('type')->label('Tipo'),
-                Tables\Columns\TextColumn::make('year')->label('Año'),
-                Tables\Columns\TextColumn::make('semester')->label('Sem'),
-                Tables\Columns\ToggleColumn::make('published')->label('Pub'),
-                Tables\Columns\TextColumn::make('created_at')->dateTime('Y-m-d')->label('Creado'),
+                Tables\Columns\BadgeColumn::make('level')->label('Nivel')->sortable(),
+                Tables\Columns\TextColumn::make('type')->label('Tipo')->sortable(),
+                Tables\Columns\TextColumn::make('year')->label('Año')->sortable(),
+                Tables\Columns\TextColumn::make('semester')->label('Sem')->sortable(),
+                Tables\Columns\TagsColumn::make('tags')->label('Tags')->limitList(3),
+                Tables\Columns\ToggleColumn::make('published')->label('Pub')->sortable(),
+                Tables\Columns\TextColumn::make('created_at')->dateTime('Y-m-d')->label('Creado')->sortable(),
             ])
             ->filters([
-                Tables\Filters\SelectFilter::make('level')->options([
-                    'colegio'=>'Colegio','cft'=>'CFT','particulares'=>'Particulares'
+                Tables\Filters\SelectFilter::make('level')->label('Nivel')->options([
+                    'colegio' => 'Colegio', 'cft' => 'CFT', 'particulares' => 'Particulares',
                 ]),
+                Tables\Filters\SelectFilter::make('type')->label('Tipo')->options([
+                    'pdf' => 'PDF', 'image' => 'Imagen', 'video' => 'Video',
+                    'html' => 'HTML/Presentación', 'latex' => 'LaTeX', 'link' => 'Enlace', 'other' => 'Otro',
+                ]),
+                Tables\Filters\SelectFilter::make('course')->label('Curso')
+                    ->options(fn() => Material::query()->select('course')->distinct()
+                        ->orderBy('course')->whereNotNull('course')->pluck('course', 'course')->toArray()),
+                Tables\Filters\SelectFilter::make('year')->label('Año')
+                    ->options(fn() => Material::query()->select('year')->distinct()
+                        ->orderByDesc('year')->whereNotNull('year')->pluck('year', 'year')->toArray()),
                 Tables\Filters\SelectFilter::make('subject')->label('Asignatura')
                     ->options(fn() => Material::query()->select('subject')->distinct()
-                                ->orderBy('subject')->pluck('subject','subject')->toArray()),
+                        ->orderBy('subject')->pluck('subject', 'subject')->toArray()),
                 Tables\Filters\TernaryFilter::make('published')->label('Publicados'),
             ])
+            ->filtersLayout(Tables\Enums\FiltersLayout::AboveContent)
             ->actions([Tables\Actions\EditAction::make()])
             ->bulkActions([Tables\Actions\DeleteBulkAction::make()]);
     }
