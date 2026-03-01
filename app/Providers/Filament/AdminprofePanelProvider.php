@@ -27,6 +27,7 @@ class AdminprofePanelProvider extends PanelProvider
             ->id('adminprofe')
             ->path('adminprofe')
             ->login()
+            ->brandName(config('app.name'))
             ->colors([
                 'primary' => Color::Amber,
             ])
