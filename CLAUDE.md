@@ -63,7 +63,7 @@ Filament en `/adminprofe` — el único recurso es `MaterialResource` (`app/Fila
 
 ### Modelo Material (`app/Models/Material.php`)
 
-Entidad central. Campos clave: `code` (único, usado como clave de ruta), `title`, `description`, `subject`, `level` (enum: `colegio`/`cft`/`particulares`), `course`, `year`, `semester`, `unit`, `type` (enum: `pdf`/`image`/`video`/`html`/`latex`/`link`/`other`), `file_path`, `link_url`, `published`. Tiene accesores `$m->nivel` (devuelve badge HTML) y `$m->tipo` (devuelve etiqueta legible del tipo).
+Entidad central. Campos clave: `code` (único, usado como clave de ruta), `title`, `description`, `subject`, `level` (enum: `colegio`/`cft`/`particulares`/`universidad`/`instituto`), `course`, `year`, `semester`, `unit`, `type` (enum: `pdf`/`image`/`video`/`html`/`latex`/`link`/`other`), `file_path`, `link_url`, `published`. Tiene accesores `$m->nivel` (devuelve badge HTML) y `$m->tipo` (devuelve etiqueta legible del tipo).
 
 ### Componentes Livewire (`app/Livewire/`)
 

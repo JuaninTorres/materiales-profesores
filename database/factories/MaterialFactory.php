@@ -9,7 +9,7 @@ class MaterialFactory extends Factory
 {
     public function definition(): array
     {
-        $levels = ['colegio','cft','particulares'];
+        $levels = ['colegio','cft','particulares','universidad','instituto'];
         $types  = ['pdf','image','video','html','latex','link','other'];
         $subjects = ['Matemática','Álgebra','Cálculo','Probabilidad','Estadística'];
 

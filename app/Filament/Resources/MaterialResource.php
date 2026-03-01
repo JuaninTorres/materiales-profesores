@@ -38,9 +38,11 @@ class MaterialResource extends \Filament\Resources\Resource
             Forms\Components\Select::make('level')
                 ->label('Nivel')
                 ->options([
-                    'colegio' => 'Colegio',
-                    'cft' => 'CFT',
+                    'colegio'      => 'Colegio',
+                    'cft'          => 'CFT',
                     'particulares' => 'Particulares',
+                    'universidad'  => 'Universidad',
+                    'instituto'    => 'Instituto',
                 ])->required(),
 
             Forms\Components\TextInput::make('subject')->label('Asignatura')->required(),
@@ -99,6 +101,7 @@ class MaterialResource extends \Filament\Resources\Resource
             ->filters([
                 Tables\Filters\SelectFilter::make('level')->label('Nivel')->options([
                     'colegio' => 'Colegio', 'cft' => 'CFT', 'particulares' => 'Particulares',
+                    'universidad' => 'Universidad', 'instituto' => 'Instituto',
                 ]),
                 Tables\Filters\SelectFilter::make('type')->label('Tipo')->options([
                     'pdf' => 'PDF', 'image' => 'Imagen', 'video' => 'Video',

@@ -81,19 +81,17 @@ class Material extends Model
 
     protected function getNivelAttribute()
     {
-        if($this->level == 'cft') {
-            return '<span class="badge text-bg-primary">' . strtoupper($this->level) . '</span>';
-        }
+        $map = [
+            'colegio'      => ['text-bg-warning', 'Colegio'],
+            'cft'          => ['text-bg-primary', 'CFT'],
+            'particulares' => ['text-bg-success', 'Particulares'],
+            'universidad'  => ['text-bg-danger',  'Universidad'],
+            'instituto'    => ['text-bg-secondary','Instituto'],
+        ];
 
-        if($this->level == 'colegio') {
-            return '<span class="badge text-bg-warning">' . strtoupper($this->level) . '</span>';
-        }
+        [$class, $label] = $map[$this->level] ?? ['text-bg-info', strtoupper($this->level)];
 
-        if($this->level == 'particulares') {
-            return '<span class="badge text-bg-success">' . strtoupper($this->level) . '</span>';
-        }
-
-        return '<span class="badge text-bg-info">' . strtoupper($this->level) . '</span>';
+        return '<span class="badge ' . $class . '">' . $label . '</span>';
     }
 
 }

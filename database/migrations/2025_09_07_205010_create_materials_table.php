@@ -18,7 +18,7 @@ return new class extends Migration
             $table->text('description')->nullable();
 
             $table->string('subject')->index();
-            $table->enum('level', ['colegio','cft','particulares'])->index();
+            $table->enum('level', ['colegio','cft','particulares','universidad','instituto'])->index();
             $table->string('course')->nullable()->index();
             $table->smallInteger('year')->nullable()->index();
             $table->tinyInteger('semester')->nullable()->index();
