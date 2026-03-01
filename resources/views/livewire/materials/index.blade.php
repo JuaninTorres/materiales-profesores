@@ -116,7 +116,7 @@
             <div class="row g-4">
                 @foreach($materials as $m)
                     <div class="col-12 col-md-6 col-xl-4">
-                        <div class="card border-0 shadow-sm h-100">
+                        <div class="card border-0 shadow-sm h-100 card-hover">
                             <div class="card-body p-4 d-flex flex-column">
                                 <div class="d-flex align-items-start justify-content-between gap-2 mb-2">
                                     {!! $m->nivel !!}

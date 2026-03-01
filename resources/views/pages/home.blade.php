@@ -159,7 +159,7 @@
         <div class="row g-4">
             @foreach($recentMaterials as $m)
                 <div class="col-md-6 col-xl-3" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
-                    <div class="card h-100 shadow-sm border-0 position-relative">
+                    <div class="card h-100 shadow-sm border-0 position-relative card-hover">
                         <div class="card-body p-4 d-flex flex-column">
                             <div class="mb-2">{!! $m->nivel !!}</div>
                             <h3 class="h6 fw-bold mb-1">
