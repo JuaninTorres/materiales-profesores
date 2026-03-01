@@ -51,7 +51,7 @@
     </h2>
     <div class="row g-4">
         <div class="col-md-4">
-            <div class="card border-0 bg-body-tertiary h-100">
+            <div class="card border-0 bg-body-tertiary h-100 card-hover">
                 <div class="card-body p-4">
                     <i class="bi bi-building fs-3 text-primary mb-3 d-block" aria-hidden="true"></i>
                     <div class="fw-bold mb-1">Colegio Don Orione</div>
@@ -64,7 +64,7 @@
             </div>
         </div>
         <div class="col-md-4">
-            <div class="card border-0 bg-body-tertiary h-100">
+            <div class="card border-0 bg-body-tertiary h-100 card-hover">
                 <div class="card-body p-4">
                     <i class="bi bi-people-fill fs-3 text-primary mb-3 d-block" aria-hidden="true"></i>
                     <div class="fw-bold mb-1">C.E. Bicentenario Sargento Aldea</div>
@@ -77,7 +77,7 @@
             </div>
         </div>
         <div class="col-md-4">
-            <div class="card border-0 bg-body-tertiary h-100">
+            <div class="card border-0 bg-body-tertiary h-100 card-hover">
                 <div class="card-body p-4">
                     <i class="bi bi-person-video2 fs-3 text-primary mb-3 d-block" aria-hidden="true"></i>
                     <div class="fw-bold mb-1">Clases particulares y PAES</div>
