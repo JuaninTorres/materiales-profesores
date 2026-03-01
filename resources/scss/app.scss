@@ -9,6 +9,11 @@ body {
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
+/* Logo sobre fondos oscuros/primarios */
+.logo-white {
+  filter: brightness(0) invert(1);
+}
+
 /* Sobre mí */
 .about-photo {
   border-radius: 1rem;

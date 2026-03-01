@@ -16,8 +16,9 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
             <div class="container">
-                <a href="{{ route('home') }}" class="navbar-brand fw-bold">
-                    <i class="bi bi-mortarboard-fill me-2" aria-hidden="true"></i>Profe Nicolás
+                <a href="{{ route('home') }}" class="navbar-brand d-flex align-items-center gap-2">
+                    <img src="/images/logo.svg" height="34" alt="" aria-hidden="true" class="logo-white">
+                    <span class="fw-bold">Profe Nicolás</span>
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
                         aria-controls="mainNav" aria-expanded="false" aria-label="Abrir menú">
@@ -63,10 +64,11 @@
 
                 {{-- Marca y descripción --}}
                 <div class="col-lg-4">
-                    <a href="{{ route('home') }}" class="text-white text-decoration-none fw-bold fs-5">
-                        <i class="bi bi-mortarboard-fill me-2" aria-hidden="true"></i>Profe Nicolás
+                    <a href="{{ route('home') }}" class="text-white text-decoration-none d-flex align-items-center gap-3 mb-3">
+                        <img src="/images/logo.svg" height="52" alt="Logo Profe Nicolás" class="logo-white">
+                        <span class="fw-bold fs-5">Profe Nicolás</span>
                     </a>
-                    <p class="text-white-50 small mt-3 mb-0">
+                    <p class="text-white-50 small mb-0">
                         Matemática que se entiende.<br>
                         Quintero, Región de Valparaíso.
                     </p>
