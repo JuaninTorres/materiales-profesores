@@ -9,6 +9,7 @@ use Filament\Forms\Form;
 use Filament\Forms\Get;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Support\HtmlString;
 
 class MaterialResource extends \Filament\Resources\Resource
 {
@@ -80,6 +81,46 @@ class MaterialResource extends \Filament\Resources\Resource
                 ->placeholder('Agrega un tag y presiona Enter'),
 
             Forms\Components\Toggle::make('published')->label('Publicado')->default(true),
+
+            Forms\Components\Section::make('Vista previa')
+                ->schema([
+                    Forms\Components\Placeholder::make('file_preview')
+                        ->label('')
+                        ->columnSpanFull()
+                        ->content(function ($record): HtmlString|string {
+                            if (!$record) return '';
+
+                            if ($record->file_path) {
+                                $url = e(asset('storage/' . $record->file_path));
+                                return match ($record->type) {
+                                    'image' => new HtmlString(
+                                        '<img src="' . $url . '" style="max-height:320px;max-width:100%;border-radius:.5rem;display:block;">'
+                                    ),
+                                    'pdf' => new HtmlString(
+                                        '<iframe src="' . $url . '" style="width:100%;height:520px;border:0;border-radius:.5rem;"></iframe>'
+                                    ),
+                                    'video' => new HtmlString(
+                                        '<video controls style="width:100%;max-height:400px;border-radius:.5rem;"><source src="' . $url . '"></video>'
+                                    ),
+                                    default => new HtmlString(
+                                        '<a href="' . $url . '" target="_blank" rel="noopener" style="text-decoration:underline;">Abrir archivo</a>'
+                                    ),
+                                };
+                            }
+
+                            if ($record->link_url) {
+                                $url = e($record->link_url);
+                                return new HtmlString(
+                                    '<a href="' . $url . '" target="_blank" rel="noopener noreferrer" style="text-decoration:underline;">' . $url . '</a>'
+                                );
+                            }
+
+                            return '';
+                        }),
+                ])
+                ->visible(fn($record) => $record && ($record->file_path || $record->link_url))
+                ->collapsible()
+                ->columnSpanFull(),
         ])->columns(2);
     }
 
