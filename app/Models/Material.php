@@ -17,14 +17,14 @@ class Material extends Model
     protected $fillable = [
         'code','title','description',
         'subject','level','course','year','semester','unit',
-        'type','file_path','file_mime','size_kb','link_url','published',
+        'type','file_path','file_mime','size_bytes','link_url','published','tags',
     ];
 
     protected $casts = [
         'published' => 'boolean',
         'year' => 'integer',
         'semester' => 'integer',
-        'size_kb' => 'integer',
+        'size_bytes' => 'integer',
         'tags' => 'array',
     ];
 
@@ -51,6 +51,15 @@ class Material extends Model
             'unit'        => $this->unit,
             'type'        => $this->type,
         ];
+    }
+
+    protected function getSizeFormattedAttribute(): ?string
+    {
+        if (!$this->size_bytes) return null;
+
+        if ($this->size_bytes < 1024) return $this->size_bytes . ' B';
+        if ($this->size_bytes < 1048576) return number_format($this->size_bytes / 1024, 1) . ' KB';
+        return number_format($this->size_bytes / 1048576, 2) . ' MB';
     }
 
     protected function getTipoAttribute()

@@ -9,7 +9,6 @@ use Filament\Forms\Form;
 use Filament\Forms\Get;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Support\Facades\Storage;
 
 class MaterialResource extends \Filament\Resources\Resource
 {
@@ -62,27 +61,15 @@ class MaterialResource extends \Filament\Resources\Resource
                 ->preserveFilenames()
                 ->acceptedFileTypes(['application/pdf','text/html','image/*','video/*'])
                 ->maxSize(10240)
-                ->helperText('Máximo 10MB. Para HTML, sube el archivo principal y recursos en la misma carpeta.')
-                ->afterStateUpdated(function ($state, callable $set) {
-                    if ($state) {
-                        $disk = 'public';
-                        try {
-                            $mime = Storage::disk($disk)->mimeType($state) ?? null;
-                            $size = Storage::disk($disk)->size($state) ?? null;
-                            $set('file_mime', $mime);
-                            $set('size_kb', $size ? intdiv($size, 1024) : null);
-                        } catch (\Throwable $e) {
-                            $set('file_mime', null);
-                            $set('size_kb', null);
-                        }
-                    } else {
-                        $set('file_mime', null);
-                        $set('size_kb', null);
-                    }
-                }),
+                ->helperText('Máximo 10MB. El MIME y el tamaño se calculan automáticamente al guardar.'),
 
-            Forms\Components\TextInput::make('file_mime')->label('MIME')->disabled(),
-            Forms\Components\TextInput::make('size_kb')->label('Tamaño (KB)')->disabled(),
+            Forms\Components\TextInput::make('file_mime')->label('MIME')->disabled()->dehydrated(false),
+            Forms\Components\TextInput::make('size_bytes')->label('Tamaño')->disabled()->dehydrated(false)
+                ->formatStateUsing(fn($state) => $state ? (
+                    $state < 1024 ? "{$state} B" :
+                    ($state < 1048576 ? number_format($state / 1024, 1).' KB' :
+                    number_format($state / 1048576, 2).' MB')
+                ) : '—'),
             Forms\Components\TextInput::make('link_url')->label('URL (si es enlace)')->url(),
 
             Forms\Components\TagsInput::make('tags')

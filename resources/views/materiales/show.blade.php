@@ -72,9 +72,9 @@
                     <dd class="col fw-semibold mb-0">{{ $material->semester }}</dd>
                 @endif
 
-                @if($material->size_kb)
+                @if($material->size_formatted)
                     <dt class="col text-muted fw-normal">Tamaño</dt>
-                    <dd class="col fw-semibold mb-0">{{ number_format($material->size_kb) }} KB</dd>
+                    <dd class="col fw-semibold mb-0">{{ $material->size_formatted }}</dd>
                 @endif
 
                 <dt class="col text-muted fw-normal">Código</dt>
