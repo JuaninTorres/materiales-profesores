@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title', 'profenicolas.cl')</title>
     <meta name="color-scheme" content="light">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="/favicon.ico" sizes="32x32">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     @vite(['resources/js/app.js'])
     @livewireStyles
     @stack('meta')
@@ -61,7 +64,7 @@
                 {{-- Marca y descripción --}}
                 <div class="col-lg-4">
                     <a href="{{ route('home') }}" class="text-white text-decoration-none fw-bold fs-5">
-                        <i class="bi bi-mortarboard-fill me-2 text-primary" aria-hidden="true"></i>Profe Nicolás
+                        <i class="bi bi-mortarboard-fill me-2" aria-hidden="true"></i>Profe Nicolás
                     </a>
                     <p class="text-white-50 small mt-3 mb-0">
                         Matemática que se entiende.<br>
