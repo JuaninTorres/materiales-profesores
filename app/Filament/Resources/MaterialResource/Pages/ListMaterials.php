@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\MaterialResource\Pages;
 
 use App\Filament\Resources\MaterialResource;
+use App\Filament\Widgets\MaterialsStatsWidget;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 
@@ -14,6 +15,13 @@ class ListMaterials extends ListRecords
     {
         return [
             Actions\CreateAction::make(),
+        ];
+    }
+
+    protected function getHeaderWidgets(): array
+    {
+        return [
+            MaterialsStatsWidget::class,
         ];
     }
 }
