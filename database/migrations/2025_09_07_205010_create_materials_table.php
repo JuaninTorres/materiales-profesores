@@ -28,8 +28,10 @@ return new class extends Migration
 
             $table->string('file_path')->nullable();
             $table->string('file_mime')->nullable();
-            $table->integer('size_kb')->nullable();
+            $table->unsignedBigInteger('size_bytes')->nullable();
             $table->string('link_url')->nullable();
+
+            $table->json('tags')->nullable();
 
             $table->boolean('published')->default(true)->index();
             $table->timestamps();

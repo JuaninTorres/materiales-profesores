@@ -16,15 +16,17 @@ class MaterialFactory extends Factory
         $type = $this->faker->randomElement($types);
         $code = strtoupper($this->faker->lexify('CFT??-MAT-').$this->faker->numberBetween(100,999));
 
-        $filePath = null; $fileMime = null; $sizeKb = null; $linkUrl = null;
+        $filePath = null; $fileMime = null; $sizeBytes = null; $linkUrl = null;
 
         if (in_array($type, ['pdf','html'])) {
-            $filePath = 'materials/demo/'.Str::slug($code).'.'.($type === 'pdf' ? 'pdf' : 'html');
-            $fileMime = $type === 'pdf' ? 'application/pdf' : 'text/html';
-            $sizeKb   = $this->faker->numberBetween(100, 2048);
+            $filePath  = 'materials/demo/'.Str::slug($code).'.'.($type === 'pdf' ? 'pdf' : 'html');
+            $fileMime  = $type === 'pdf' ? 'application/pdf' : 'text/html';
+            $sizeBytes = $this->faker->numberBetween(102400, 2097152); // 100 KB – 2 MB en bytes
         } elseif ($type === 'link') {
-            $linkUrl  = $this->faker->url();
+            $linkUrl = $this->faker->url();
         }
+
+        $allTags = ['álgebra','funciones','estadística','probabilidad','geometría','trigonometría','cálculo','números','PAES','prueba','guía','ejercicios'];
 
         return [
             'code'        => $code,
@@ -39,8 +41,9 @@ class MaterialFactory extends Factory
             'type'        => $type,
             'file_path'   => $filePath,
             'file_mime'   => $fileMime,
-            'size_kb'     => $sizeKb,
+            'size_bytes'  => $sizeBytes,
             'link_url'    => $linkUrl,
+            'tags'        => $this->faker->boolean(70) ? $this->faker->randomElements($allTags, $this->faker->numberBetween(1, 3)) : null,
             'published'   => $this->faker->boolean(90),
         ];
     }
