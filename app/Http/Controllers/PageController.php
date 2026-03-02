@@ -16,4 +16,16 @@ class PageController extends Controller
 
         return view('pages.home', compact('recentMaterials'));
     }
+
+    public function sitemap()
+    {
+        $materials = Material::where('published', true)
+            ->select('code', 'updated_at')
+            ->latest()
+            ->get();
+
+        return response()
+            ->view('sitemap', compact('materials'))
+            ->header('Content-Type', 'application/xml');
+    }
 }

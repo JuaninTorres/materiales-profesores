@@ -8,6 +8,7 @@ use App\Livewire\Contact\Form as ContactForm;
 use App\Http\Controllers\MaterialController;
 
 Route::get('/', [PageController::class, 'home'])->name('home');
+Route::get('/sitemap.xml', [PageController::class, 'sitemap'])->name('sitemap');
 Route::view('/sobre-mi', 'pages.about')->name('about');
 Route::view('/servicios', 'pages.services')->name('services');
 Route::get('/materiales', MaterialsIndex::class)->name('materials.index');
