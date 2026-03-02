@@ -116,10 +116,22 @@ return [
         'id' => env('ALGOLIA_APP_ID', ''),
         'secret' => env('ALGOLIA_SECRET', ''),
         'index-settings' => [
-            // 'users' => [
-            //     'searchableAttributes' => ['id', 'name', 'email'],
-            //     'attributesForFaceting'=> ['filterOnly(email)'],
-            // ],
+            \App\Models\Material::class => [
+                'searchableAttributes' => [
+                    'title',
+                    'description',
+                    'subject',
+                    'course',
+                    'unit',
+                    'code',
+                ],
+                'attributesForFaceting' => [
+                    'filterOnly(level)',
+                    'filterOnly(course)',
+                    'filterOnly(type)',
+                    'filterOnly(semester)',
+                ],
+            ],
         ],
     ],
 

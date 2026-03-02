@@ -5,8 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
-use Laravel\Scout\Attributes\SearchUsingFullText;
-use Laravel\Scout\Attributes\SearchUsingPrefix;
 use Illuminate\Database\Eloquent\Builder;
 
 class Material extends Model
@@ -34,9 +32,11 @@ class Material extends Model
         return 'code';
     }
 
-    // Estrategia de búsqueda con Scout Database Engine
-    #[SearchUsingPrefix(['code'])] // búsqueda rápida por prefijo del código
-    #[SearchUsingFullText(['title','description','subject','course','unit'])] // usa índices FULLTEXT
+    public function shouldBeSearchable(): bool
+    {
+        return $this->published;
+    }
+
     public function toSearchableArray(): array
     {
         return [

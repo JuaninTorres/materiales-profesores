@@ -46,32 +46,32 @@ class Index extends Component
         $this->view = in_array($mode, ['cards','list']) ? $mode : 'cards';
     }
 
+    private function applyFiltersAndSort(\Illuminate\Database\Eloquent\Builder $q): \Illuminate\Database\Eloquent\Builder
+    {
+        return $q
+            ->when($this->course,   fn($q, $v) => $q->where('course', $v))
+            ->when($this->type,     fn($q, $v) => $q->where('type', $v))
+            ->when($this->semester, fn($q, $v) => $q->where('semester', $v))
+            ->when(true, fn($q) => match ($this->sort) {
+                'title_az' => $q->orderBy('title', 'asc')->orderBy('id', 'desc'),
+                'title_za' => $q->orderBy('title', 'desc')->orderBy('id', 'desc'),
+                default    => $q->latest('id'),
+            });
+    }
+
     public function render()
     {
-        $materials = Material::query()
-            ->where('published', true)
-            ->when(trim($this->q) !== '', function ($q) {
-                $term = trim($this->q);
-                $q->where(fn($w) =>
-                    $w->where('title','like',"%{$term}%")
-                      ->orWhere('course','like',"%{$term}%")
-                      ->orWhere('type','like',"%{$term}%")
-                      ->orWhere('description','like',"%{$term}%")
-                );
-            })
-            ->when($this->course,  fn($q,$v) => $q->where('course',$v))
-            ->when($this->type,    fn($q,$v) => $q->where('type',$v))
-            ->when($this->semester,fn($q,$v) => $q->where('semester',$v))
+        $term = trim($this->q);
 
-            // ORDENAMIENTO
-            ->when(true, function($q) {
-                return match($this->sort) {
-                    'title_az' => $q->orderBy('title','asc')->orderBy('id','desc'),
-                    'title_za' => $q->orderBy('title','desc')->orderBy('id','desc'),
-                    default    => $q->latest('id'), // recent
-                };
-            })
-            ->paginate($this->perPage);
+        if ($term !== '') {
+            $materials = Material::search($term)
+                ->query(fn($q) => $this->applyFiltersAndSort($q->where('published', true)))
+                ->paginate($this->perPage);
+        } else {
+            $materials = $this->applyFiltersAndSort(
+                Material::query()->where('published', true)
+            )->paginate($this->perPage);
+        }
 
         // para selects
         $courses   = Material::where('published', true)->select('course')->distinct()->orderBy('course')->pluck('course');
