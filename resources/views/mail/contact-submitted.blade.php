@@ -2,7 +2,9 @@
 # Nuevo mensaje de contacto
 
 **Nombre:** {{ $data['name'] }}
+
 **Email:** {{ $data['email'] }}
+
 **Asunto:** {{ $data['subject'] ?: '—' }}
 
 **Mensaje:**
