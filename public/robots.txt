@@ -1,2 +1,19 @@
 User-agent: *
-Disallow:
+
+# Bloquear panel de administración
+Disallow: /adminprofe/
+
+# Bloquear rutas de autenticación
+Disallow: /login
+Disallow: /register
+Disallow: /forgot-password
+Disallow: /reset-password
+Disallow: /verify-email
+Disallow: /confirm-password
+
+# Bloquear rutas internas de Livewire y assets compilados
+Disallow: /livewire/
+Disallow: /build/
+
+# Sitemap
+Sitemap: https://profenicolas.cl/sitemap.xml
