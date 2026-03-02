@@ -84,11 +84,11 @@
                     </div>
 
                     <div class="d-flex align-items-center gap-3">
-                        <button type="submit" class="btn btn-primary" wire:loading.attr="disabled">
-                            <i class="bi bi-send me-2" aria-hidden="true" wire:loading.remove></i>
-                            <i class="bi bi-hourglass-split me-2" aria-hidden="true" wire:loading></i>
-                            <span wire:loading.remove>Enviar mensaje</span>
-                            <span wire:loading>Enviando…</span>
+                        <button type="submit" class="btn btn-primary" wire:loading.attr="disabled" wire:target="send">
+                            <i class="bi bi-send me-2" aria-hidden="true" wire:loading.remove wire:target="send"></i>
+                            <i class="bi bi-hourglass-split me-2" aria-hidden="true" wire:loading wire:target="send"></i>
+                            <span wire:loading.remove wire:target="send">Enviar mensaje</span>
+                            <span wire:loading wire:target="send">Enviando…</span>
                         </button>
                         <a href="{{ route('home') }}" class="btn btn-outline-secondary">Volver</a>
                     </div>
