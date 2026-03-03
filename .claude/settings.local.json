@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git add:*)",
+      "Bash(npm run:*)",
+      "Bash(git push:*)",
+      "Bash(git add resources/scss/app.scss resources/views/layouts/app.blade.php && git commit -m \"$\\(cat <<'EOF'\nAgregar logo SVG en navbar y footer con filtro CSS para fondos oscuros\n\n- Clase .logo-white con filter brightness\\(0\\) invert\\(1\\) para mostrar el\n  logo azul \\(#081ca1\\) en blanco sobre bg-primary y bg-dark\n- Navbar: logo \\(34px\\) + texto \"Profe Nicolás\" reemplaza el ícono Bootstrap\n- Footer: logo \\(52px\\) + texto como cabecera de la columna de marca\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>\nEOF\n\\)\" && git push 2>&1)",
+      "Bash(head:*)",
+      "Bash(php artisan:*)",
+      "Bash(tail:*)",
+      "Bash(grep FAILED\\\\|Error\\\\|Exception:*)",
+      "Bash(composer require:*)"
+    ]
+  }
+}

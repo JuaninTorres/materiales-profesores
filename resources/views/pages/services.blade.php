@@ -53,7 +53,7 @@
 
     {{-- Preparación PAES --}}
     <div class="col-lg-4">
-        <div class="card border-0 shadow-sm h-100 border-top border-4 border-primary card-hover">
+        <div class="card border-0 shadow-sm h-100 border-top border-4 border-warning card-hover">
             <div class="card-body p-4 d-flex flex-column">
                 <div class="mb-3 d-flex align-items-start justify-content-between">
                     <i class="bi bi-trophy display-5 text-warning" aria-hidden="true"></i>
@@ -79,7 +79,7 @@
                         Seguimiento del avance durante el año
                     </li>
                 </ul>
-                <a href="{{ route('contact') }}" class="btn btn-primary mt-auto">
+                <a href="{{ route('contact') }}" class="btn btn-warning mt-auto">
                     <i class="bi bi-calendar2-check me-2" aria-hidden="true"></i>Consultar
                 </a>
             </div>
