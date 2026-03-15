@@ -32,7 +32,11 @@
         <h1 class="h2 fw-bold mb-2">{{ $material->title }}</h1>
 
         @if($material->description)
-            <p class="text-muted mb-3">{{ $material->description }}</p>
+            {{-- {!! !!} es necesario aquí: Str::markdown() genera HTML seguro desde Markdown.
+                 html_input='escape' impide que el admin inyecte HTML raw. --}}
+            <div class="text-muted mb-3 material-description">
+                {!! Str::markdown($material->description, ['html_input' => 'escape']) !!}
+            </div>
         @endif
 
         @if(!empty($material->tags))
