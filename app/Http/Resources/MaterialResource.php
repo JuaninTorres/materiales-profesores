@@ -25,7 +25,7 @@ class MaterialResource extends JsonResource
             'tags'        => $this->tags ?? [],
             'size_bytes'  => $this->size_bytes,
             'published'   => $this->published,
-            'url'         => route('materiales.show', $this->code),
+            'url'         => route('materials.show', $this->code),
             'file_url'    => $this->file_path
                                 ? Storage::disk('public')->url($this->file_path)
                                 : null,

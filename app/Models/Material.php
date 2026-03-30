@@ -34,7 +34,7 @@ class Material extends Model
 
     public function shouldBeSearchable(): bool
     {
-        return $this->published;
+        return (bool) $this->published;
     }
 
     public function toSearchableArray(): array
