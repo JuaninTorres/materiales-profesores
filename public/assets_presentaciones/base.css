@@ -23,6 +23,8 @@
 /* ── Reset y base ── */
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
+html { font-size: 150%; }
+
 body {
   font-family: 'Roboto', 'Inter', sans-serif;
   background: var(--bg);
