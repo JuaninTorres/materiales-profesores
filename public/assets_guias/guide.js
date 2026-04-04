@@ -8,6 +8,18 @@
    ============================================================ */
 
 // ─────────────────────────────────────────────
+// HELPERS
+// ─────────────────────────────────────────────
+function typesetMath(el) {
+  if (!window.MathJax) return;
+  if (typeof MathJax.typesetPromise === 'function') {
+    MathJax.typesetPromise([el]).catch(console.error);
+  } else if (MathJax.startup?.promise) {
+    MathJax.startup.promise.then(() => MathJax.typesetPromise([el]).catch(console.error));
+  }
+}
+
+// ─────────────────────────────────────────────
 // ESTADO
 // ─────────────────────────────────────────────
 let userAnswers = new Array(EXERCISES.length).fill(null);
@@ -41,9 +53,7 @@ function buildExercises() {
     container.appendChild(card);
   });
 
-  if (window.MathJax) {
-    MathJax.typesetPromise([container]).catch(console.error);
-  }
+  typesetMath(container);
 }
 
 // ─────────────────────────────────────────────
@@ -154,9 +164,7 @@ function buildAnswerDetails() {
     container.appendChild(item);
   });
 
-  if (window.MathJax) {
-    MathJax.typesetPromise([container]).catch(console.error);
-  }
+  typesetMath(container);
 }
 
 // ─────────────────────────────────────────────
