@@ -20,9 +20,20 @@ function typesetMath(el) {
 }
 
 // ─────────────────────────────────────────────
+// MEZCLA DE ALTERNATIVAS (se calcula una vez al cargar)
+// ─────────────────────────────────────────────
+const SHUFFLED = EXERCISES.map(ex => {
+  const perm = [0, 1, 2, 3].sort(() => Math.random() - 0.5);
+  return Object.assign({}, ex, {
+    options: perm.map(i => ex.options[i]),
+    correct: perm.indexOf(ex.correct)
+  });
+});
+
+// ─────────────────────────────────────────────
 // ESTADO
 // ─────────────────────────────────────────────
-let userAnswers = new Array(EXERCISES.length).fill(null);
+let userAnswers = new Array(SHUFFLED.length).fill(null);
 let submitted = false;
 
 // ─────────────────────────────────────────────
@@ -31,7 +42,7 @@ let submitted = false;
 function buildExercises() {
   const container = document.getElementById('exercises-container');
   container.innerHTML = '';
-  EXERCISES.forEach((ex, i) => {
+  SHUFFLED.forEach((ex, i) => {
     const card = document.createElement('div');
     card.className = 'exercise-card';
     card.id = `exercise-${i}`;
@@ -99,7 +110,7 @@ function submitAnswers() {
   submitted = true;
 
   let correct = 0;
-  EXERCISES.forEach((ex, i) => {
+  SHUFFLED.forEach((ex, i) => {
     const isCorrect = userAnswers[i] === ex.correct;
     if (isCorrect) correct++;
 
@@ -110,10 +121,10 @@ function submitAnswers() {
     });
   });
 
-  const pct = Math.round((correct / EXERCISES.length) * 100);
+  const pct = Math.round((correct / SHUFFLED.length) * 100);
   document.getElementById('result-pct').textContent = `${pct}%`;
   document.getElementById('result-correct').textContent = correct;
-  document.getElementById('result-incorrect').textContent = EXERCISES.length - correct;
+  document.getElementById('result-incorrect').textContent = SHUFFLED.length - correct;
 
   let msg;
   if (pct < 60) {
@@ -141,7 +152,7 @@ function buildAnswerDetails() {
   const container = document.getElementById('answers-detail');
   container.innerHTML = '';
 
-  EXERCISES.forEach((ex, i) => {
+  SHUFFLED.forEach((ex, i) => {
     const isCorrect = userAnswers[i] === ex.correct;
     const item = document.createElement('div');
     item.className = `answer-item ${isCorrect ? 'answer-correct' : 'answer-incorrect'}`;
@@ -172,7 +183,7 @@ function buildAnswerDetails() {
 // ─────────────────────────────────────────────
 function resetQuiz() {
   submitted = false;
-  userAnswers = new Array(EXERCISES.length).fill(null);
+  userAnswers = new Array(SHUFFLED.length).fill(null);
   document.getElementById('results-section').style.display = 'none';
   buildExercises();
   updateProgress();
