@@ -1,7 +1,7 @@
 /* ============================================================
    guide.js — Motor de interactividad para guías de ejercicios
    Profesor Nicolás González · profenicolas.cl
-   Servido desde: https://profenicolas.cl/assets_presentaciones/guide.js
+   Servido desde: https://profenicolas.cl/assets_guias/guide.js
 
    Requiere que el documento defina (en <script> inline previo):
      const EXERCISES = [ { id, type, question, options, correct, explanation }, ... ]
@@ -101,7 +101,6 @@ function submitAnswers() {
   });
 
   const pct = Math.round((correct / EXERCISES.length) * 100);
-  document.getElementById('id-puntaje').value = `${correct}/${EXERCISES.length} (${pct}%)`;
   document.getElementById('result-pct').textContent = `${pct}%`;
   document.getElementById('result-correct').textContent = correct;
   document.getElementById('result-incorrect').textContent = EXERCISES.length - correct;
@@ -167,7 +166,6 @@ function resetQuiz() {
   submitted = false;
   userAnswers = new Array(EXERCISES.length).fill(null);
   document.getElementById('results-section').style.display = 'none';
-  document.getElementById('id-puntaje').value = '';
   buildExercises();
   updateProgress();
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -186,6 +184,5 @@ new IntersectionObserver(
 // ─────────────────────────────────────────────
 // INICIALIZAR
 // ─────────────────────────────────────────────
-document.getElementById('id-fecha').valueAsDate = new Date();
 buildExercises();
 updateProgress();
