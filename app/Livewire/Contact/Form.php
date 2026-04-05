@@ -11,19 +11,23 @@ use Livewire\Component;
 class Form extends Component
 {
     public string $name = '';
+
     public string $email = '';
+
     public ?string $subject = '';
+
     public string $message = '';
+
     public string $website = ''; // honeypot
 
     public bool $sent = false;
 
     protected array $rules = [
-        'name'    => ['required','string','max:120'],
-        'email'   => ['required','email','max:150'],
-        'subject' => ['nullable','string','max:150'],
-        'message' => ['required','string','min:10','max:5000'],
-        'website' => ['nullable','string','size:0'], // honeypot debe quedar vacío
+        'name' => ['required', 'string', 'max:120'],
+        'email' => ['required', 'email', 'max:150'],
+        'subject' => ['nullable', 'string', 'max:150'],
+        'message' => ['required', 'string', 'min:10', 'max:5000'],
+        'website' => ['nullable', 'string', 'size:0'], // honeypot debe quedar vacío
     ];
 
     protected array $messages = [
@@ -41,15 +45,16 @@ class Form extends Component
         $validated = $this->validate();
 
         // Si el honeypot viene con contenido, corta (opcional: loguear)
-        if (!empty($this->website)) {
+        if (! empty($this->website)) {
             // Silenciosamente consideramos enviado (evita feedback para bots)
             $this->sent = true;
+
             return;
         }
 
         $payload = [
-            'name'    => $this->name,
-            'email'   => $this->email,
+            'name' => $this->name,
+            'email' => $this->email,
             'subject' => $this->subject ?? '',
             'message' => $this->message,
         ];
@@ -59,7 +64,7 @@ class Form extends Component
         Mail::to($to)->send(new ContactFormSubmitted($payload));
 
         // Limpiar y confirmar
-        $this->reset(['name','email','subject','message','website']);
+        $this->reset(['name', 'email', 'subject', 'message', 'website']);
         $this->sent = true;
         session()->flash('contact_ok', '¡Gracias! Tu mensaje fue enviado correctamente.');
     }

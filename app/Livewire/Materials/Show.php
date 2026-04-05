@@ -9,7 +9,10 @@ class Show extends Component
 {
     public Material $material;
 
-    public function mount(Material $material) { $this->material = $material; }
+    public function mount(Material $material)
+    {
+        $this->material = $material;
+    }
 
     public function render()
     {

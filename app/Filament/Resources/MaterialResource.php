@@ -16,39 +16,42 @@ use Illuminate\Support\Str;
 class MaterialResource extends \Filament\Resources\Resource
 {
     protected static ?string $model = Material::class;
+
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
     protected static ?string $navigationGroup = 'Contenido';
+
     protected static ?string $navigationLabel = 'Materiales';
 
     /**
      * Genera un código URL-safe único a partir de los campos del material.
      * Si el slug base ya existe, agrega -2, -3, … (estilo WordPress).
      *
-     * @param  array       $data      Datos del formulario (level, subject, course, year, semester, title)
-     * @param  int|null    $ignoreId  ID del registro actual en edición (para no colisionar consigo mismo)
+     * @param  array  $data  Datos del formulario (level, subject, course, year, semester, title)
+     * @param  int|null  $ignoreId  ID del registro actual en edición (para no colisionar consigo mismo)
      */
     public static function generateUniqueCode(array $data, ?int $ignoreId = null): string
     {
         $parts = array_filter([
-            $data['level']    ?? null,
-            $data['subject']  ?? null,
-            $data['course']   ?? null,
-            $data['year']     ?? null,
-            isset($data['semester']) && $data['semester'] ? 's' . $data['semester'] : null,
-            $data['title']    ?? null,
-        ], fn($v) => $v !== null && $v !== '');
+            $data['level'] ?? null,
+            $data['subject'] ?? null,
+            $data['course'] ?? null,
+            $data['year'] ?? null,
+            isset($data['semester']) && $data['semester'] ? 's'.$data['semester'] : null,
+            $data['title'] ?? null,
+        ], fn ($v) => $v !== null && $v !== '');
 
         $base = Str::slug(implode(' ', $parts)) ?: 'material';
 
         $code = $base;
-        $n    = 2;
+        $n = 2;
 
         while (
             Material::where('code', $code)
-                ->when($ignoreId, fn($q) => $q->where('id', '!=', $ignoreId))
+                ->when($ignoreId, fn ($q) => $q->where('id', '!=', $ignoreId))
                 ->exists()
         ) {
-            $code = $base . '-' . $n++;
+            $code = $base.'-'.$n++;
         }
 
         return $code;
@@ -62,9 +65,9 @@ class MaterialResource extends \Filament\Resources\Resource
                 ->required()
                 ->unique(ignoreRecord: true)
                 ->maxLength(100)
-                ->hint(fn($record) => $record ? 'Cambiar este valor modifica la URL pública del material.' : null)
+                ->hint(fn ($record) => $record ? 'Cambiar este valor modifica la URL pública del material.' : null)
                 ->hintColor('warning')
-                ->hintIcon(fn($record) => $record ? 'heroicon-o-exclamation-triangle' : null)
+                ->hintIcon(fn ($record) => $record ? 'heroicon-o-exclamation-triangle' : null)
                 ->placeholder('Se generará automáticamente al guardar')
                 ->suffixAction(
                     Forms\Components\Actions\Action::make('generate_code')
@@ -73,12 +76,12 @@ class MaterialResource extends \Filament\Resources\Resource
                         ->action(function (Set $set, Get $get, Forms\Components\Component $component) {
                             $record = $component->getLivewire()->record ?? null;
                             $set('code', MaterialResource::generateUniqueCode([
-                                'level'    => $get('level'),
-                                'subject'  => $get('subject'),
-                                'course'   => $get('course'),
-                                'year'     => $get('year'),
+                                'level' => $get('level'),
+                                'subject' => $get('subject'),
+                                'course' => $get('course'),
+                                'year' => $get('year'),
                                 'semester' => $get('semester'),
-                                'title'    => $get('title'),
+                                'title' => $get('title'),
                             ], $record?->id));
                         })
                 ),
@@ -95,36 +98,36 @@ class MaterialResource extends \Filament\Resources\Resource
             Forms\Components\Select::make('level')
                 ->label('Nivel')
                 ->options([
-                    'colegio'      => 'Colegio',
-                    'cft'          => 'CFT',
+                    'colegio' => 'Colegio',
+                    'cft' => 'CFT',
                     'particulares' => 'Particulares',
-                    'universidad'  => 'Universidad',
-                    'instituto'    => 'Instituto',
+                    'universidad' => 'Universidad',
+                    'instituto' => 'Instituto',
                 ])->required(),
 
             Forms\Components\TextInput::make('subject')->label('Asignatura')->required(),
             Forms\Components\TextInput::make('course')->label('Curso'),
             Forms\Components\TextInput::make('year')->numeric()->minValue(2000)->maxValue(2100),
-            Forms\Components\Select::make('semester')->options([1=>1,2=>2])->label('Semestre'),
+            Forms\Components\Select::make('semester')->options([1 => 1, 2 => 2])->label('Semestre'),
             Forms\Components\TextInput::make('unit')->label('Unidad'),
 
             Forms\Components\Select::make('type')->label('Tipo')->options([
-                'pdf'=>'PDF','image'=>'Imagen','video'=>'Video',
-                'html'=>'HTML/Presentación','latex'=>'LaTeX','link'=>'Enlace','other'=>'Otro'
+                'pdf' => 'PDF', 'image' => 'Imagen', 'video' => 'Video',
+                'html' => 'HTML/Presentación', 'latex' => 'LaTeX', 'link' => 'Enlace', 'other' => 'Otro',
             ])->required(),
 
             Forms\Components\FileUpload::make('file_path')
                 ->label('Archivo')
-                ->directory(fn() => 'materials/'.now()->format('Y/m'))
+                ->directory(fn () => 'materials/'.now()->format('Y/m'))
                 ->visibility('public')
                 ->preserveFilenames()
-                ->acceptedFileTypes(['application/pdf','text/html','image/*','video/*'])
+                ->acceptedFileTypes(['application/pdf', 'text/html', 'image/*', 'video/*'])
                 ->maxSize(10240)
                 ->helperText('Máximo 10MB. El MIME y el tamaño se calculan automáticamente al guardar.'),
 
             Forms\Components\TextInput::make('file_mime')->label('MIME')->disabled()->dehydrated(false),
             Forms\Components\TextInput::make('size_bytes')->label('Tamaño')->disabled()->dehydrated(false)
-                ->formatStateUsing(fn($state) => $state ? (
+                ->formatStateUsing(fn ($state) => $state ? (
                     $state < 1024 ? "{$state} B" :
                     ($state < 1048576 ? number_format($state / 1024, 1).' KB' :
                     number_format($state / 1048576, 2).' MB')
@@ -144,37 +147,41 @@ class MaterialResource extends \Filament\Resources\Resource
                         ->label('')
                         ->columnSpanFull()
                         ->content(function ($record): HtmlString|string {
-                            if (!$record) return '';
+                            if (! $record) {
+                                return '';
+                            }
 
                             if ($record->file_path) {
-                                $url = e(asset('storage/' . $record->file_path));
+                                $url = e(asset('storage/'.$record->file_path));
+
                                 return match ($record->type) {
                                     'image' => new HtmlString(
-                                        '<img src="' . $url . '" style="max-height:320px;max-width:100%;border-radius:.5rem;display:block;">'
+                                        '<img src="'.$url.'" style="max-height:320px;max-width:100%;border-radius:.5rem;display:block;">'
                                     ),
                                     'pdf' => new HtmlString(
-                                        '<iframe src="' . $url . '" style="width:100%;height:520px;border:0;border-radius:.5rem;"></iframe>'
+                                        '<iframe src="'.$url.'" style="width:100%;height:520px;border:0;border-radius:.5rem;"></iframe>'
                                     ),
                                     'video' => new HtmlString(
-                                        '<video controls style="width:100%;max-height:400px;border-radius:.5rem;"><source src="' . $url . '"></video>'
+                                        '<video controls style="width:100%;max-height:400px;border-radius:.5rem;"><source src="'.$url.'"></video>'
                                     ),
                                     default => new HtmlString(
-                                        '<a href="' . $url . '" target="_blank" rel="noopener" style="text-decoration:underline;">Abrir archivo</a>'
+                                        '<a href="'.$url.'" target="_blank" rel="noopener" style="text-decoration:underline;">Abrir archivo</a>'
                                     ),
                                 };
                             }
 
                             if ($record->link_url) {
                                 $url = e($record->link_url);
+
                                 return new HtmlString(
-                                    '<a href="' . $url . '" target="_blank" rel="noopener noreferrer" style="text-decoration:underline;">' . $url . '</a>'
+                                    '<a href="'.$url.'" target="_blank" rel="noopener noreferrer" style="text-decoration:underline;">'.$url.'</a>'
                                 );
                             }
 
                             return '';
                         }),
                 ])
-                ->visible(fn($record) => $record && ($record->file_path || $record->link_url))
+                ->visible(fn ($record) => $record && ($record->file_path || $record->link_url))
                 ->collapsible()
                 ->columnSpanFull(),
         ])->columns(2);
@@ -205,13 +212,13 @@ class MaterialResource extends \Filament\Resources\Resource
                     'html' => 'HTML/Presentación', 'latex' => 'LaTeX', 'link' => 'Enlace', 'other' => 'Otro',
                 ]),
                 Tables\Filters\SelectFilter::make('course')->label('Curso')
-                    ->options(fn() => Material::query()->select('course')->distinct()
+                    ->options(fn () => Material::query()->select('course')->distinct()
                         ->orderBy('course')->whereNotNull('course')->pluck('course', 'course')->toArray()),
                 Tables\Filters\SelectFilter::make('year')->label('Año')
-                    ->options(fn() => Material::query()->select('year')->distinct()
+                    ->options(fn () => Material::query()->select('year')->distinct()
                         ->orderByDesc('year')->whereNotNull('year')->pluck('year', 'year')->toArray()),
                 Tables\Filters\SelectFilter::make('subject')->label('Asignatura')
-                    ->options(fn() => Material::query()->select('subject')->distinct()
+                    ->options(fn () => Material::query()->select('subject')->distinct()
                         ->orderBy('subject')->pluck('subject', 'subject')->toArray()),
                 Tables\Filters\TernaryFilter::make('published')->label('Publicados'),
             ])
@@ -223,13 +230,13 @@ class MaterialResource extends \Filament\Resources\Resource
                         ->label('Publicar')
                         ->icon('heroicon-o-eye')
                         ->color('success')
-                        ->action(fn($records) => $records->each->update(['published' => true]))
+                        ->action(fn ($records) => $records->each->update(['published' => true]))
                         ->deselectRecordsAfterCompletion(),
                     Tables\Actions\BulkAction::make('unpublish')
                         ->label('Despublicar')
                         ->icon('heroicon-o-eye-slash')
                         ->color('warning')
-                        ->action(fn($records) => $records->each->update(['published' => false]))
+                        ->action(fn ($records) => $records->each->update(['published' => false]))
                         ->deselectRecordsAfterCompletion(),
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
