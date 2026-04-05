@@ -4,9 +4,9 @@ namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
-use Illuminate\Mail\Mailables\Address;
 use Illuminate\Queue\SerializesModels;
 
 class ContactFormSubmitted extends Mailable
@@ -26,7 +26,7 @@ class ContactFormSubmitted extends Mailable
             replyTo: [
                 new Address($this->data['email'], $this->data['name']),
             ],
-            subject: 'Nuevo contacto: ' . ($this->data['subject'] ?? 'Mensaje'),
+            subject: 'Nuevo contacto: '.($this->data['subject'] ?? 'Mensaje'),
         );
     }
 

@@ -15,8 +15,8 @@ class MaterialService
      */
     public function store(array $data, UploadedFile $file): Material
     {
-        $directory = 'materials/' . now()->format('Y/m');
-        $filePath  = $file->store($directory, 'public');
+        $directory = 'materials/'.now()->format('Y/m');
+        $filePath = $file->store($directory, 'public');
 
         $data['file_path'] = $filePath;
         $data['file_mime'] = $file->getMimeType();
@@ -42,8 +42,8 @@ class MaterialService
                 Storage::disk('public')->delete($material->file_path);
             }
 
-            $directory = 'materials/' . now()->format('Y/m');
-            $filePath  = $file->store($directory, 'public');
+            $directory = 'materials/'.now()->format('Y/m');
+            $filePath = $file->store($directory, 'public');
 
             $data['file_path'] = $filePath;
             $data['file_mime'] = $file->getMimeType();

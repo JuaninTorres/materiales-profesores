@@ -26,12 +26,14 @@ class EditMaterial extends EditRecord
 
     private function updateFileMeta(Material $record): void
     {
-        if (!$record->file_path) return;
+        if (! $record->file_path) {
+            return;
+        }
 
         try {
             $disk = Storage::disk('public');
             $record->updateQuietly([
-                'file_mime'  => $disk->mimeType($record->file_path) ?? null,
+                'file_mime' => $disk->mimeType($record->file_path) ?? null,
                 'size_bytes' => $disk->size($record->file_path) ?? null,
             ]);
         } catch (\Throwable) {

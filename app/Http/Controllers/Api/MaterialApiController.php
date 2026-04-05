@@ -20,12 +20,24 @@ class MaterialApiController extends Controller
     {
         $query = Material::query();
 
-        if ($level   = $request->get('level'))   $query->where('level', $level);
-        if ($course  = $request->get('course'))  $query->where('course', $course);
-        if ($type    = $request->get('type'))    $query->where('type', $type);
-        if ($subject = $request->get('subject')) $query->where('subject', $subject);
-        if ($year    = $request->get('year'))    $query->where('year', (int) $year);
-        if ($sem     = $request->get('semester'))$query->where('semester', (int) $sem);
+        if ($level = $request->get('level')) {
+            $query->where('level', $level);
+        }
+        if ($course = $request->get('course')) {
+            $query->where('course', $course);
+        }
+        if ($type = $request->get('type')) {
+            $query->where('type', $type);
+        }
+        if ($subject = $request->get('subject')) {
+            $query->where('subject', $subject);
+        }
+        if ($year = $request->get('year')) {
+            $query->where('year', (int) $year);
+        }
+        if ($sem = $request->get('semester')) {
+            $query->where('semester', (int) $sem);
+        }
 
         $perPage = min($request->integer('per_page', 15), 100);
 
@@ -36,7 +48,7 @@ class MaterialApiController extends Controller
 
     public function store(StoreMaterialRequest $request): JsonResponse
     {
-        $data     = $request->except('archivo_html');
+        $data = $request->except('archivo_html');
         $material = $this->service->store($data, $request->file('archivo_html'));
 
         return (new MaterialResource($material))
@@ -46,7 +58,7 @@ class MaterialApiController extends Controller
 
     public function update(UpdateMaterialRequest $request, Material $material): MaterialResource
     {
-        $data    = $request->except('archivo_html');
+        $data = $request->except('archivo_html');
         $updated = $this->service->update($material, $data, $request->file('archivo_html'));
 
         return new MaterialResource($updated);

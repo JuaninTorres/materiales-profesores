@@ -9,7 +9,8 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void {
+    public function up(): void
+    {
         Schema::create('materials', function (Blueprint $table) {
             $table->id();
 
@@ -18,13 +19,13 @@ return new class extends Migration
             $table->text('description')->nullable();
 
             $table->string('subject')->index();
-            $table->enum('level', ['colegio','cft','particulares','universidad','instituto'])->index();
+            $table->enum('level', ['colegio', 'cft', 'particulares', 'universidad', 'instituto'])->index();
             $table->string('course')->nullable()->index();
             $table->smallInteger('year')->nullable()->index();
             $table->tinyInteger('semester')->nullable()->index();
             $table->string('unit')->nullable();
 
-            $table->enum('type', ['pdf','image','video','html','latex','link','other'])->index();
+            $table->enum('type', ['pdf', 'image', 'video', 'html', 'latex', 'link', 'other'])->index();
 
             $table->string('file_path')->nullable();
             $table->string('file_mime')->nullable();

@@ -12,8 +12,8 @@ class MaterialsStatsWidget extends BaseWidget
 
     protected function getStats(): array
     {
-        $total       = Material::count();
-        $published   = Material::where('published', true)->count();
+        $total = Material::count();
+        $published = Material::where('published', true)->count();
         $unpublished = $total - $published;
 
         $byLevel = Material::selectRaw('level, count(*) as total')
@@ -22,7 +22,7 @@ class MaterialsStatsWidget extends BaseWidget
             ->pluck('total', 'level');
 
         $levelDescription = $byLevel->isNotEmpty()
-            ? $byLevel->map(fn($n, $lvl) => ucfirst($lvl) . ': ' . $n)->join(' · ')
+            ? $byLevel->map(fn ($n, $lvl) => ucfirst($lvl).': '.$n)->join(' · ')
             : '—';
 
         $publishedPct = $total > 0 ? round($published / $total * 100) : 0;
@@ -34,7 +34,7 @@ class MaterialsStatsWidget extends BaseWidget
                 ->icon('heroicon-o-rectangle-stack'),
 
             Stat::make('Publicados', $published)
-                ->description($publishedPct . '% del total')
+                ->description($publishedPct.'% del total')
                 ->color('success')
                 ->icon('heroicon-o-eye'),
 
