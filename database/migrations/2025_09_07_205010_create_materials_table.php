@@ -10,7 +10,8 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void {
+    public function up(): void
+    {
         $isMysql = DB::connection()->getDriverName() === 'mysql';
 
         Schema::create('materials', function (Blueprint $table) use ($isMysql) {
