@@ -16,7 +16,7 @@
       "Bash(git checkout:*)",
       "Bash(gh pr:*)",
       "Bash(git branch:*)",
-      "Bash(./vendor/bin/pint)"
+      "Bash(./vendor/bin/pest)"
     ]
   }
 }
