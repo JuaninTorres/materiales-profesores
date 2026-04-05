@@ -24,7 +24,7 @@ class MaterialSeeder extends Seeder
             'file_path' => 'materials/2025/09/medidas_tendencia_central.pdf',
             'file_mime' => 'application/pdf',
             'size_bytes' => 870400, // ~850 KB
-            'tags' => ['estadística','tendencia central','guía'],
+            'tags' => ['estadística', 'tendencia central', 'guía'],
             'published' => true,
         ]);
 
@@ -42,7 +42,7 @@ class MaterialSeeder extends Seeder
             'file_path' => 'materials/2025/09/funciones_lineales.html',
             'file_mime' => 'text/html',
             'size_bytes' => 512000, // ~500 KB
-            'tags' => ['funciones','gráficos','III° Medio'],
+            'tags' => ['funciones', 'gráficos', 'III° Medio'],
             'published' => true,
         ]);
 
