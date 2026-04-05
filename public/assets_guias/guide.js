@@ -49,9 +49,9 @@ function buildExercises() {
     card.innerHTML = `
       <div class="exercise-header">
         <div class="exercise-num">${i + 1}</div>
-        <div class="exercise-type">${ex.type}</div>
+        <div class="exercise-question">${ex.question}</div>
+        <span class="exercise-type">${ex.type}</span>
       </div>
-      <div class="exercise-question">${ex.question}</div>
       <div class="exercise-options" id="options-${i}">
         ${'ABCD'.split('').map((letter, j) => `
           <button class="option-btn" id="opt-${i}-${j}" onclick="selectOption(${i}, ${j})">
