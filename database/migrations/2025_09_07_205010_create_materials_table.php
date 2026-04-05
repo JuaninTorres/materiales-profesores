@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -10,7 +11,9 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void {
-        Schema::create('materials', function (Blueprint $table) {
+        $isMysql = DB::connection()->getDriverName() === 'mysql';
+
+        Schema::create('materials', function (Blueprint $table) use ($isMysql) {
             $table->id();
 
             $table->string('code')->unique();
@@ -36,9 +39,11 @@ return new class extends Migration
             $table->boolean('published')->default(true)->index();
             $table->timestamps();
 
-            // FULLTEXT para MySQL 8 (InnoDB)
-            $table->fullText(['title', 'description']);
-            $table->fullText(['subject', 'course', 'unit']); // opcional pero útil
+            // FULLTEXT para MySQL 8 (InnoDB) — no soportado en SQLite
+            if ($isMysql) {
+                $table->fullText(['title', 'description']);
+                $table->fullText(['subject', 'course', 'unit']);
+            }
         });
     }
 
