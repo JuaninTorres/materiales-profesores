@@ -16,7 +16,12 @@
       "Bash(git checkout:*)",
       "Bash(gh pr:*)",
       "Bash(git branch:*)",
-      "Bash(./vendor/bin/pest)"
+      "Bash(./vendor/bin/pest)",
+      "Bash(git fetch:*)",
+      "Bash(git pull:*)",
+      "Bash(git stash:*)",
+      "Bash(./vendor/bin/pint)",
+      "Bash(./vendor/bin/pint --test)"
     ]
   }
 }
