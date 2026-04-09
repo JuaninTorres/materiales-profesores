@@ -13,7 +13,7 @@ class Material extends Model
 
     protected $fillable = [
         'code', 'title', 'description',
-        'subject', 'level', 'course', 'year', 'semester', 'unit',
+        'subject', 'level', 'course', 'year', 'semester', 'unit', 'tema',
         'type', 'file_path', 'file_mime', 'size_bytes', 'link_url', 'published', 'tags',
     ];
 
