@@ -71,21 +71,21 @@
             </div>
 
             <div class="col-6 col-md-2">
-                <label class="form-label small fw-semibold" for="type">Tipo</label>
-                <select id="type" class="form-select form-select-sm" wire:model.live="type">
-                    <option value="">Todos</option>
-                    @foreach($types as $t)
-                        <option value="{{ $t }}">{{ ucfirst($t) }}</option>
+                <label class="form-label small fw-semibold" for="unit">Unidad</label>
+                <select id="unit" class="form-select form-select-sm" wire:model.live="unit">
+                    <option value="">Todas</option>
+                    @foreach($units as $u)
+                        <option value="{{ $u }}">{{ $u }}</option>
                     @endforeach
                 </select>
             </div>
 
             <div class="col-6 col-md-2">
-                <label class="form-label small fw-semibold" for="semester">Semestre</label>
-                <select id="semester" class="form-select form-select-sm" wire:model.live="semester">
+                <label class="form-label small fw-semibold" for="tema">Tema</label>
+                <select id="tema" class="form-select form-select-sm" wire:model.live="tema">
                     <option value="">Todos</option>
-                    @foreach($semesters as $s)
-                        <option value="{{ $s }}">{{ $s }}</option>
+                    @foreach($temas as $t)
+                        <option value="{{ $t }}">{{ $t }}</option>
                     @endforeach
                 </select>
             </div>
@@ -132,6 +132,23 @@
                                     {{ $m->course }}@if($m->semester) · Semestre {{ $m->semester }}@endif
                                 </p>
 
+                                @if($m->unit || $m->tema)
+                                    <div class="d-flex flex-wrap gap-1 mb-2">
+                                        @if($m->unit)
+                                            <span class="badge text-bg-info text-truncate" style="max-width:100%"
+                                                  title="{{ $m->unit }}">
+                                                <i class="bi bi-bookmarks-fill me-1" aria-hidden="true"></i>{{ $m->unit }}
+                                            </span>
+                                        @endif
+                                        @if($m->tema)
+                                            <span class="badge text-bg-secondary text-truncate" style="max-width:100%"
+                                                  title="{{ $m->tema }}">
+                                                <i class="bi bi-bookmark-fill me-1" aria-hidden="true"></i>{{ $m->tema }}
+                                            </span>
+                                        @endif
+                                    </div>
+                                @endif
+
                                 @if(!empty($m->tags))
                                     <div class="mb-2 d-flex flex-wrap gap-1">
                                         @foreach((array)$m->tags as $tag)
@@ -173,6 +190,20 @@
                             <div class="text-muted small">
                                 {{ $m->course }} · {{ $m->tipo }}@if($m->semester) · Semestre {{ $m->semester }}@endif
                             </div>
+                            @if($m->unit || $m->tema)
+                                <div class="mt-1 d-flex flex-wrap gap-1">
+                                    @if($m->unit)
+                                        <span class="badge text-bg-info">
+                                            <i class="bi bi-bookmarks-fill me-1" aria-hidden="true"></i>{{ $m->unit }}
+                                        </span>
+                                    @endif
+                                    @if($m->tema)
+                                        <span class="badge text-bg-secondary">
+                                            <i class="bi bi-bookmark-fill me-1" aria-hidden="true"></i>{{ $m->tema }}
+                                        </span>
+                                    @endif
+                                </div>
+                            @endif
                             @if(!empty($m->tags))
                                 <div class="mt-1 d-flex flex-wrap gap-1">
                                     @foreach((array)$m->tags as $tag)
@@ -200,7 +231,7 @@
             <h3 class="h5 fw-semibold mb-1">Sin resultados</h3>
             <p class="text-muted mb-3">No se encontraron materiales con esos filtros.</p>
             <button type="button" class="btn btn-outline-secondary btn-sm"
-                    wire:click="$set('q', ''); $set('course', ''); $set('type', ''); $set('semester', '')">
+                    wire:click="$set('q', ''); $set('course', ''); $set('unit', ''); $set('tema', '')">
                 <i class="bi bi-arrow-counterclockwise me-1" aria-hidden="true"></i>Limpiar filtros
             </button>
         </div>
