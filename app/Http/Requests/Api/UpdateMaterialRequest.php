@@ -22,6 +22,7 @@ class UpdateMaterialRequest extends FormRequest
             'year' => 'nullable|integer|min:2020|max:2099',
             'semester' => 'nullable|integer|min:1|max:2',
             'unit' => 'nullable|string|max:255',
+            'tema' => 'nullable|string|max:255',
             'tags' => 'nullable|array',
             'tags.*' => 'string|max:100',
             'archivo_html' => 'nullable|file|mimetypes:text/html,text/plain|max:10240',

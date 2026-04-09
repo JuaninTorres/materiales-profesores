@@ -21,6 +21,7 @@ class MaterialResource extends JsonResource
             'year' => $this->year,
             'semester' => $this->semester,
             'unit' => $this->unit,
+            'tema' => $this->tema,
             'type' => $this->type,
             'tags' => $this->tags ?? [],
             'size_bytes' => $this->size_bytes,

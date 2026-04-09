@@ -22,6 +22,7 @@ class StoreMaterialRequest extends FormRequest
             'year' => 'nullable|integer|min:2020|max:2099',
             'semester' => 'nullable|integer|min:1|max:2',
             'unit' => 'nullable|string|max:255',
+            'tema' => 'nullable|string|max:255',
             'type' => 'required|in:html',
             'tags' => 'nullable|array',
             'tags.*' => 'string|max:100',
