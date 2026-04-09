@@ -110,6 +110,7 @@ class MaterialResource extends \Filament\Resources\Resource
             Forms\Components\TextInput::make('year')->numeric()->minValue(2000)->maxValue(2100),
             Forms\Components\Select::make('semester')->options([1 => 1, 2 => 2])->label('Semestre'),
             Forms\Components\TextInput::make('unit')->label('Unidad'),
+            Forms\Components\TextInput::make('tema')->label('Tema')->placeholder('Ej: Tema 1: Fracciones'),
 
             Forms\Components\Select::make('type')->label('Tipo')->options([
                 'pdf' => 'PDF', 'image' => 'Imagen', 'video' => 'Video',

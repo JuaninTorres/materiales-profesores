@@ -21,7 +21,8 @@
       "Bash(git pull:*)",
       "Bash(git stash:*)",
       "Bash(./vendor/bin/pint)",
-      "Bash(./vendor/bin/pint --test)"
+      "Bash(./vendor/bin/pint --test)",
+      "Bash(composer test:*)"
     ]
   }
 }

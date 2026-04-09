@@ -12,28 +12,25 @@ class Index extends Component
 
     protected string $paginationTheme = 'bootstrap';
 
-    // Estado existente
     public string $q = '';
 
     public ?string $course = null;
 
-    public ?string $type = null;
+    public ?string $unit = null;
 
-    public ?string $semester = null;
+    public ?string $tema = null;
 
     public int $perPage = 12;
 
-    // NUEVO: orden y vista
     public string $sort = 'recent';      // recent | title_az | title_za
 
     public string $view = 'cards';       // cards | list
 
-    // Mantener en la URL
     protected $queryString = [
         'q' => ['except' => ''],
         'course' => ['except' => null],
-        'type' => ['except' => null],
-        'semester' => ['except' => null],
+        'unit' => ['except' => null],
+        'tema' => ['except' => null],
         'perPage' => ['except' => 12],
         'sort' => ['except' => 'recent'],
         'view' => ['except' => 'cards'],
@@ -42,7 +39,7 @@ class Index extends Component
 
     public function updated($field): void
     {
-        if (in_array($field, ['q', 'course', 'type', 'semester', 'perPage', 'sort'])) {
+        if (in_array($field, ['q', 'course', 'unit', 'tema', 'perPage', 'sort'])) {
             $this->resetPage();
         }
     }
@@ -57,8 +54,8 @@ class Index extends Component
     {
         return $q
             ->when($this->course, fn ($q, $v) => $q->where('course', $v))
-            ->when($this->type, fn ($q, $v) => $q->where('type', $v))
-            ->when($this->semester, fn ($q, $v) => $q->where('semester', $v))
+            ->when($this->unit, fn ($q, $v) => $q->where('unit', $v))
+            ->when($this->tema, fn ($q, $v) => $q->where('tema', $v))
             ->when(true, fn ($q) => match ($this->sort) {
                 'title_az' => $q->orderBy('title', 'asc')->orderBy('id', 'desc'),
                 'title_za' => $q->orderBy('title', 'desc')->orderBy('id', 'desc'),
@@ -81,11 +78,11 @@ class Index extends Component
         }
 
         // para selects
-        $courses = Material::where('published', true)->select('course')->distinct()->orderBy('course')->pluck('course');
-        $types = Material::where('published', true)->select('type')->distinct()->orderBy('type')->pluck('type');
-        $semesters = Material::where('published', true)->select('semester')->whereNotNull('semester')->distinct()->orderBy('semester', 'desc')->pluck('semester');
+        $courses = Material::where('published', true)->select('course')->whereNotNull('course')->distinct()->orderBy('course')->pluck('course');
+        $units = Material::where('published', true)->select('unit')->whereNotNull('unit')->distinct()->orderBy('unit')->pluck('unit');
+        $temas = Material::where('published', true)->select('tema')->whereNotNull('tema')->where('tema', '!=', '')->distinct()->orderBy('tema')->pluck('tema');
 
-        return view('livewire.materials.index', compact('materials', 'courses', 'types', 'semesters'))
+        return view('livewire.materials.index', compact('materials', 'courses', 'units', 'temas'))
             ->layout('layouts.app');
     }
 }
