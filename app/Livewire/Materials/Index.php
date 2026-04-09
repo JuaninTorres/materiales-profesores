@@ -42,6 +42,15 @@ class Index extends Component
         if (in_array($field, ['q', 'course', 'unit', 'tema', 'perPage', 'sort'])) {
             $this->resetPage();
         }
+
+        if ($field === 'course') {
+            $this->unit = null;
+            $this->tema = null;
+        }
+
+        if ($field === 'unit') {
+            $this->tema = null;
+        }
     }
 
     // Helpers para UI
@@ -77,10 +86,21 @@ class Index extends Component
             )->paginate($this->perPage);
         }
 
-        // para selects
-        $courses = Material::where('published', true)->select('course')->whereNotNull('course')->distinct()->orderBy('course')->pluck('course');
-        $units = Material::where('published', true)->select('unit')->whereNotNull('unit')->distinct()->orderBy('unit')->pluck('unit');
-        $temas = Material::where('published', true)->select('tema')->whereNotNull('tema')->where('tema', '!=', '')->distinct()->orderBy('tema')->pluck('tema');
+        // para selects — cada uno se restringe según los filtros upstream activos
+        $courses = Material::where('published', true)
+            ->select('course')->whereNotNull('course')
+            ->distinct()->orderBy('course')->pluck('course');
+
+        $units = Material::where('published', true)
+            ->when($this->course, fn ($q) => $q->where('course', $this->course))
+            ->select('unit')->whereNotNull('unit')->where('unit', '!=', '')
+            ->distinct()->orderBy('unit')->pluck('unit');
+
+        $temas = Material::where('published', true)
+            ->when($this->course, fn ($q) => $q->where('course', $this->course))
+            ->when($this->unit, fn ($q) => $q->where('unit', $this->unit))
+            ->select('tema')->whereNotNull('tema')->where('tema', '!=', '')
+            ->distinct()->orderBy('tema')->pluck('tema');
 
         return view('livewire.materials.index', compact('materials', 'courses', 'units', 'temas'))
             ->layout('layouts.app');
