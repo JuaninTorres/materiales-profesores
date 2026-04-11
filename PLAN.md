@@ -12,8 +12,9 @@ Plan de trabajo en progreso. Cada tarea es independiente y puede ejecutarse en u
 - Stack: Laravel 12 + Livewire 3 + Bootstrap 5 SCSS (sin Tailwind)
 - SCSS vía Vite: `resources/scss/app.scss` (único punto de entrada)
 - **Regla crítica:** ningún `style=` inline ni `<style>` en Blade — todo CSS va en SCSS
+- **Sin CDN externos:** Bootstrap, Bootstrap Icons, AOS y fuentes se sirven localmente vía npm/Vite
 - Paleta: Navy `#1e3a5f`, Amber `#f59e0b`, Cream `#f8f5f0`, Footer `#0f1e2e`
-- Fuente: Plus Jakarta Sans (400/600/700/800) vía Google Fonts
+- Fuente: Plus Jakarta Sans (400/600/700/800) — instalada vía `@fontsource/plus-jakarta-sans`, bundleada por Vite
 
 ---
 
@@ -46,14 +47,19 @@ Plan de trabajo en progreso. Cada tarea es independiente y puede ejecutarse en u
 
 ## Progreso
 
-- [ ] **Tarea 1 — SCSS foundation**
-  - Archivos: `_variables.scss`, crear `_design-system.scss`, `_components.scss` (vacío), `_pages.scss` (vacío), actualizar `app.scss`
-  - Verificar: `npm run build` sin errores
-  - Commit: `feat: add design system SCSS foundation`
+- [ ] **Tarea 1 — SCSS foundation + fuente self-hosted**
+  - `npm install @fontsource/plus-jakarta-sans` (sin CDN)
+  - Actualizar `_variables.scss` (`$primary`, `$font-family-sans-serif`)
+  - Crear `_design-system.scss` (variables CSS, utilidades, paleta)
+  - Crear `_components.scss` y `_pages.scss` (shells vacíos)
+  - Actualizar `app.scss`: imports de fontsource al inicio, imports de partials al final
+  - Verificar: `npm run build` sin errores (Vite bundlea los `.woff2` localmente)
+  - Commit: `feat: add design system SCSS foundation, self-host Plus Jakarta Sans via Fontsource`
 
 - [ ] **Tarea 2 — Layout: Navbar + Footer**
   - Archivo: `resources/views/layouts/app.blade.php`
-  - Agregar: Google Fonts link, `@stack('scripts')`, navbar `.navbar-site` (navy), footer `.site-footer` (dark)
+  - Sin `<link>` externos — la fuente ya viene de Tarea 1
+  - Agregar: `@stack('scripts')`, navbar `.navbar-site` (navy), footer `.site-footer` (dark)
   - SCSS en `_components.scss`
   - Commit: `feat: redesign navbar and footer`
 

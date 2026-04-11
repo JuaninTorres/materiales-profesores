@@ -42,7 +42,15 @@
 - Create: `resources/scss/_pages.scss` (empty shell)
 - Modify: `resources/scss/app.scss`
 
-- [ ] **Step 1: Update `_variables.scss`** — prepend these lines before the existing content:
+- [ ] **Step 1: Install the font as a local npm package (no CDN)**
+
+```bash
+npm install @fontsource/plus-jakarta-sans
+```
+
+This bundles the font files through Vite — no external requests at runtime.
+
+- [ ] **Step 2: Update `_variables.scss`** — prepend these lines before the existing content:
 
 ```scss
 $font-family-sans-serif: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
@@ -170,8 +178,18 @@ Keep the rest of the existing file unchanged.
 
 - [ ] **Step 4: Create empty `_pages.scss`** with a single comment `// Pages — filled in Task 4+`
 
-- [ ] **Step 5: Update `resources/scss/app.scss`** — append at the end (after existing content):
+- [ ] **Step 6: Update `resources/scss/app.scss`** — add font imports **before** the Bootstrap import, then the partials at the end:
 
+At the very top (before `@import "variables"`):
+```scss
+// --- Self-hosted font (bundled by Vite, no CDN) ---
+@import '@fontsource/plus-jakarta-sans/400.css';
+@import '@fontsource/plus-jakarta-sans/600.css';
+@import '@fontsource/plus-jakarta-sans/700.css';
+@import '@fontsource/plus-jakarta-sans/800.css';
+```
+
+At the end (after existing content):
 ```scss
 // --- Design system partials ---
 @import "design-system";
@@ -179,24 +197,24 @@ Keep the rest of the existing file unchanged.
 @import "pages";
 ```
 
-- [ ] **Step 6: Run `npm run build` and verify it compiles without errors**
+- [ ] **Step 7: Run `npm run build` and verify it compiles without errors**
 
 ```bash
 npm run build
 ```
 
-Expected: exits 0, no SCSS errors.
+Expected: exits 0, no SCSS errors. Vite bundleará las fuentes localmente (archivos `.woff2` en `public/build/assets/`).
 
-- [ ] **Step 7: Commit**
+- [ ] **Step 8: Commit**
 
 ```bash
-git add resources/scss/
-git commit -m "feat: add design system SCSS foundation (partials, variables, utilities)"
+git add package.json package-lock.json resources/scss/
+git commit -m "feat: add design system SCSS foundation, self-host Plus Jakarta Sans via Fontsource"
 ```
 
 ---
 
-## Task 2: Navbar, Footer, Google Fonts
+## Task 2: Navbar y Footer
 
 **Files:**
 - Modify: `resources/views/layouts/app.blade.php`
@@ -240,9 +258,6 @@ Expected: FAIL — `navbar-site` not found.
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <link rel="icon" href="/favicon.ico" sizes="32x32">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     @vite(['resources/js/app.js'])
     @livewireStyles
     @stack('meta')
