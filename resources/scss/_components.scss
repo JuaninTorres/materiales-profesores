@@ -93,3 +93,105 @@
     color: #64748b;
   }
 }
+
+// ============================================================
+// MAT-CARD
+// ============================================================
+.mat-card {
+  background: #fff;
+  border: 1.5px solid #e2e8f0;
+  border-radius: .75rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: box-shadow .2s, transform .2s;
+
+  &:hover {
+    box-shadow: 0 .5rem 1.5rem rgba(0,0,0,.12);
+    transform: translateY(-2px);
+  }
+}
+
+.mat-card-top {
+  padding: 1rem 1rem .5rem;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+.mat-card-body {
+  padding: 0 1rem .75rem;
+  flex: 1;
+}
+
+.mat-card-title {
+  font-size: .95rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: .3rem;
+  line-height: 1.35;
+}
+
+.mat-card-meta {
+  font-size: .78rem;
+  color: #64748b;
+  margin-bottom: .5rem;
+}
+
+.mat-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .25rem;
+}
+
+.mat-tag {
+  font-size: .72rem !important;
+  font-weight: 500 !important;
+}
+
+.mat-card-footer {
+  padding: .75rem 1rem;
+  border-top: 1px solid #f1f5f9;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mat-pages {
+  font-size: .75rem;
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  gap: .3rem;
+}
+
+// ---- Type badges ----
+.mat-type-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .25rem;
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  padding: .2rem .55rem;
+  border-radius: 999px;
+
+  &.mat-type-pdf   { background: #fef2f2; color: #dc2626; }
+  &.mat-type-video { background: #eff6ff; color: #2563eb; }
+  &.mat-type-html  { background: #f0fdf4; color: #16a34a; }
+  &.mat-type-image { background: #fdf4ff; color: #9333ea; }
+  &.mat-type-latex { background: #fff7ed; color: #ea580c; }
+  &.mat-type-link  { background: #f0f9ff; color: #0284c7; }
+  &.mat-type-other { background: #f8fafc; color: #64748b; }
+}
+
+// ---- Level dot ----
+.mat-level-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+}
