@@ -1,3 +1,9 @@
+// --- Self-hosted font (bundled by Vite, no CDN) ---
+@import '@fontsource/plus-jakarta-sans/400.css';
+@import '@fontsource/plus-jakarta-sans/600.css';
+@import '@fontsource/plus-jakarta-sans/700.css';
+@import '@fontsource/plus-jakarta-sans/800.css';
+
 @import "variables";
 @import "bootstrap/scss/bootstrap";
 
@@ -52,3 +58,8 @@ body {
   object-fit: cover;
   object-position: top;
 }
+
+// --- Design system partials ---
+@import "design-system";
+@import "components";
+@import "pages";

@@ -47,7 +47,7 @@ Plan de trabajo en progreso. Cada tarea es independiente y puede ejecutarse en u
 
 ## Progreso
 
-- [ ] **Tarea 1 — SCSS foundation + fuente self-hosted**
+- [x] **Tarea 1 — SCSS foundation + fuente self-hosted**
   - `npm install @fontsource/plus-jakarta-sans` (sin CDN)
   - Actualizar `_variables.scss` (`$primary`, `$font-family-sans-serif`)
   - Crear `_design-system.scss` (variables CSS, utilidades, paleta)

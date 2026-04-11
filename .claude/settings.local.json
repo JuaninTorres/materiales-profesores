@@ -29,7 +29,8 @@
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:65431/)",
       "Bash(python3 -m http.server 8765)",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:8765/home-mockup.html)",
-      "Bash(awk -F/ '{:*)"
+      "Bash(awk -F/ '{:*)",
+      "Bash(npm install:*)"
     ]
   }
 }
