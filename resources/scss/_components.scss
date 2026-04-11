@@ -1,1 +1,95 @@
-// Components — filled in Task 2
+// ============================================================
+// NAVBAR
+// ============================================================
+.navbar-site {
+  background-color: var(--color-navy);
+  padding-top: .875rem;
+  padding-bottom: .875rem;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+
+  .navbar-brand-link {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: #fff;
+    .brand-accent { color: var(--color-amber); }
+  }
+
+  .nav-link {
+    color: rgba(255,255,255,.75);
+    font-weight: 600;
+    font-size: .9rem;
+    padding: .375rem .75rem;
+    transition: color .15s;
+    &:hover, &.active { color: #fff; }
+  }
+
+  .navbar-toggler {
+    border-color: rgba(255,255,255,.3);
+    padding: .3rem .6rem;
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255,255,255,0.8%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+  }
+}
+
+// ============================================================
+// FOOTER
+// ============================================================
+.site-footer {
+  background-color: var(--color-footer);
+  color: #94a3b8;
+
+  .footer-brand {
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: #fff;
+    margin-bottom: .5rem;
+  }
+
+  .footer-tagline {
+    font-size: .82rem;
+    color: #94a3b8;
+    line-height: 1.6;
+  }
+
+  .footer-col-h {
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: #64748b;
+    margin-bottom: .75rem;
+  }
+
+  .footer-link {
+    display: block;
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: .85rem;
+    padding: .2rem 0;
+    transition: color .15s;
+    &:hover { color: #fff; }
+  }
+
+  .footer-contact-row {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    font-size: .85rem;
+    color: #94a3b8;
+    margin-bottom: .5rem;
+    i { color: #64748b; flex-shrink: 0; }
+  }
+
+  .footer-bottom {
+    margin-top: 1rem;
+    border-top: 1px solid #1e2d3d;
+    padding: 1rem 0;
+    font-size: .78rem;
+    color: #64748b;
+  }
+}
