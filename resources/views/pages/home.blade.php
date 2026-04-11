@@ -258,3 +258,49 @@
 </section>
 
 @endsection
+
+@push('jsonld')
+@php
+  $jsonData = [
+    "@context" => "https://schema.org",
+    "@graph" => [
+      [
+        "@type" => "Person",
+        "@id" => url('/') . "#nicolas",
+        "name" => "Nicolás González M.",
+        "jobTitle" => "Profesor de Matemática",
+        "url" => url('/'),
+        "sameAs" => [],
+        "address" => [
+          "@type" => "PostalAddress",
+          "addressLocality" => "Quintero",
+          "addressRegion" => "Valparaíso",
+          "addressCountry" => "CL"
+        ],
+        "knowsAbout" => ["Matemática", "PAES", "Álgebra", "Cálculo", "Geometría"]
+      ],
+      [
+        "@type" => "WebSite",
+        "@id" => url('/') . "#website",
+        "url" => url('/'),
+        "name" => "Profe Nicolás",
+        "description" => "Materiales gratuitos de matemática y clases particulares.",
+        "publisher" => [
+          "@id" => url('/') . "#nicolas"
+        ],
+        "potentialAction" => [
+          "@type" => "SearchAction",
+          "target" => [
+            "@type" => "EntryPoint",
+            "urlTemplate" => route('materials.index') . "?q={search_term_string}"
+          ],
+          "query-input" => "required name=search_term_string"
+        ]
+      ]
+    ]
+  ];
+@endphp
+<script type="application/ld+json">
+{{ json_encode($jsonData) }}
+</script>
+@endpush

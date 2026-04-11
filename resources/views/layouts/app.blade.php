@@ -31,6 +31,7 @@
     @vite(['resources/js/app.js'])
     @livewireStyles
     @stack('meta')
+    @stack('jsonld')
 </head>
 <body>
     <header>
