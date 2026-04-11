@@ -277,4 +277,62 @@ document.querySelectorAll('.js-copy-link').forEach(btn => {
 </script>
 @endpush
 
+@push('jsonld')
+@php
+  $jsonData = [
+    "@context" => "https://schema.org",
+    "@graph" => [
+      [
+        "@type" => "LearningResource",
+        "name" => $material->title,
+        "description" => Str::limit(strip_tags($material->description ?? ''), 250),
+        "url" => route('materials.show', $material),
+        "educationalLevel" => $material->level,
+        "learningResourceType" => $material->tipo,
+        "inLanguage" => "es",
+        "isAccessibleForFree" => true,
+        "author" => [
+          "@type" => "Person",
+          "name" => "Nicolás González M.",
+          "@id" => url('/') . "#nicolas"
+        ],
+        "provider" => [
+          "@type" => "Person",
+          "@id" => url('/') . "#nicolas"
+        ]
+      ],
+      [
+        "@type" => "BreadcrumbList",
+        "itemListElement" => [
+          [
+            "@type" => "ListItem",
+            "position" => 1,
+            "name" => "Inicio",
+            "item" => url('/')
+          ],
+          [
+            "@type" => "ListItem",
+            "position" => 2,
+            "name" => "Materiales",
+            "item" => route('materials.index')
+          ],
+          [
+            "@type" => "ListItem",
+            "position" => 3,
+            "name" => $material->title
+          ]
+        ]
+      ]
+    ]
+  ];
+
+  if ($material->subject) {
+    $jsonData["@graph"][0]["teaches"] = $material->subject;
+  }
+@endphp
+<script type="application/ld+json">
+{{ json_encode($jsonData) }}
+</script>
+@endpush
+
 @endsection
