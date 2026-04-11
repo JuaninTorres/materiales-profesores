@@ -16,9 +16,7 @@
     @section('og_image', asset('storage/' . $material->file_path))
 @endif
 
-@push('meta')
-    <link rel="canonical" href="{{ route('materials.show', $material) }}">
-@endpush
+@section('canonical', route('materials.show', $material))
 
 @section('full_content')
 
