@@ -68,7 +68,7 @@ Plan de trabajo en progreso. Cada tarea es independiente y puede ejecutarse en u
   - SCSS `.mat-card`, `.mat-type-badge`, `.mat-level-dot` en `_components.scss`
   - Commit: `feat: add mat-card Blade component`
 
-- [ ] **Tarea 4 — Home page**
+- [x] **Tarea 4 — Home page**
   - Archivo: `resources/views/pages/home.blade.php`
   - Secciones: hero, 3 value-cards, 4 level-pills, grid de mat-cards (últimos 6), FAQ accordion Bootstrap con Schema.org FAQPage, CTA final navy
   - SCSS en `_pages.scss`

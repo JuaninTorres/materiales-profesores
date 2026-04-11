@@ -6,137 +6,78 @@
 @section('full_content')
 
 {{-- ================================================================
-     HERO — sin AOS (sobre el fold, visible de inmediato)
+     HERO
 ================================================================ --}}
-<section class="bg-primary text-white py-5">
-    <div class="container py-4">
-        <div class="row align-items-center g-5">
-            <div class="col-lg-7 text-center text-lg-start">
-                <p class="text-white-50 text-uppercase fw-semibold mb-2 small">
+<section class="hero">
+    <div class="container">
+        <div class="row align-items-center g-4">
+            <div class="col-lg-7">
+                <p class="eyebrow">
                     <i class="bi bi-mortarboard-fill me-1" aria-hidden="true"></i>Profesor de Matemática
                 </p>
-                <h1 class="display-4 fw-bold lh-sm mb-4">
-                    Matemática<br>que se entiende.
+                <h1 class="fw-800">
+                    Matemática<br>que <span class="text-amber">se entiende.</span>
                 </h1>
-                <p class="lead mb-5 opacity-75">
-                    Hola, soy el <strong class="text-white">Profe Nicolás González</strong>.
-                    Llevo más de 13 años acompañando a estudiantes de colegio, CFT y PAES a
-                    entender la matemática —no solo a memorizar fórmulas. Acá encuentras
-                    los materiales de mis clases, disponibles para todos.
+                <p class="hero-lead">
+                    Hola, soy el <strong>Profe Nicolás González</strong>. Llevo más de 13 años
+                    acompañando a estudiantes de colegio, CFT y PAES a entender la matemática
+                    —no solo a memorizar fórmulas. Acá encuentras los materiales de mis clases,
+                    disponibles para todos.
                 </p>
-                <div class="d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start">
-                    <a href="{{ route('materials.index') }}" class="btn btn-light btn-lg px-4 fw-semibold">
+                <div class="d-flex flex-wrap gap-3">
+                    <a href="{{ route('materials.index') }}" class="btn btn-amber btn-lg px-4">
                         <i class="bi bi-collection me-2" aria-hidden="true"></i>Explorar materiales
                     </a>
-                    <a href="{{ route('contact') }}" class="btn btn-outline-light btn-lg px-4">
-                        <i class="bi bi-calendar2-check me-2" aria-hidden="true"></i>Agendar una clase
+                    <a href="{{ route('contact') }}" class="btn btn-outline-amber btn-lg px-4">
+                        <i class="bi bi-calendar2-check me-2" aria-hidden="true"></i>Agendar clase
                     </a>
                 </div>
             </div>
-            <div class="col-lg-5 text-center d-none d-lg-block">
+            <div class="col-lg-5 d-none d-lg-block">
                 <img src="{{ asset('images/landing_principal.jpg') }}"
                      alt="Profesor Nicolás González M."
-                     class="landing-hero-photo img-fluid">
+                     class="hero-photo">
             </div>
         </div>
     </div>
 </section>
 
 {{-- ================================================================
-     PROPUESTA DE VALOR
+     VALUE PROPS
 ================================================================ --}}
-<section class="py-5">
-    <div class="container py-3">
-        <div class="row g-4 text-center">
-            <div class="col-md-4" data-aos="fade-up" data-aos-delay="0">
-                <div class="p-3">
-                    <i class="bi bi-file-earmark-text display-4 text-primary mb-3 d-block" aria-hidden="true"></i>
-                    <h2 class="h5 fw-bold">Material organizado y gratuito</h2>
-                    <p class="text-muted mb-0">
-                        Guías, ejercicios y apuntes ordenados por curso, unidad y tipo.
-                        Descárgalos cuando los necesites, sin registros.
-                    </p>
-                </div>
-            </div>
-            <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
-                <div class="p-3">
-                    <i class="bi bi-people display-4 text-primary mb-3 d-block" aria-hidden="true"></i>
-                    <h2 class="h5 fw-bold">Para todos los niveles</h2>
-                    <p class="text-muted mb-0">
-                        Desde séptimo básico hasta la PAES y formación técnica.
-                        Si estudias matemática en Chile, hay contenido para ti.
-                    </p>
-                </div>
-            </div>
-            <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
-                <div class="p-3">
-                    <i class="bi bi-person-check display-4 text-primary mb-3 d-block" aria-hidden="true"></i>
-                    <h2 class="h5 fw-bold">Asesorías personalizadas</h2>
-                    <p class="text-muted mb-0">
-                        Clases particulares adaptadas a tu ritmo y tus objetivos.
-                        Escríbeme y lo coordinamos.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-{{-- ================================================================
-     NIVELES
-================================================================ --}}
-<section class="py-5 bg-body-tertiary">
-    <div class="container py-3">
-        <h2 class="h3 fw-bold text-center mb-2" data-aos="fade-up">¿En qué nivel estás?</h2>
-        <p class="text-center text-muted mb-5" data-aos="fade-up" data-aos-delay="50">
-            Tengo material y clases disponibles para tres contextos distintos.
-        </p>
+<section class="section bg-cream">
+    <div class="container">
         <div class="row g-4">
-            <div class="col-md-4" data-aos="fade-up" data-aos-delay="0">
-                <div class="card h-100 border-0 shadow-sm">
-                    <div class="card-body p-4 text-center d-flex flex-column">
-                        <i class="bi bi-building display-5 text-success mb-3" aria-hidden="true"></i>
-                        <h3 class="h5 fw-bold">Colegio</h3>
-                        <p class="text-muted flex-grow-1">
-                            7° básico a 4° medio. Guías, ejercicios y materia
-                            de cada unidad, ordenados por curso.
-                        </p>
-                        <a href="{{ route('materials.index') }}"
-                           class="btn btn-outline-success btn-sm">
-                            Ver materiales
-                        </a>
+            <div class="col-md-4">
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="bi bi-file-earmark-text" aria-hidden="true"></i>
+                    </div>
+                    <div>
+                        <div class="value-title">Material organizado y gratuito</div>
+                        <div class="value-desc">Guías, ejercicios y apuntes ordenados por curso y unidad. Sin registro ni costo.</div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
-                <div class="card h-100 border-0 shadow-sm">
-                    <div class="card-body p-4 text-center d-flex flex-column">
-                        <i class="bi bi-tools display-5 text-primary mb-3" aria-hidden="true"></i>
-                        <h3 class="h5 fw-bold">CFT</h3>
-                        <p class="text-muted flex-grow-1">
-                            Matemática aplicada para formación técnico-profesional.
-                            Contenidos prácticos para el mundo laboral.
-                        </p>
-                        <a href="{{ route('materials.index') }}"
-                           class="btn btn-outline-primary btn-sm">
-                            Ver materiales
-                        </a>
+            <div class="col-md-4">
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="bi bi-people" aria-hidden="true"></i>
+                    </div>
+                    <div>
+                        <div class="value-title">Para todos los niveles</div>
+                        <div class="value-desc">Desde 7° básico hasta la PAES y educación técnica. Contenido para cada etapa.</div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
-                <div class="card h-100 border-0 shadow-sm">
-                    <div class="card-body p-4 text-center d-flex flex-column">
-                        <i class="bi bi-trophy display-5 text-warning mb-3" aria-hidden="true"></i>
-                        <h3 class="h5 fw-bold">PAES · Particulares</h3>
-                        <p class="text-muted flex-grow-1">
-                            Preparación intensiva para la prueba de selección universitaria.
-                            Ensayos, estrategias y resolución de problemas reales.
-                        </p>
-                        <a href="{{ route('materials.index') }}"
-                           class="btn btn-outline-warning btn-sm">
-                            Ver materiales
-                        </a>
+            <div class="col-md-4">
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="bi bi-person-check" aria-hidden="true"></i>
+                    </div>
+                    <div>
+                        <div class="value-title">Asesorías personalizadas</div>
+                        <div class="value-desc">Clases particulares adaptadas a tu ritmo y objetivos, presenciales u online.</div>
                     </div>
                 </div>
             </div>
@@ -145,37 +86,71 @@
 </section>
 
 {{-- ================================================================
-     MATERIALES RECIENTES (solo si hay materiales publicados)
+     LEVELS
+================================================================ --}}
+<section class="section">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-800 fs-2 mb-2">¿En qué nivel estás?</h2>
+            <p class="text-muted">Tengo material y clases para distintos contextos educativos.</p>
+        </div>
+        <div class="row g-3">
+            <div class="col-md-6 col-lg-3">
+                <a href="{{ route('materials.index') }}" class="level-pill">
+                    <span class="level-pill-dot level-dot-colegio"></span>
+                    <div class="level-pill-text">
+                        <div class="level-name">Colegio</div>
+                        <div class="level-desc">7° básico a 4° medio</div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <a href="{{ route('materials.index') }}" class="level-pill">
+                    <span class="level-pill-dot level-dot-paes"></span>
+                    <div class="level-pill-text">
+                        <div class="level-name">PAES</div>
+                        <div class="level-desc">Preparación universitaria</div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <a href="{{ route('materials.index') }}" class="level-pill">
+                    <span class="level-pill-dot level-dot-cft"></span>
+                    <div class="level-pill-text">
+                        <div class="level-name">CFT / Instituto</div>
+                        <div class="level-desc">Formación técnico-profesional</div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <a href="{{ route('materials.index') }}" class="level-pill">
+                    <span class="level-pill-dot level-dot-universidad"></span>
+                    <div class="level-pill-text">
+                        <div class="level-name">Universidad</div>
+                        <div class="level-desc">Matemática superior</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+{{-- ================================================================
+     RECENT MATERIALS
 ================================================================ --}}
 @if($recentMaterials->isNotEmpty())
-<section class="py-5">
-    <div class="container py-3">
-        <div class="d-flex justify-content-between align-items-center mb-4" data-aos="fade-up">
-            <h2 class="h3 fw-bold mb-0">Últimos materiales</h2>
-            <a href="{{ route('materials.index') }}" class="btn btn-outline-primary btn-sm">
+<section class="section bg-cream">
+    <div class="container">
+        <div class="section-header">
+            <h2>Últimos materiales</h2>
+            <a href="{{ route('materials.index') }}" class="section-header-link">
                 Ver todos <i class="bi bi-arrow-right ms-1" aria-hidden="true"></i>
             </a>
         </div>
         <div class="row g-4">
             @foreach($recentMaterials as $m)
-                <div class="col-md-6 col-xl-3" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
-                    <div class="card h-100 shadow-sm border-0 position-relative card-hover">
-                        <div class="card-body p-4 d-flex flex-column">
-                            <div class="mb-2">{!! $m->nivel !!}</div>
-                            <h3 class="h6 fw-bold mb-1">
-                                <a href="{{ route('materials.show', $m) }}"
-                                   class="text-decoration-none text-body stretched-link">
-                                    {{ $m->title }}
-                                </a>
-                            </h3>
-                            <p class="text-muted small mb-3">
-                                {{ $m->course }} · {{ $m->tipo }}
-                            </p>
-                            <p class="small mb-0 mt-auto text-muted">
-                                {{ Str::limit($m->description, 100) }}
-                            </p>
-                        </div>
-                    </div>
+                <div class="col-md-6 col-xl-4">
+                    <x-materials.card :material="$m" />
                 </div>
             @endforeach
         </div>
@@ -184,68 +159,80 @@
 @endif
 
 {{-- ================================================================
-     SOBRE MÍ
+     FAQ
 ================================================================ --}}
-<section class="py-5 bg-body-tertiary">
-    <div class="container py-3">
-        <div class="row align-items-center g-5">
-            <div class="col-lg-7" data-aos="fade-right">
-                <h2 class="h3 fw-bold mb-3">Un poco sobre mí</h2>
-                <p class="lead text-muted mb-4">
-                    Soy profesor de Matemática egresado de la
-                    <strong class="text-body">Universidad de Valparaíso</strong>,
-                    con más de 13 años trabajando en clases particulares y
-                    preparación PAES desde 2012.
-                </p>
-                <ul class="list-unstyled mb-4">
-                    <li class="d-flex align-items-start gap-3 mb-3">
-                        <i class="bi bi-award-fill text-warning fs-5 mt-1 flex-shrink-0" aria-hidden="true"></i>
-                        <span>
-                            He acompañado a estudiantes en el campeonato
-                            <strong>CMAT</strong>, obteniendo medallas de bronce y plata
-                            en 2018, 2019, 2024 y 2025.
-                        </span>
-                    </li>
-                    <li class="d-flex align-items-start gap-3 mb-3">
-                        <i class="bi bi-check2-circle text-success fs-5 mt-1 flex-shrink-0" aria-hidden="true"></i>
-                        <span>Clases para estudiantes de colegio, CFT e instituciones de educación superior.</span>
-                    </li>
-                    <li class="d-flex align-items-start gap-3">
-                        <i class="bi bi-check2-circle text-success fs-5 mt-1 flex-shrink-0" aria-hidden="true"></i>
-                        <span>Preparación PAES adaptada a cada estudiante, desde lo básico hasta el puntaje que necesita.</span>
-                    </li>
-                </ul>
-                <a href="{{ route('about') }}" class="btn btn-outline-primary">
-                    Saber más sobre mí <i class="bi bi-arrow-right ms-1" aria-hidden="true"></i>
-                </a>
+<section class="section">
+    <div class="container">
+        <div class="container-narrow">
+            <div class="text-center mb-5">
+                <h2 class="fw-800 fs-2 mb-2">Preguntas frecuentes</h2>
             </div>
-            <div class="col-lg-5" data-aos="fade-left">
-                <div class="row g-3 text-center">
-                    <div class="col-6">
-                        <div class="p-4 bg-white rounded-3 shadow-sm h-100">
-                            <div class="display-5 fw-bold text-primary">+13</div>
-                            <div class="text-muted small mt-1">años de experiencia</div>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="p-4 bg-white rounded-3 shadow-sm h-100">
-                            <div class="display-5 fw-bold text-primary">4</div>
-                            <div class="text-muted small mt-1">medallas CMAT</div>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="p-4 bg-white rounded-3 shadow-sm h-100">
-                            <div class="display-5 fw-bold text-primary">3</div>
-                            <div class="text-muted small mt-1">niveles de enseñanza</div>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="p-4 bg-white rounded-3 shadow-sm h-100">
-                            <div class="fw-bold text-primary fs-4 mt-1">UV</div>
-                            <div class="text-muted small mt-1">Universidad de Valparaíso</div>
+            <div id="faqAccordion" itemscope itemtype="https://schema.org/FAQPage">
+
+                <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <h3 itemprop="name" class="mb-0">
+                        <button class="faq-question collapsed" data-bs-toggle="collapse"
+                                data-bs-target="#faq1" aria-expanded="false" aria-controls="faq1">
+                            ¿Los materiales son realmente gratis?
+                            <i class="bi bi-chevron-down" aria-hidden="true"></i>
+                        </button>
+                    </h3>
+                    <div id="faq1" class="collapse" data-bs-parent="#faqAccordion"
+                         itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <div class="faq-answer" itemprop="text">
+                            Sí, todos los materiales del sitio son gratuitos y de libre descarga. No necesitas crear cuenta ni pagar nada.
                         </div>
                     </div>
                 </div>
+
+                <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <h3 itemprop="name" class="mb-0">
+                        <button class="faq-question collapsed" data-bs-toggle="collapse"
+                                data-bs-target="#faq2" aria-expanded="false" aria-controls="faq2">
+                            ¿Haces clases online?
+                            <i class="bi bi-chevron-down" aria-hidden="true"></i>
+                        </button>
+                    </h3>
+                    <div id="faq2" class="collapse" data-bs-parent="#faqAccordion"
+                         itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <div class="faq-answer" itemprop="text">
+                            Sí, ofrezco clases presenciales en Quintero y online por Zoom o Meet. Cuéntame tu situación y buscamos la mejor opción.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <h3 itemprop="name" class="mb-0">
+                        <button class="faq-question collapsed" data-bs-toggle="collapse"
+                                data-bs-target="#faq3" aria-expanded="false" aria-controls="faq3">
+                            ¿Cómo puedo agendar una clase?
+                            <i class="bi bi-chevron-down" aria-hidden="true"></i>
+                        </button>
+                    </h3>
+                    <div id="faq3" class="collapse" data-bs-parent="#faqAccordion"
+                         itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <div class="faq-answer" itemprop="text">
+                            Escríbeme desde el <a href="{{ route('contact') }}">formulario de contacto</a> indicando tu nivel, disponibilidad y lo que necesitas trabajar. Te respondo en menos de 24 horas.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <h3 itemprop="name" class="mb-0">
+                        <button class="faq-question collapsed" data-bs-toggle="collapse"
+                                data-bs-target="#faq4" aria-expanded="false" aria-controls="faq4">
+                            ¿Para qué niveles tienes materiales?
+                            <i class="bi bi-chevron-down" aria-hidden="true"></i>
+                        </button>
+                    </h3>
+                    <div id="faq4" class="collapse" data-bs-parent="#faqAccordion"
+                         itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <div class="faq-answer" itemprop="text">
+                            Para colegio (7° básico a 4° medio), PAES, CFT/Instituto y matemática universitaria. Puedes filtrarlos en la sección de materiales.
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
@@ -254,17 +241,18 @@
 {{-- ================================================================
      CTA FINAL
 ================================================================ --}}
-<section class="py-5 bg-primary text-white text-center">
-    <div class="container py-4" data-aos="fade-up">
-        <i class="bi bi-chat-heart-fill display-3 mb-3 d-block opacity-75" aria-hidden="true"></i>
-        <h2 class="display-6 fw-bold mb-3">¿Tienes dudas con la materia?</h2>
-        <p class="lead mb-4 opacity-75">
-            Puedo ayudarte. Si necesitas clases particulares o preparación PAES,<br class="d-none d-md-block">
-            escríbeme y coordinamos los horarios que te acomoden.
-        </p>
-        <a href="{{ route('contact') }}" class="btn btn-light btn-lg px-5 fw-semibold">
-            <i class="bi bi-envelope-fill me-2" aria-hidden="true"></i>Escríbeme
-        </a>
+<section class="cta-section">
+    <div class="container">
+        <h2>¿Listo para mejorar tus notas?</h2>
+        <p class="lead">Explora los materiales gratuitos o contáctame para una clase personalizada.</p>
+        <div class="d-flex flex-wrap justify-content-center gap-3">
+            <a href="{{ route('materials.index') }}" class="btn btn-amber btn-lg px-5">
+                <i class="bi bi-collection me-2" aria-hidden="true"></i>Ver materiales
+            </a>
+            <a href="{{ route('contact') }}" class="btn btn-outline-amber btn-lg px-5">
+                <i class="bi bi-envelope me-2" aria-hidden="true"></i>Contactar
+            </a>
+        </div>
     </div>
 </section>
 
