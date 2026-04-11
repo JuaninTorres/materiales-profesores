@@ -80,7 +80,7 @@ Plan de trabajo en progreso. Cada tarea es independiente y puede ejecutarse en u
   - Preservar toda la lógica Livewire (`wire:model.live`, `setView()`, paginación)
   - Commit: `feat: redesign materials listing page`
 
-- [ ] **Tarea 6 — Material: detalle**
+- [x] **Tarea 6 — Material: detalle**
   - Archivo: `resources/views/materiales/show.blade.php`
   - Layout 2 columnas (CSS grid), PDF viewer con toolbar, ficha técnica, share buttons, materiales relacionados, CTA hacia /servicios
   - Quitar inline `style="height: 82vh;"` → clase CSS
