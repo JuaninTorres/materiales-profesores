@@ -99,7 +99,8 @@
 }
 
 // ---- Narrow container (FAQ) ----
-.container-narrow { max-width: 680px; margin-inline: auto; }
+.container-narrow    { max-width: 680px; margin-inline: auto; }
+.container-narrow-md { max-width: 640px; margin-inline: auto; }
 
 // ---- Level dot colors ----
 .level-dot-colegio     { background-color: #22c55e; }
