@@ -86,7 +86,7 @@ Plan de trabajo en progreso. Cada tarea es independiente y puede ejecutarse en u
   - Quitar inline `style="height: 82vh;"` → clase CSS
   - Commit: `feat: redesign material detail page`
 
-- [ ] **Tarea 7 — Sobre mí**
+- [x] **Tarea 7 — Sobre mí**
   - Archivo: `resources/views/pages/about.blade.php`
   - Hero navy 2 cols, grid de 4 logros, timeline 2 cols, 3 metodología cards, CTA doble
   - Commit: `feat: redesign about page`
