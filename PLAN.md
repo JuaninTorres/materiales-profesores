@@ -16,10 +16,10 @@
 |-------|--------|--------|
 | 1. Meta description en todas las páginas | ✅ COMPLETADA | 987f16b |
 | 2. Open Graph y Twitter Card | ✅ COMPLETADA | 57e9adf |
-| 3. Canonical tags en todas las páginas | ⏳ Pendiente | - |
-| 4. Datos estructurados (Person + WebSite) | ⏳ Pendiente | - |
-| 5. Datos estructurados (LearningResource + BreadcrumbList) | ⏳ Pendiente | - |
-| 6. Sitemap — lastmod en páginas estáticas | ⏳ Pendiente | - |
+| 3. Canonical tags en todas las páginas | ✅ COMPLETADA | e1756b4 |
+| 4. Datos estructurados (Person + WebSite) | ✅ COMPLETADA | 54be2f1 |
+| 5. Datos estructurados (LearningResource + BreadcrumbList) | ✅ COMPLETADA | bfb6e5a |
+| 6. Sitemap — lastmod en páginas estáticas | ✅ COMPLETADA | 41b0da8 |
 
 ---
 
