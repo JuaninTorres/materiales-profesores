@@ -63,7 +63,7 @@ Plan de trabajo en progreso. Cada tarea es independiente y puede ejecutarse en u
   - SCSS en `_components.scss`
   - Commit: `feat: redesign navbar and footer`
 
-- [ ] **Tarea 3 — Componente mat-card**
+- [x] **Tarea 3 — Componente mat-card**
   - Crear: `resources/views/components/materials/card.blade.php`
   - SCSS `.mat-card`, `.mat-type-badge`, `.mat-level-dot` en `_components.scss`
   - Commit: `feat: add mat-card Blade component`
