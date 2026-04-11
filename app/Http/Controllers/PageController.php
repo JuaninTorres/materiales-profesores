@@ -23,8 +23,10 @@ class PageController extends Controller
             ->latest()
             ->get();
 
+        $lastMaterialUpdate = $materials->first()?->updated_at ?? now();
+
         return response()
-            ->view('sitemap', compact('materials'))
+            ->view('sitemap', compact('materials', 'lastMaterialUpdate'))
             ->header('Content-Type', 'application/xml');
     }
 }

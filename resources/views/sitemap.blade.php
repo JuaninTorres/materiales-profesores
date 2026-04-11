@@ -4,11 +4,13 @@
     {{-- Páginas estáticas --}}
     <url>
         <loc>{{ url('/') }}</loc>
+        <lastmod>{{ $lastMaterialUpdate->toAtomString() }}</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
         <loc>{{ route('materials.index') }}</loc>
+        <lastmod>{{ $lastMaterialUpdate->toAtomString() }}</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.9</priority>
     </url>
