@@ -74,7 +74,7 @@ Plan de trabajo en progreso. Cada tarea es independiente y puede ejecutarse en u
   - SCSS en `_pages.scss`
   - Commit: `feat: redesign home page`
 
-- [ ] **Tarea 5 — Materiales: listado**
+- [x] **Tarea 5 — Materiales: listado**
   - Archivo: `resources/views/livewire/materials/index.blade.php`
   - Page header navy, filter bar sticky, active filter badges, grid de mat-cards
   - Preservar toda la lógica Livewire (`wire:model.live`, `setView()`, paginación)
