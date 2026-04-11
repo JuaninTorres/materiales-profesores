@@ -8,6 +8,13 @@
         ?: $material->title . ' · Material gratuito de matemática de Profe Nicolás González.';
 @endphp
 @section('description', $metaDescription)
+@section('og_type', 'article')
+@section('og_title', $material->title . ' · Profe Nicolás')
+@section('og_description', $metaDescription)
+
+@if($material->type === 'image' && $material->file_path)
+    @section('og_image', asset('storage/' . $material->file_path))
+@endif
 
 @push('meta')
     <link rel="canonical" href="{{ route('materials.show', $material) }}">

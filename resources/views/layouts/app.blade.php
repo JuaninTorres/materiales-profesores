@@ -6,6 +6,22 @@
     <title>@yield('title', 'profenicolas.cl')</title>
     <meta name="description" content="@yield('description', 'Materiales gratuitos de matemática y clases particulares con Nicolás González, profesor en Quintero, Chile. Para colegio, PAES, CFT y universidad.')">
     <meta name="color-scheme" content="light">
+
+    {{-- Open Graph --}}
+    <meta property="og:site_name" content="Profe Nicolás">
+    <meta property="og:locale" content="es_CL">
+    <meta property="og:type" content="@yield('og_type', 'website')">
+    <meta property="og:title" content="{{ $__env->yieldContent('og_title') ?: $__env->yieldContent('title', 'Profe Nicolás · Matemática') }}">
+    <meta property="og:description" content="{{ $__env->yieldContent('og_description') ?: $__env->yieldContent('description', 'Materiales gratuitos de matemática y clases particulares con Nicolás González, profesor en Quintero, Chile.') }}">
+    <meta property="og:url" content="@yield('og_url', request()->url())">
+    <meta property="og:image" content="@yield('og_image', asset('images/og-default.jpg'))">
+
+    {{-- Twitter Card --}}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ $__env->yieldContent('og_title') ?: $__env->yieldContent('title', 'Profe Nicolás') }}">
+    <meta name="twitter:description" content="{{ $__env->yieldContent('og_description') ?: $__env->yieldContent('description', 'Materiales gratuitos de matemática y clases particulares.') }}"
+    <meta name="twitter:image" content="@yield('og_image', asset('images/og-default.jpg'))">
+
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <link rel="icon" href="/favicon.ico" sizes="32x32">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
