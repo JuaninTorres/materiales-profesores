@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title', 'profenicolas.cl')</title>
+    <meta name="description" content="@yield('description', 'Materiales gratuitos de matemática y clases particulares con Nicolás González, profesor en Quintero, Chile. Para colegio, PAES, CFT y universidad.')">
     <meta name="color-scheme" content="light">
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <link rel="icon" href="/favicon.ico" sizes="32x32">
@@ -14,15 +15,10 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-site sticky-top" aria-label="Navegación principal">
+        <nav class="navbar navbar-expand-lg navbar-site fixed-top" aria-label="Navegación principal">
             <div class="container">
                 <a href="{{ route('home') }}" class="navbar-brand-link">
-                    <svg width="30" height="30" viewBox="0 0 30 30" fill="none" aria-hidden="true">
-                        <line x1="5" y1="27" x2="5" y2="3"  stroke="#f59e0b" stroke-width="1" stroke-opacity=".4"/>
-                        <line x1="3" y1="25" x2="27" y2="25" stroke="#f59e0b" stroke-width="1" stroke-opacity=".4"/>
-                        <path d="M7 23 L7 7 L18 19 L18 7" stroke="#f59e0b" stroke-width="2.5" fill="none"
-                              stroke-linejoin="round" stroke-linecap="round"/>
-                    </svg>
+                    <img src="/images/logo.svg" class="navbar-logo" height="36" alt="" aria-hidden="true">
                     Profe <span class="brand-accent">Nicolás</span>
                 </a>
 
@@ -46,13 +42,9 @@
                             <a class="nav-link {{ request()->routeIs('services') ? 'active' : '' }}"
                                href="{{ route('services') }}">Servicios</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('contact') ? 'active' : '' }}"
-                               href="{{ route('contact') }}">Contacto</a>
-                        </li>
                         <li class="nav-item ms-lg-2">
-                            <a class="btn btn-amber btn-sm" href="{{ route('materials.index') }}">
-                                Ver materiales
+                            <a class="btn btn-amber btn-sm" href="{{ route('contact') }}">
+                                Consultar
                             </a>
                         </li>
                     </ul>
@@ -65,10 +57,8 @@
         @hasSection('full_content')
             @yield('full_content')
         @else
-            <div class="container py-4">
-                {{ $slot ?? '' }}
-                @yield('content')
-            </div>
+            {{ $slot ?? '' }}
+            @yield('content')
         @endif
     </main>
 

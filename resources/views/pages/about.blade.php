@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Sobre mí · Profe Nicolás González')
+@section('description', 'Nicolás González M., profesor de Matemática con más de 13 años de experiencia en colegio, PAES y CFT. Egresado de la Universidad de Valparaíso. Clases en Quintero u online.')
 @section('main_class', '')
 
 @section('full_content')

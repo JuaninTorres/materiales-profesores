@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Servicios · Profe Nicolás González')
+@section('description', 'Clases particulares de matemática con Nicolás González: refuerzo escolar 7° básico a 4° medio, preparación PAES y nivelación intensiva. Presencial en Quintero u online.')
 @section('main_class', '')
 
 @section('full_content')

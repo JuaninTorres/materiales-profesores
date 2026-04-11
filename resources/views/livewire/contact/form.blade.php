@@ -1,4 +1,5 @@
 @section('title', 'Contacto · profenicolas.cl')
+@section('description', 'Escríbele al Profe Nicolás González para agendar una clase particular de matemática o resolver tus dudas. Respuesta en menos de 24 horas.')
 @section('main_class', '')
 
 <div>

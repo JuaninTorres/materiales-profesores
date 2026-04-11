@@ -1,10 +1,11 @@
 @section('title', 'Materiales · profenicolas.cl')
+@section('description', 'Biblioteca gratuita de guías, ejercicios y apuntes de matemática para colegio, PAES, CFT y universidad. Sin registro, de libre descarga.')
 @section('main_class', '')
 
 <div>
 
     {{-- PAGE HEADER --}}
-    <div class="page-header">
+    <div class="page-header text-center">
         <div class="container">
             <p class="page-header-eyebrow">
                 <i class="bi bi-collection-fill me-1" aria-hidden="true"></i>Biblioteca

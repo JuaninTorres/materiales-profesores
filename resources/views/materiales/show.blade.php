@@ -3,23 +3,31 @@
 @section('title', $material->title . ' · Materiales')
 @section('main_class', '')
 
+@php
+    $metaDescription = Str::limit(strip_tags($material->description ?? ''), 155)
+        ?: $material->title . ' · Material gratuito de matemática de Profe Nicolás González.';
+@endphp
+@section('description', $metaDescription)
+
 @push('meta')
-    <meta name="description" content="{{ Str::limit(strip_tags($material->description ?? ''), 155) }}">
     <link rel="canonical" href="{{ route('materials.show', $material) }}">
 @endpush
 
 @section('full_content')
 
-{{-- BREADCRUMB --}}
-<nav class="material-breadcrumb" aria-label="Ruta de navegación">
+{{-- PAGE HEADER --}}
+<div class="material-page-header">
     <div class="container">
-        <a href="{{ route('home') }}">Inicio</a>
-        <span class="mx-2" aria-hidden="true">›</span>
-        <a href="{{ route('materials.index') }}">Materiales</a>
-        <span class="mx-2" aria-hidden="true">›</span>
-        <span class="text-muted">{{ Str::limit($material->title, 40) }}</span>
+        <nav class="material-breadcrumb-nav" aria-label="Ruta de navegación">
+            <a href="{{ route('home') }}">Inicio</a>
+            <span class="mx-2" aria-hidden="true">›</span>
+            <a href="{{ route('materials.index') }}">Materiales</a>
+            <span class="mx-2" aria-hidden="true">›</span>
+            <span>{{ Str::limit($material->title, 50) }}</span>
+        </nav>
+        <h1 class="material-page-title">{{ $material->title }}</h1>
     </div>
-</nav>
+</div>
 
 {{-- MAIN --}}
 <div class="container py-5">
@@ -33,8 +41,6 @@
                     <span class="badge bg-light text-secondary border">{{ $material->year }}</span>
                 @endif
             </div>
-
-            <h1 class="fw-800 mb-3">{{ $material->title }}</h1>
 
             @if($material->description)
                 <div class="material-description text-muted mb-4">
@@ -148,10 +154,26 @@
                         <i class="bi bi-download me-2" aria-hidden="true"></i>Descargar PDF
                     </a>
                 @elseif($material->type === 'html' && $material->file_path)
+                    @php
+                        $esGuia = ($materialSubType === 'guia');
+                    @endphp
                     <a href="{{ route('materials.content', $material) }}"
                        class="btn btn-amber w-100 mb-2" target="_blank" rel="noopener">
-                        <i class="bi bi-play-circle me-2" aria-hidden="true"></i>Abrir presentación
+                        <i class="bi bi-{{ $esGuia ? 'journal-text' : 'play-circle' }} me-2" aria-hidden="true"></i>
+                        {{ $esGuia ? 'Abrir guía' : 'Abrir presentación' }}
                     </a>
+                    <a href="{{ route('materials.pdf', [$material, 'alumno']) }}"
+                       class="btn btn-outline-primary w-100 mb-2">
+                        <i class="bi bi-file-earmark-pdf me-2" aria-hidden="true"></i>
+                        {{ $esGuia ? 'Imprimir guía (Alumno)' : 'Descargar PDF (Alumno)' }}
+                    </a>
+                    @auth
+                    <a href="{{ route('materials.pdf', [$material, 'docente']) }}"
+                       class="btn btn-outline-success w-100 mb-2">
+                        <i class="bi bi-file-earmark-pdf-fill me-2" aria-hidden="true"></i>
+                        {{ $esGuia ? 'Imprimir guía (Docente)' : 'Descargar PDF (Docente)' }}
+                    </a>
+                    @endauth
                 @elseif($material->type === 'link' && $material->link_url)
                     <a href="{{ $material->link_url }}"
                        class="btn btn-amber w-100 mb-2" target="_blank" rel="noopener noreferrer">
@@ -167,16 +189,21 @@
                 {{-- Share buttons --}}
                 <div class="share-buttons mt-2">
                     <a href="https://twitter.com/intent/tweet?url={{ urlencode(route('materials.show', $material)) }}&text={{ urlencode($material->title) }}"
-                       class="share-btn" target="_blank" rel="noopener noreferrer" aria-label="Compartir en Twitter/X">
+                       class="share-btn" target="_blank" rel="noopener noreferrer"
+                       aria-label="Compartir en Twitter/X"
+                       data-bs-toggle="tooltip" data-bs-placement="top" title="Compartir en X">
                         <i class="bi bi-twitter-x" aria-hidden="true"></i>
                     </a>
                     <a href="https://wa.me/?text={{ urlencode($material->title . ' ' . route('materials.show', $material)) }}"
-                       class="share-btn" target="_blank" rel="noopener noreferrer" aria-label="Compartir por WhatsApp">
+                       class="share-btn" target="_blank" rel="noopener noreferrer"
+                       aria-label="Compartir por WhatsApp"
+                       data-bs-toggle="tooltip" data-bs-placement="top" title="Compartir por WhatsApp">
                         <i class="bi bi-whatsapp" aria-hidden="true"></i>
                     </a>
-                    <button type="button" class="share-btn"
-                            onclick="navigator.clipboard.writeText('{{ route('materials.show', $material) }}')"
-                            aria-label="Copiar enlace">
+                    <button type="button" class="share-btn js-copy-link"
+                            data-url="{{ route('materials.show', $material) }}"
+                            aria-label="Copiar enlace"
+                            data-bs-toggle="tooltip" data-bs-placement="top" title="Copiar enlace">
                         <i class="bi bi-link-45deg" aria-hidden="true"></i>
                     </button>
                 </div>
@@ -210,5 +237,39 @@
         </aside>
     </div>
 </div>
+
+@push('scripts')
+<script>
+document.querySelectorAll('.js-copy-link').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const url = btn.dataset.url;
+        const icon = btn.querySelector('i');
+
+        const confirm = () => {
+            icon.className = 'bi bi-check2';
+            btn.setAttribute('aria-label', 'Enlace copiado');
+            setTimeout(() => {
+                icon.className = 'bi bi-link-45deg';
+                btn.setAttribute('aria-label', 'Copiar enlace');
+            }, 2000);
+        };
+
+        if (navigator.clipboard) {
+            navigator.clipboard.writeText(url).then(confirm);
+        } else {
+            const ta = document.createElement('textarea');
+            ta.value = url;
+            ta.style.position = 'fixed';
+            ta.style.opacity = '0';
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            document.body.removeChild(ta);
+            confirm();
+        }
+    });
+});
+</script>
+@endpush
 
 @endsection

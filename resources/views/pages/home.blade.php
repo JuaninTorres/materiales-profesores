@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'Profe Nicolás González · Matemática para todos')
+@section('description', 'Hola, soy el Profe Nicolás González. Materiales gratuitos de matemática para colegio, PAES, CFT y universidad, más clases particulares en Quintero y online.')
 @section('main_class', '')
 
 @section('full_content')
