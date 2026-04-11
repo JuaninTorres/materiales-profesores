@@ -96,7 +96,7 @@ Plan de trabajo en progreso. Cada tarea es independiente y puede ejecutarse en u
   - Page header navy, 3 service cards (`.featured` con borde amber), info práctica 2×2, lista de niveles con color-dots
   - Commit: `feat: redesign services page`
 
-- [ ] **Tarea 9 — Contacto**
+- [x] **Tarea 9 — Contacto**
   - Archivo: `resources/views/livewire/contact/form.blade.php`
   - Page header navy, layout 2 columnas CSS grid, selector de asunto en radio grid 6 opciones (mantiene `wire:model.live="subject"`), sidebar con 3 cards
   - Commit: `feat: redesign contact page`
