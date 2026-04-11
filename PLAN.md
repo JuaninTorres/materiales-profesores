@@ -91,7 +91,7 @@ Plan de trabajo en progreso. Cada tarea es independiente y puede ejecutarse en u
   - Hero navy 2 cols, grid de 4 logros, timeline 2 cols, 3 metodología cards, CTA doble
   - Commit: `feat: redesign about page`
 
-- [ ] **Tarea 8 — Servicios**
+- [x] **Tarea 8 — Servicios**
   - Archivo: `resources/views/pages/services.blade.php`
   - Page header navy, 3 service cards (`.featured` con borde amber), info práctica 2×2, lista de niveles con color-dots
   - Commit: `feat: redesign services page`
