@@ -20,9 +20,20 @@ function typesetMath(el) {
 }
 
 // ─────────────────────────────────────────────
+// MODO IMPRESIÓN — debe declararse ANTES de SHUFFLED
+// ─────────────────────────────────────────────
+const PRINT_MODO = new URLSearchParams(window.location.search).get('modo');
+if (PRINT_MODO) document.body.classList.add('modo-' + PRINT_MODO);
+
+// ─────────────────────────────────────────────
 // MEZCLA DE ALTERNATIVAS (se calcula una vez al cargar)
+// En modo impresión se mantiene el orden original para que
+// las versiones alumno y docente coincidan.
 // ─────────────────────────────────────────────
 const SHUFFLED = EXERCISES.map(ex => {
+  if (PRINT_MODO) {
+    return Object.assign({}, ex);
+  }
   const perm = [0, 1, 2, 3].sort(() => Math.random() - 0.5);
   return Object.assign({}, ex, {
     options: perm.map(i => ex.options[i]),
@@ -205,3 +216,26 @@ new IntersectionObserver(
 // ─────────────────────────────────────────────
 buildExercises();
 updateProgress();
+
+// ─────────────────────────────────────────────
+// MODO IMPRESIÓN: marcar correctas en docente
+// ─────────────────────────────────────────────
+if (PRINT_MODO === 'docente') {
+  SHUFFLED.forEach((ex, i) => {
+    const correctBtn = document.getElementById(`opt-${i}-${ex.correct}`);
+    if (correctBtn) {
+      correctBtn.classList.add('correct');
+      correctBtn.disabled = true;
+    }
+    const card = document.getElementById(`exercise-${i}`);
+    if (card && ex.explanation) {
+      const expEl = document.createElement('div');
+      expEl.className = 'explanation-box mt-2';
+      expEl.style.display = 'block';
+      expEl.innerHTML = `<strong>Respuesta correcta:</strong> ${ex.options[ex.correct]}<br>
+                         <em>${ex.explanation}</em>`;
+      card.appendChild(expEl);
+      typesetMath(expEl);
+    }
+  });
+}

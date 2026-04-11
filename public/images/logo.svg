@@ -2,61 +2,59 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 422.81 422.81">
   <defs>
     <style>
-      .cls-1 {
+      .axis-line {
+        fill: none;
+        stroke: #ffffff;
         stroke-width: 3px;
       }
-
-      .cls-1, .cls-2 {
-        fill: none;
-        stroke: #081ca1;
+      .axis-arrow {
+        fill: #ffffff;
+        stroke-width: 0px;
       }
-
-      .cls-2 {
-        stroke-width: 7px;
-      }
-
-      .cls-3 {
+      .axis-label {
         font-family: ArialRoundedMTBold, 'Arial Rounded MT Bold';
         font-size: 34.02px;
+        fill: #ffffff;
       }
-
-      .cls-3, .cls-4 {
-        fill: #081ca1;
+      .n-stroke {
+        fill: none;
+        stroke: #f59e0b;
+        stroke-width: 7px;
       }
-
-      .cls-4 {
+      .n-dot {
+        fill: #f59e0b;
         stroke-width: 0px;
       }
     </style>
   </defs>
   <g id="Capa_5" data-name="Capa 5">
     <g>
-      <line class="cls-1" x1="14.82" y1="227.72" x2="386.08" y2="227.72"/>
-      <polygon class="cls-4" points="377.65 238.83 382.37 227.72 377.65 216.61 403.99 227.72 377.65 238.83"/>
+      <line class="axis-line" x1="14.82" y1="227.72" x2="386.08" y2="227.72"/>
+      <polygon class="axis-arrow" points="377.65 238.83 382.37 227.72 377.65 216.61 403.99 227.72 377.65 238.83"/>
     </g>
     <g>
-      <line class="cls-1" x1="206.62" y1="406.68" x2="206.62" y2="43.74"/>
-      <polygon class="cls-4" points="217.73 52.16 206.62 47.45 195.51 52.16 206.62 25.83 217.73 52.16"/>
+      <line class="axis-line" x1="206.62" y1="406.68" x2="206.62" y2="43.74"/>
+      <polygon class="axis-arrow" points="217.73 52.16 206.62 47.45 195.51 52.16 206.62 25.83 217.73 52.16"/>
     </g>
-    <text class="cls-3" transform="translate(221.82 50.37)"><tspan x="0" y="0">Y</tspan></text>
-    <text class="cls-3" transform="translate(381.71 267.7)"><tspan x="0" y="0">X</tspan></text>
+    <text class="axis-label" transform="translate(221.82 50.37)"><tspan x="0" y="0">Y</tspan></text>
+    <text class="axis-label" transform="translate(381.71 267.7)"><tspan x="0" y="0">X</tspan></text>
   </g>
   <g id="Capa_3" data-name="Capa 3">
     <g>
-      <polygon class="cls-2" points="91.42 96.02 148.1 96.02 258.91 225.72 258.91 150.66 315.08 96.02 315.08 352.87 258.91 352.87 148.1 225.72 148.1 300.28 91.42 352.87 91.42 96.02"/>
-      <line class="cls-2" x1="91.42" y1="96.02" x2="315.08" y2="352.87"/>
-      <line class="cls-2" x1="285.97" y1="124.33" x2="285.97" y2="319.45"/>
-      <line class="cls-2" x1="120.52" y1="129.45" x2="120.52" y2="325.86"/>
+      <polygon class="n-stroke" points="91.42 96.02 148.1 96.02 258.91 225.72 258.91 150.66 315.08 96.02 315.08 352.87 258.91 352.87 148.1 225.72 148.1 300.28 91.42 352.87 91.42 96.02"/>
+      <line class="n-stroke" x1="91.42" y1="96.02" x2="315.08" y2="352.87"/>
+      <line class="n-stroke" x1="285.97" y1="124.33" x2="285.97" y2="319.45"/>
+      <line class="n-stroke" x1="120.52" y1="129.45" x2="120.52" y2="325.86"/>
     </g>
   </g>
   <g id="Capa_4" data-name="Capa 4">
     <g>
-      <circle class="cls-4" cx="91.42" cy="96.02" r="12.04"/>
-      <circle class="cls-4" cx="91.42" cy="352.14" r="12.04"/>
-      <circle class="cls-4" cx="315.08" cy="352.14" r="12.04"/>
-      <circle class="cls-4" cx="315.08" cy="96.02" r="12.04"/>
-      <circle class="cls-4" cx="259.59" cy="153.51" r="12.04"/>
-      <circle class="cls-4" cx="147.61" cy="300.95" r="12.04"/>
+      <circle class="n-dot" cx="91.42" cy="96.02" r="12.04"/>
+      <circle class="n-dot" cx="91.42" cy="352.14" r="12.04"/>
+      <circle class="n-dot" cx="315.08" cy="352.14" r="12.04"/>
+      <circle class="n-dot" cx="315.08" cy="96.02" r="12.04"/>
+      <circle class="n-dot" cx="259.59" cy="153.51" r="12.04"/>
+      <circle class="n-dot" cx="147.61" cy="300.95" r="12.04"/>
     </g>
   </g>
 </svg>

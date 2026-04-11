@@ -15,5 +15,8 @@ Route::get('/materiales', MaterialsIndex::class)->name('materials.index');
 // Route::get('/materiales/{material:code}', MaterialShow::class)->name('materials.show');
 Route::get('/materiales/{material:code}', [MaterialController::class, 'show'])->name('materials.show');
 Route::get('/materiales/{material:code}/contenido', [MaterialController::class, 'content'])->name('materials.content');
+Route::get('/materiales/{material:code}/pdf/{modo}', [MaterialController::class, 'pdf'])
+    ->where('modo', 'alumno|docente')
+    ->name('materials.pdf');
 Route::view('/contacto', 'pages.contact')->name('contact');
 Route::get('/contacto', ContactForm::class)->name('contact');
