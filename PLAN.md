@@ -56,7 +56,7 @@ Plan de trabajo en progreso. Cada tarea es independiente y puede ejecutarse en u
   - Verificar: `npm run build` sin errores (Vite bundlea los `.woff2` localmente)
   - Commit: `feat: add design system SCSS foundation, self-host Plus Jakarta Sans via Fontsource`
 
-- [ ] **Tarea 2 — Layout: Navbar + Footer**
+- [x] **Tarea 2 — Layout: Navbar + Footer**
   - Archivo: `resources/views/layouts/app.blade.php`
   - Sin `<link>` externos — la fuente ya viene de Tarea 1
   - Agregar: `@stack('scripts')`, navbar `.navbar-site` (navy), footer `.site-footer` (dark)
