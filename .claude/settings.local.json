@@ -22,7 +22,14 @@
       "Bash(git stash:*)",
       "Bash(./vendor/bin/pint)",
       "Bash(./vendor/bin/pint --test)",
-      "Bash(composer test:*)"
+      "Bash(composer test:*)",
+      "Bash(/Users/juan/.claude/plugins/cache/claude-plugins-official/superpowers/5.0.7/skills/brainstorming/scripts/start-server.sh --project-dir /Users/juan/Codes/materiales-profesores)",
+      "Bash(bash scripts/start-server.sh --project-dir /Users/juan/Codes/materiales-profesores)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:65431/home-mockup.html)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:65431/)",
+      "Bash(python3 -m http.server 8765)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:8765/home-mockup.html)",
+      "Bash(awk -F/ '{:*)"
     ]
   }
 }
