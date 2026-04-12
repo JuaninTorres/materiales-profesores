@@ -12,11 +12,11 @@ test('navbar renders with site classes', function () {
 
 test('mat-card component renders for a published material', function () {
     $material = Material::factory()->create([
-        'title'     => 'Guía de Álgebra',
-        'type'      => 'pdf',
-        'level'     => 'colegio',
+        'title' => 'Guía de Álgebra',
+        'type' => 'pdf',
+        'level' => 'colegio',
         'published' => true,
-        'course'    => '3° Medio',
+        'course' => '3° Medio',
     ]);
 
     $html = Blade::render('<x-materials.card :material="$material" />', ['material' => $material]);

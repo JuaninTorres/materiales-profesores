@@ -53,8 +53,8 @@ class MaterialController extends Controller
                 'https://profenicolas.cl/assets_guias/',
             ],
             [
-                asset('assets_presentaciones') . '/',
-                asset('assets_guias') . '/',
+                asset('assets_presentaciones').'/',
+                asset('assets_guias').'/',
             ],
             $content
         );
@@ -70,8 +70,8 @@ class MaterialController extends Controller
             abort_unless(auth()->check(), 403);
         }
 
-        $contentUrl = route('materials.content', $material) . '?modo=' . $modo;
-        $filename   = $material->code . '-' . $modo . '.pdf';
+        $contentUrl = route('materials.content', $material).'?modo='.$modo;
+        $filename = $material->code.'-'.$modo.'.pdf';
 
         $pdf = \Spatie\Browsershot\Browsershot::url($contentUrl)
             ->waitUntilNetworkIdle()
@@ -83,8 +83,8 @@ class MaterialController extends Controller
             ->pdf();
 
         return response($pdf, 200, [
-            'Content-Type'        => 'application/pdf',
-            'Content-Disposition' => 'attachment; filename="' . $filename . '"',
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'attachment; filename="'.$filename.'"',
         ]);
     }
 

@@ -4,7 +4,7 @@ use App\Models\Material;
 
 test('material detail page renders', function () {
     $material = Material::factory()->create([
-        'type'      => 'pdf',
+        'type' => 'pdf',
         'published' => true,
     ]);
 
