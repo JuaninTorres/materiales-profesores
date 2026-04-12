@@ -4,22 +4,26 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\MaterialResource\Pages;
 use App\Models\Material;
+use BackedEnum;
+use Filament\Actions;
 use Filament\Forms;
-use Filament\Forms\Form;
 use Filament\Forms\Get;
 use Filament\Forms\Set;
+use Filament\Schemas\Components;
+use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Support\HtmlString;
 use Illuminate\Support\Str;
+use UnitEnum;
 
 class MaterialResource extends \Filament\Resources\Resource
 {
     protected static ?string $model = Material::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?string $navigationGroup = 'Contenido';
+    protected static string|UnitEnum|null $navigationGroup = 'Contenido';
 
     protected static ?string $navigationLabel = 'Materiales';
 
@@ -57,9 +61,9 @@ class MaterialResource extends \Filament\Resources\Resource
         return $code;
     }
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form->schema([
+        return $schema->schema([
             Forms\Components\TextInput::make('code')
                 ->label('Código')
                 ->required()
@@ -70,7 +74,7 @@ class MaterialResource extends \Filament\Resources\Resource
                 ->hintIcon(fn ($record) => $record ? 'heroicon-o-exclamation-triangle' : null)
                 ->placeholder('Se generará automáticamente al guardar')
                 ->suffixAction(
-                    Forms\Components\Actions\Action::make('generate_code')
+                    Actions\Action::make('generate_code')
                         ->icon('heroicon-o-arrow-path')
                         ->tooltip('Generar código desde los campos del formulario')
                         ->action(function (Set $set, Get $get, Forms\Components\Component $component) {
@@ -142,7 +146,7 @@ class MaterialResource extends \Filament\Resources\Resource
 
             Forms\Components\Toggle::make('published')->label('Publicado')->default(true),
 
-            Forms\Components\Section::make('Vista previa')
+            Components\Section::make('Vista previa')
                 ->schema([
                     Forms\Components\Placeholder::make('file_preview')
                         ->label('')
@@ -224,22 +228,22 @@ class MaterialResource extends \Filament\Resources\Resource
                 Tables\Filters\TernaryFilter::make('published')->label('Publicados'),
             ])
             ->filtersLayout(Tables\Enums\FiltersLayout::AboveContent)
-            ->actions([Tables\Actions\EditAction::make()])
+            ->actions([Actions\EditAction::make()])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\BulkAction::make('publish')
+                Actions\BulkActionGroup::make([
+                    Actions\BulkAction::make('publish')
                         ->label('Publicar')
                         ->icon('heroicon-o-eye')
                         ->color('success')
                         ->action(fn ($records) => $records->each->update(['published' => true]))
                         ->deselectRecordsAfterCompletion(),
-                    Tables\Actions\BulkAction::make('unpublish')
+                    Actions\BulkAction::make('unpublish')
                         ->label('Despublicar')
                         ->icon('heroicon-o-eye-slash')
                         ->color('warning')
                         ->action(fn ($records) => $records->each->update(['published' => false]))
                         ->deselectRecordsAfterCompletion(),
-                    Tables\Actions\DeleteBulkAction::make(),
+                    Actions\DeleteBulkAction::make(),
                 ]),
             ]);
     }

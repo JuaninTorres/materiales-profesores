@@ -6,6 +6,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Material;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Spatie\Browsershot\Browsershot;
+use Symfony\Component\HttpFoundation\Response;
 
 class MaterialController extends Controller
 {
@@ -41,7 +44,7 @@ class MaterialController extends Controller
     {
         abort_unless($material->published && $material->type === 'html' && $material->file_path, 404);
 
-        $content = \Illuminate\Support\Facades\Storage::disk('public')->get($material->file_path);
+        $content = Storage::disk('public')->get($material->file_path);
         abort_if($content === null, 404);
 
         // Reescribir las URLs de assets de producción al servidor local.
@@ -62,7 +65,7 @@ class MaterialController extends Controller
         return response($content, 200)->header('Content-Type', 'text/html; charset=utf-8');
     }
 
-    public function pdf(Material $material, string $modo): \Symfony\Component\HttpFoundation\Response
+    public function pdf(Material $material, string $modo): Response
     {
         abort_unless($material->published && $material->type === 'html' && $material->file_path, 404);
 
@@ -73,12 +76,12 @@ class MaterialController extends Controller
         $contentUrl = route('materials.content', $material).'?modo='.$modo;
         $filename = $material->code.'-'.$modo.'.pdf';
 
-        $pdf = \Spatie\Browsershot\Browsershot::url($contentUrl)
+        $pdf = Browsershot::url($contentUrl)
             ->waitUntilNetworkIdle()
             ->setDelay(3000)
             ->emulateMedia('print')
             ->showBackground()
-            ->format('A4')
+            ->format('Letter')
             ->margins(15, 15, 15, 15)
             ->pdf();
 
@@ -111,7 +114,7 @@ class MaterialController extends Controller
      */
     private function parseMaterialSubType(Material $material): string
     {
-        $path = \Illuminate\Support\Facades\Storage::disk('public')->path($material->file_path);
+        $path = Storage::disk('public')->path($material->file_path);
         $handle = @fopen($path, 'r');
         if (! $handle) {
             return 'presentacion';

@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Material;
+
 return [
 
     /*
@@ -116,7 +118,7 @@ return [
         'id' => env('ALGOLIA_APP_ID', ''),
         'secret' => env('ALGOLIA_SECRET', ''),
         'index-settings' => [
-            \App\Models\Material::class => [
+            Material::class => [
                 'searchableAttributes' => [
                     'title',
                     'description',

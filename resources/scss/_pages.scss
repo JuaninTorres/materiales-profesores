@@ -222,6 +222,35 @@
   margin-bottom: .75rem;
 }
 
+// --- PDF loading overlay ---
+.pdf-loading-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .55);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s ease;
+
+  &.is-visible {
+    opacity: 1;
+    pointer-events: all;
+  }
+}
+
+.pdf-loading-card {
+  background: #fff;
+  border-radius: 1rem;
+  padding: 2rem 2.5rem;
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, .2);
+  max-width: 320px;
+  width: 90%;
+}
+
 .ficha-tecnica {
   .ficha-row {
     display: flex;
