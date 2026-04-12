@@ -2,41 +2,33 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
     {{-- Páginas estáticas --}}
+    @foreach($staticPages as $key => $page)
     <url>
-        <loc>{{ url('/') }}</loc>
-        <lastmod>{{ $lastMaterialUpdate->toAtomString() }}</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>1.0</priority>
+        <loc>{{ route($page['route']) }}</loc>
+        <changefreq>{{ $page['changefreq'] }}</changefreq>
+        <priority>{{ $page['priority'] }}</priority>
     </url>
-    <url>
-        <loc>{{ route('materials.index') }}</loc>
-        <lastmod>{{ $lastMaterialUpdate->toAtomString() }}</lastmod>
-        <changefreq>daily</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>{{ route('about') }}</loc>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-    </url>
-    <url>
-        <loc>{{ route('services') }}</loc>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-    </url>
-    <url>
-        <loc>{{ route('contact') }}</loc>
-        <changefreq>monthly</changefreq>
-        <priority>0.6</priority>
-    </url>
+    @endforeach
 
-    {{-- Materiales publicados --}}
+    {{-- Materiales publicados con prioridad dinámica --}}
+    @php
+        $now = now();
+        $oldestMaterialDate = $materials->last()?->updated_at ?? $now;
+        $daysSinceOldest = $oldestMaterialDate->diffInDays($now) ?: 1;
+    @endphp
     @foreach($materials as $material)
+    @php
+        // Prioridad dinámica: materiales más recientes tienen mayor prioridad (0.95)
+        // materiales más antiguos tienen menor prioridad (0.5)
+        $daysSinceUpdate = $material->updated_at->diffInDays($now) ?: 0;
+        $recencyScore = 1 - ($daysSinceUpdate / $daysSinceOldest);
+        $priority = round(0.5 + (0.45 * $recencyScore), 2);
+    @endphp
     <url>
         <loc>{{ route('materials.show', $material->code) }}</loc>
         <lastmod>{{ $material->updated_at->toAtomString() }}</lastmod>
         <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
+        <priority>{{ $priority }}</priority>
     </url>
     @endforeach
 
