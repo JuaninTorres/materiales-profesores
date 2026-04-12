@@ -3,6 +3,7 @@
 namespace App\Livewire\Materials;
 
 use App\Models\Material;
+use Illuminate\Database\Eloquent\Builder;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -59,7 +60,7 @@ class Index extends Component
         $this->view = in_array($mode, ['cards', 'list']) ? $mode : 'cards';
     }
 
-    private function applyFiltersAndSort(\Illuminate\Database\Eloquent\Builder $q): \Illuminate\Database\Eloquent\Builder
+    private function applyFiltersAndSort(Builder $q): Builder
     {
         return $q
             ->when($this->course, fn ($q, $v) => $q->where('course', $v))

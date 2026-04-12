@@ -2,13 +2,15 @@
 
 namespace App\Models;
 
+use Database\Factories\MaterialFactory;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
 
 class Material extends Model
 {
-    /** @use HasFactory<\Database\Factories\MaterialFactory> */
+    /** @use HasFactory<MaterialFactory> */
     use HasFactory, Searchable;
 
     protected $fillable = [
@@ -52,51 +54,52 @@ class Material extends Model
         ];
     }
 
-    protected function getSizeFormattedAttribute(): ?string
+    protected function sizeFormatted(): Attribute
     {
-        if (! $this->size_bytes) {
-            return null;
-        }
+        return Attribute::make(
+            get: function (): ?string {
+                if (! $this->size_bytes) {
+                    return null;
+                }
+                if ($this->size_bytes < 1024) {
+                    return $this->size_bytes.' B';
+                }
+                if ($this->size_bytes < 1048576) {
+                    return number_format($this->size_bytes / 1024, 1).' KB';
+                }
 
-        if ($this->size_bytes < 1024) {
-            return $this->size_bytes.' B';
-        }
-        if ($this->size_bytes < 1048576) {
-            return number_format($this->size_bytes / 1024, 1).' KB';
-        }
-
-        return number_format($this->size_bytes / 1048576, 2).' MB';
+                return number_format($this->size_bytes / 1048576, 2).' MB';
+            }
+        );
     }
 
-    protected function getTipoAttribute()
+    protected function tipo(): Attribute
     {
-        if ($this->type == 'html') {
-            return 'Presentación HTML';
-        }
-
-        if ($this->type == 'other') {
-            return 'Otros';
-        }
-
-        if ($this->type == 'pdf') {
-            return 'PDF';
-        }
-
-        return ucfirst($this->type);
+        return Attribute::make(
+            get: fn (): string => match ($this->type) {
+                'html' => 'Presentación HTML',
+                'other' => 'Otros',
+                'pdf' => 'PDF',
+                default => ucfirst($this->type),
+            }
+        );
     }
 
-    protected function getNivelAttribute()
+    protected function nivel(): Attribute
     {
-        $map = [
-            'colegio' => ['text-bg-warning', 'Colegio'],
-            'cft' => ['text-bg-primary', 'CFT'],
-            'particulares' => ['text-bg-success', 'Particulares'],
-            'universidad' => ['text-bg-danger',  'Universidad'],
-            'instituto' => ['text-bg-secondary', 'Instituto'],
-        ];
+        return Attribute::make(
+            get: function (): string {
+                $map = [
+                    'colegio' => ['text-bg-warning',  'Colegio'],
+                    'cft' => ['text-bg-primary',   'CFT'],
+                    'particulares' => ['text-bg-success',   'Particulares'],
+                    'universidad' => ['text-bg-danger',    'Universidad'],
+                    'instituto' => ['text-bg-secondary', 'Instituto'],
+                ];
+                [$class, $label] = $map[$this->level] ?? ['text-bg-info', strtoupper($this->level)];
 
-        [$class, $label] = $map[$this->level] ?? ['text-bg-info', strtoupper($this->level)];
-
-        return '<span class="badge '.$class.'">'.$label.'</span>';
+                return '<span class="badge '.$class.'">'.$label.'</span>';
+            }
+        );
     }
 }

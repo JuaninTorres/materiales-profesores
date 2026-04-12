@@ -167,17 +167,21 @@
                         <i class="bi bi-{{ $esGuia ? 'journal-text' : 'play-circle' }} me-2" aria-hidden="true"></i>
                         {{ $esGuia ? 'Abrir guía' : 'Abrir presentación' }}
                     </a>
-                    <a href="{{ route('materials.pdf', [$material, 'alumno']) }}"
-                       class="btn btn-outline-primary w-100 mb-2">
+                    <button type="button"
+                            class="btn btn-outline-primary w-100 mb-2 js-pdf-download"
+                            data-url="{{ route('materials.pdf', [$material, 'alumno']) }}"
+                            data-filename="{{ $material->code }}-alumno.pdf">
                         <i class="bi bi-file-earmark-pdf me-2" aria-hidden="true"></i>
                         {{ $esGuia ? 'Imprimir guía (Alumno)' : 'Descargar PDF (Alumno)' }}
-                    </a>
+                    </button>
                     @auth
-                    <a href="{{ route('materials.pdf', [$material, 'docente']) }}"
-                       class="btn btn-outline-success w-100 mb-2">
+                    <button type="button"
+                            class="btn btn-outline-success w-100 mb-2 js-pdf-download"
+                            data-url="{{ route('materials.pdf', [$material, 'docente']) }}"
+                            data-filename="{{ $material->code }}-docente.pdf">
                         <i class="bi bi-file-earmark-pdf-fill me-2" aria-hidden="true"></i>
                         {{ $esGuia ? 'Imprimir guía (Docente)' : 'Descargar PDF (Docente)' }}
-                    </a>
+                    </button>
                     @endauth
                 @elseif($material->type === 'link' && $material->link_url)
                     <a href="{{ $material->link_url }}"
@@ -243,6 +247,15 @@
     </div>
 </div>
 
+{{-- PDF generation overlay --}}
+<div id="pdf-loading-overlay" class="pdf-loading-overlay" aria-hidden="true">
+    <div class="pdf-loading-card">
+        <div class="spinner-border text-primary mb-3" role="status" aria-hidden="true"></div>
+        <p class="fw-bold mb-1">Generando PDF…</p>
+        <p class="text-muted small mb-0" id="pdf-loading-submsg">Esto puede tardar unos segundos.</p>
+    </div>
+</div>
+
 @push('scripts')
 <script>
 document.querySelectorAll('.js-copy-link').forEach(btn => {
@@ -274,6 +287,76 @@ document.querySelectorAll('.js-copy-link').forEach(btn => {
         }
     });
 });
+
+// PDF fetch/blob download with loading overlay
+(function () {
+    const overlay = document.getElementById('pdf-loading-overlay');
+    const subMsg  = document.getElementById('pdf-loading-submsg');
+    let controller = null;
+
+    function showOverlay() {
+        subMsg.textContent = 'Esto puede tardar unos segundos.';
+        subMsg.classList.remove('text-danger');
+        overlay.setAttribute('aria-hidden', 'false');
+        overlay.classList.add('is-visible');
+    }
+
+    function hideOverlay() {
+        overlay.classList.remove('is-visible');
+        overlay.setAttribute('aria-hidden', 'true');
+    }
+
+    function showError(msg) {
+        subMsg.textContent = msg;
+        subMsg.classList.add('text-danger');
+        setTimeout(hideOverlay, 3500);
+    }
+
+    document.querySelectorAll('.js-pdf-download').forEach(btn => {
+        btn.addEventListener('click', async () => {
+            const url      = btn.dataset.url;
+            const filename = btn.dataset.filename;
+
+            showOverlay();
+
+            // Reassure the user if it's taking long
+            const reassureTimer = setTimeout(() => {
+                subMsg.textContent = 'Casi listo, espera un momento más…';
+            }, 7000);
+
+            controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 90000);
+
+            try {
+                const response = await fetch(url, { signal: controller.signal });
+
+                if (!response.ok) throw new Error(`Error ${response.status}`);
+
+                const blob    = await response.blob();
+                const blobUrl = URL.createObjectURL(blob);
+                const a       = document.createElement('a');
+                a.href        = blobUrl;
+                a.download    = filename;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                setTimeout(() => URL.revokeObjectURL(blobUrl), 60000);
+
+                hideOverlay();
+            } catch (err) {
+                if (err.name === 'AbortError') {
+                    showError('La solicitud tardó demasiado. Intenta nuevamente.');
+                } else {
+                    showError('Ocurrió un error al generar el PDF. Intenta nuevamente.');
+                }
+            } finally {
+                clearTimeout(reassureTimer);
+                clearTimeout(timeoutId);
+                controller = null;
+            }
+        });
+    });
+}());
 </script>
 @endpush
 

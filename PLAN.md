@@ -1,517 +1,439 @@
-# SEO Improvements — Implementation Plan
+# Laravel 13 Upgrade Plan — materiales-profesores
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Corregir y mejorar todos los puntos de SEO identificados en la auditoría de profenicolas.cl.
+**Goal:** Actualizar el proyecto de Laravel 12.x (v12.28.1) a Laravel 13.x.
 
-**Architecture:** Los meta tags se centralizan en `layouts/app.blade.php` usando `@yield` con defaults globales, mientras cada vista sobreescribe con `@section`. Los datos estructurados (JSON-LD) se inyectan vía `@stack('jsonld')`. El canonical y OG:URL se resuelven automáticamente con `request()->url()` en el layout, con posibilidad de override por página.
+**Architecture:** Actualización incremental por fases — investigación → entorno → dependencias → código → tests → deploy. La Fase 1 es obligatoria antes de tocar cualquier archivo.
 
-**Tech Stack:** Laravel 12, Blade, Bootstrap 5, Schema.org JSON-LD.
-
----
-
-## Estado del Proyecto
-
-| Tarea | Estado | Commit |
-|-------|--------|--------|
-| 1. Meta description en todas las páginas | ✅ COMPLETADA | 987f16b |
-| 2. Open Graph y Twitter Card | ✅ COMPLETADA | 57e9adf |
-| 3. Canonical tags en todas las páginas | ✅ COMPLETADA | e1756b4 |
-| 4. Datos estructurados (Person + WebSite) | ✅ COMPLETADA | 54be2f1 |
-| 5. Datos estructurados (LearningResource + BreadcrumbList) | ✅ COMPLETADA | bfb6e5a |
-| 6. Sitemap — lastmod en páginas estáticas | ✅ COMPLETADA | 41b0da8 |
+**Tech Stack:** Laravel 13, PHP 8.3+, Livewire 3, Filament 3/4, Bootstrap 5, Pest, Laravel Forge.
 
 ---
 
-## Archivos afectados
+## Estado del progreso
 
-| Archivo | Acción |
+| Fase | Estado |
 |---|---|
-| `resources/views/layouts/app.blade.php` | Modificar: añadir meta description, OG tags, canonical, Twitter Card, stack jsonld |
-| `resources/views/pages/home.blade.php` | Modificar: añadir section description, section og_image, push jsonld (Person + FAQPage) |
-| `resources/views/pages/about.blade.php` | Modificar: añadir section description, push meta |
-| `resources/views/pages/services.blade.php` | Modificar: añadir section description, push meta |
-| `resources/views/livewire/materials/index.blade.php` | Modificar: añadir section description, canonical |
-| `resources/views/livewire/contact/form.blade.php` | Modificar: añadir section description |
-| `resources/views/materiales/show.blade.php` | Modificar: migrar description a @section, añadir OG tags, BreadcrumbList JSON-LD, LearningResource JSON-LD |
-| `resources/views/sitemap.blade.php` | Modificar: añadir lastmod a páginas estáticas |
+| 1. Investigación | ⬜ Pendiente |
+| 2. Preparación del entorno | ⬜ Pendiente |
+| 3. Actualización de dependencias | ⬜ Pendiente |
+| 4. Configuración del framework | ⬜ Pendiente |
+| 5. Cambios en el código | ⬜ Pendiente |
+| 6. Pipeline de assets | ⬜ Pendiente |
+| 7. Testing | ⬜ Pendiente |
+| 8. Checklist pre-merge | ⬜ Pendiente |
+| 9. Deploy a producción | ⬜ Pendiente |
 
 ---
 
-## ✅ Tarea 1: `meta description` en todas las páginas
+## Versiones actuales bloqueadas
 
-**Estado:** COMPLETADA (Commit: 987f16b)
+| Paquete | Versión |
+|---|---|
+| `laravel/framework` | v12.28.1 |
+| `livewire/livewire` | v3.6.4 |
+| `livewire/flux` | v2.3.1 |
+| `livewire/volt` | v1.7.2 |
+| `filament/filament` | v3.3.37 |
+| `laravel/scout` | v10.19.0 |
+| `laravel/sanctum` | v4.3.1 |
+| `spatie/browsershot` | v5.2.3 |
+| `pestphp/pest` | v4.0.4 |
+| `resend/resend-php` | v1.1.0 |
+| `algolia/algoliasearch-client-php` | v4.39.0 |
+| PHP | ^8.2 |
 
-**Archivos:**
-- Modificar: `resources/views/layouts/app.blade.php`
-- Modificar: `resources/views/pages/home.blade.php`
-- Modificar: `resources/views/pages/about.blade.php`
-- Modificar: `resources/views/pages/services.blade.php`
-- Modificar: `resources/views/livewire/materials/index.blade.php`
-- Modificar: `resources/views/livewire/contact/form.blade.php`
-- Modificar: `resources/views/materiales/show.blade.php`
+## Cambios de código confirmados (independientes del changelog de L13)
 
-- [ ] **Paso 1: Agregar `@yield('description')` en el layout**
-
-En `resources/views/layouts/app.blade.php`, reemplazar la línea del `<title>`:
-
-```blade
-<title>@yield('title', 'profenicolas.cl')</title>
-<meta name="description" content="@yield('description', 'Materiales gratuitos de matemática y clases particulares con Nicolás González, profesor en Quintero, Chile. Para colegio, PAES, CFT y universidad.')">
-```
-
-- [ ] **Paso 2: Añadir description en Home**
-
-En `resources/views/pages/home.blade.php`, después de `@section('main_class', '')`:
-
-```blade
-@section('description', 'Hola, soy el Profe Nicolás González. Materiales gratuitos de matemática para colegio, PAES, CFT y universidad, más clases particulares en Quintero y online.')
-```
-
-- [ ] **Paso 3: Añadir description en Sobre mí**
-
-En `resources/views/pages/about.blade.php`, después de `@section('main_class', '')`:
-
-```blade
-@section('description', 'Nicolás González M., profesor de Matemática con más de 13 años de experiencia en colegio, PAES y CFT. Egresado de la Universidad de Valparaíso. Clases en Quintero u online.')
-```
-
-- [ ] **Paso 4: Añadir description en Servicios**
-
-En `resources/views/pages/services.blade.php`, después de `@section('main_class', '')`:
-
-```blade
-@section('description', 'Clases particulares de matemática con Nicolás González: refuerzo escolar 7° básico a 4° medio, preparación PAES y nivelación intensiva. Presencial en Quintero u online.')
-```
-
-- [ ] **Paso 5: Añadir description en Materiales (Livewire)**
-
-En `resources/views/livewire/materials/index.blade.php`, después de `@section('main_class', '')`:
-
-```blade
-@section('description', 'Biblioteca gratuita de guías, ejercicios y apuntes de matemática para colegio, PAES, CFT y universidad. Sin registro, de libre descarga.')
-```
-
-- [ ] **Paso 6: Añadir description en Contacto (Livewire)**
-
-En `resources/views/livewire/contact/form.blade.php`, después de `@section('main_class', '')`:
-
-```blade
-@section('description', 'Escríbele al Profe Nicolás González para agendar una clase particular de matemática o resolver tus dudas. Respuesta en menos de 24 horas.')
-```
-
-- [ ] **Paso 7: Migrar description en Show a `@section`**
-
-En `resources/views/materiales/show.blade.php`, el `@push('meta')` actual mezcla description y canonical. Separar: sacar la description del push y convertirla en section. Reemplazar el bloque `@push('meta')` existente por:
-
-```blade
-@php
-    $metaDescription = Str::limit(strip_tags($material->description ?? ''), 155)
-        ?: $material->title . ' · Material de matemática de Profe Nicolás González.';
-@endphp
-@section('description', $metaDescription)
-
-@push('meta')
-    <link rel="canonical" href="{{ route('materials.show', $material) }}">
-@endpush
-```
-
-- [ ] **Paso 8: Verificar en el navegador**
-
-Ejecutar el servidor:
-```bash
-composer dev
-```
-
-Abrir cada URL y verificar en DevTools → Elements que el `<head>` contiene:
-```html
-<meta name="description" content="...">
-```
-
-- `/` → description sobre materiales gratuitos y Nicolás González
-- `/sobre-mi` → description sobre el profesor
-- `/servicios` → description sobre clases particulares
-- `/materiales` → description sobre biblioteca gratuita
-- `/contacto` → description sobre contacto
-- `/materiales/{cualquier-code}` → description dinámica del material
-
-- [ ] **Paso 9: Commit**
-
-```bash
-git add resources/views/layouts/app.blade.php \
-        resources/views/pages/home.blade.php \
-        resources/views/pages/about.blade.php \
-        resources/views/pages/services.blade.php \
-        resources/views/livewire/materials/index.blade.php \
-        resources/views/livewire/contact/form.blade.php \
-        resources/views/materiales/show.blade.php
-git commit -m "feat(seo): add meta description to all pages"
-```
+`app/Models/Material.php` usa el patrón de accessor pre-Laravel 9 (`getSizeFormattedAttribute()`,
+`getTipoAttribute()`, `getNivelAttribute()`). Deprecado en L9, posiblemente eliminado en L13.
+**Esta migración es requerida independientemente del resto del upgrade.**
 
 ---
 
-## ✅ Tarea 2: Open Graph y Twitter Card en todas las páginas
+## Fase 1 — Investigación
 
-**Estado:** COMPLETADA (Commit: 57e9adf)
+> Esta fase es obligatoria. No modificar ningún archivo antes de completarla.
 
-**Archivos:**
-- Modificar: `resources/views/layouts/app.blade.php`
-- Modificar: `resources/views/pages/home.blade.php`
-- Modificar: `resources/views/pages/about.blade.php`
-- Modificar: `resources/views/pages/services.blade.php`
-- Modificar: `resources/views/livewire/materials/index.blade.php`
-- Modificar: `resources/views/livewire/contact/form.blade.php`
-- Modificar: `resources/views/materiales/show.blade.php`
+- [ ] **1.1** Leer la guía oficial de actualización de Laravel 13:
+  `https://laravel.com/docs/13.x/upgrade`
 
-- [ ] **Paso 1: Añadir bloque OG en el layout (defaults globales)**
+  Anotar cada breaking change que aplique al proyecto. Áreas clave a revisar:
+  - Versión mínima de PHP requerida
+  - Features deprecadas en L12 que fueron eliminadas en L13
+  - Cambios en `bootstrap/app.php` (firmas de `withMiddleware` / `withExceptions`)
+  - Cambios en Eloquent (casts, accessors, scopes)
+  - Cambios en helpers de testing
+  - Cambios en Queue/Jobs
 
-En `resources/views/layouts/app.blade.php`, después de la meta description:
+- [ ] **1.2** Verificar compatibilidad de cada paquete con Laravel 13:
 
-```blade
-{{-- Open Graph --}}
-<meta property="og:site_name" content="Profe Nicolás">
-<meta property="og:locale" content="es_CL">
-<meta property="og:type" content="@yield('og_type', 'website')">
-<meta property="og:title" content="@yield('og_title', @yield('title', 'Profe Nicolás · Matemática'))">
-<meta property="og:description" content="@yield('og_description', @yield('description', 'Materiales gratuitos de matemática y clases particulares con Nicolás González, profesor en Quintero, Chile.'))">
-<meta property="og:url" content="@yield('og_url', request()->url())">
-<meta property="og:image" content="@yield('og_image', asset('images/og-default.jpg'))">
-{{-- Twitter Card --}}
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="@yield('og_title', @yield('title', 'Profe Nicolás'))">
-<meta name="twitter:description" content="@yield('og_description', @yield('description', 'Materiales gratuitos de matemática y clases particulares.'))">
-<meta name="twitter:image" content="@yield('og_image', asset('images/og-default.jpg'))">
-```
+  | Paquete | URL |
+  |---|---|
+  | `filament/filament` | https://github.com/filamentphp/filament/releases |
+  | `livewire/livewire` | https://github.com/livewire/livewire/releases |
+  | `livewire/flux` | https://github.com/livewire/flux/releases |
+  | `livewire/volt` | https://github.com/livewire/volt/releases |
+  | `laravel/sanctum` | https://github.com/laravel/sanctum/releases |
+  | `laravel/scout` | https://github.com/laravel/scout/releases |
+  | `spatie/browsershot` | https://github.com/spatie/browsershot/releases |
+  | `pestphp/pest` + plugins | https://github.com/pestphp/pest/releases |
+  | `resend/resend-php` | https://github.com/resendlabs/resend-php/releases |
 
-Nota: La imagen `og-default.jpg` debe existir en `public/images/`. Si no existe, crear una imagen de 1200×630px con el logo/branding del sitio y subirla a `public/images/og-default.jpg`.
+  > **Nota sobre Filament:** Verificar si existe Filament 4. Si es así, puede requerir
+  > una guía de migración propia separada de este plan — presupuestar tiempo extra.
 
-- [ ] **Paso 2: Añadir og_type y og_title en Show (material)**
-
-En `resources/views/materiales/show.blade.php`, añadir tras los `@section` ya existentes:
-
-```blade
-@section('og_type', 'article')
-@section('og_title', $material->title . ' · Profe Nicolás')
-@section('og_description', Str::limit(strip_tags($material->description ?? ''), 155) ?: $material->title . ' · Material gratuito de matemática.')
-```
-
-Si el material tiene imagen adjunta, añadir también:
-```blade
-@if($material->type === 'image' && $material->file_path)
-    @section('og_image', asset('storage/' . $material->file_path))
-@endif
-```
-
-- [ ] **Paso 3: Verificar en el navegador**
-
-Con el servidor corriendo, usar la extensión "Meta SEO inspector" o DevTools para verificar que en `/materiales/{code}` aparecen los tags OG con valores correctos, y en `/` aparecen los defaults.
-
-Alternativa rápida: ver source con `Ctrl+U` y buscar `og:title`.
-
-- [ ] **Paso 4: Commit**
-
-```bash
-git add resources/views/layouts/app.blade.php \
-        resources/views/materiales/show.blade.php
-git commit -m "feat(seo): add Open Graph and Twitter Card meta tags"
-```
+- [ ] **1.3** Verificar versión de PHP del servidor Forge:
+  ```bash
+  php -v
+  ```
+  Si el servidor corre PHP 8.2 y L13 requiere 8.3, la actualización de PHP en Forge
+  debe hacerse en una ventana de mantenimiento antes del deploy.
 
 ---
 
-## Tarea 3: Canonical tags en todas las páginas
+## Fase 2 — Preparación del entorno local
 
-**Archivos:**
-- Modificar: `resources/views/layouts/app.blade.php`
+- [ ] **2.1** Verificar PHP local:
+  ```bash
+  php -v
+  ```
+  Si es 8.2 y L13 requiere 8.3:
+  ```bash
+  brew install php@8.3
+  php -v   # debe mostrar 8.3.x
+  ```
 
-- [ ] **Paso 1: Añadir canonical global en el layout**
+- [ ] **2.2** Verificar Composer 2.x:
+  ```bash
+  composer --version
+  ```
 
-En `resources/views/layouts/app.blade.php`, después de las meta OG y Twitter Card:
-
-```blade
-<link rel="canonical" href="@yield('canonical', request()->url())">
-```
-
-Nota: `request()->url()` devuelve la URL sin query string, lo que es el comportamiento correcto para páginas con filtros como `/materiales`.
-
-- [ ] **Paso 2: Eliminar el canonical del @push('meta') en Show**
-
-En `resources/views/materiales/show.blade.php`, el `@push('meta')` ahora solo tendría el canonical, que ya viene del layout. Eliminar el canonical del push:
-
-```blade
-{{-- Eliminar esta línea del @push('meta') --}}
-<link rel="canonical" href="{{ route('materials.show', $material) }}">
-```
-
-El canonical del layout usará `request()->url()` que para la ruta de show devuelve la URL correcta (sin query params). Si se quiere ser explícito con la ruta nombrada, mantener un `@section('canonical', route('materials.show', $material))` y modificar el layout para usar `@yield('canonical', request()->url())`.
-
-Opción recomendada para Show (más explícito):
-```blade
-@section('canonical', route('materials.show', $material))
-```
-
-Y en el layout:
-```blade
-<link rel="canonical" href="@yield('canonical', request()->url())">
-```
-
-- [ ] **Paso 3: Verificar**
-
-Revisar en source que:
-- `/materiales?q=fracciones` tiene canonical `https://profenicolas.cl/materiales` (sin query string)
-- `/materiales/tema01-fracciones` tiene canonical con su propia URL
-
-- [ ] **Paso 4: Commit**
-
-```bash
-git add resources/views/layouts/app.blade.php \
-        resources/views/materiales/show.blade.php
-git commit -m "feat(seo): add canonical link tag to all pages"
-```
+- [ ] **2.3** Crear punto de rollback:
+  ```bash
+  git tag pre-laravel-13-upgrade
+  ```
 
 ---
 
-## Tarea 4: Datos estructurados — Person y WebSite en Home
+## Fase 3 — Actualización de dependencias
 
-**Archivos:**
-- Modificar: `resources/views/layouts/app.blade.php` (añadir `@stack('jsonld')`)
-- Modificar: `resources/views/pages/home.blade.php`
+> Actualizar constraints una a una. No correr `composer update` sin completar la Fase 1.
 
-- [ ] **Paso 1: Añadir stack jsonld en el layout**
+- [ ] **3.1** Actualizar constraint de PHP en `composer.json` (si L13 lo requiere):
+  ```json
+  "php": "^8.3"
+  ```
 
-En `resources/views/layouts/app.blade.php`, al final del `<head>`, antes del cierre:
+- [ ] **3.2** Actualizar constraint del framework en `composer.json`:
+  ```json
+  "laravel/framework": "^13.0"
+  ```
 
-```blade
-@stack('jsonld')
-```
+- [ ] **3.3** Actualizar constraints de paquetes del ecosistema en `composer.json`
+  con base en la investigación de la Fase 1.2. Cambios esperados (verificar en Fase 1):
+  - `laravel/sanctum` → posiblemente `^5.0`
+  - `laravel/scout` → posiblemente `^11.0`
+  - `filament/filament` → posiblemente `^4.0`
+  - `livewire/livewire` → posiblemente `^3.7`+
+  - `pestphp/pest` + plugins → posiblemente `^5.0`
+  - `nunomaduro/collision` → sigue el ciclo de Laravel
 
-- [ ] **Paso 2: Añadir JSON-LD de Person y WebSite en Home**
+- [ ] **3.4** Correr la actualización:
+  ```bash
+  composer update --with-all-dependencies 2>&1 | tee /tmp/composer-update.log
+  ```
+  Si hay conflictos, diagnosticar uno a uno:
+  ```bash
+  composer why-not laravel/framework 13.x-dev
+  ```
 
-En `resources/views/pages/home.blade.php`, al final (antes de `@endsection`):
+- [ ] **3.5** Publicar assets actualizados:
+  ```bash
+  php artisan vendor:publish --tag=laravel-assets --force
+  php artisan filament:upgrade
+  ```
 
-```blade
-@push('jsonld')
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Person",
-      "@id": "{{ url('/') }}#nicolas",
-      "name": "Nicolás González M.",
-      "jobTitle": "Profesor de Matemática",
-      "url": "{{ url('/') }}",
-      "sameAs": [],
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Quintero",
-        "addressRegion": "Valparaíso",
-        "addressCountry": "CL"
-      },
-      "knowsAbout": ["Matemática", "PAES", "Álgebra", "Cálculo", "Geometría"]
-    },
-    {
-      "@type": "WebSite",
-      "@id": "{{ url('/') }}#website",
-      "url": "{{ url('/') }}",
-      "name": "Profe Nicolás",
-      "description": "Materiales gratuitos de matemática y clases particulares.",
-      "publisher": {
-        "@id": "{{ url('/') }}#nicolas"
-      },
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": {
-          "@type": "EntryPoint",
-          "urlTemplate": "{{ route('materials.index') }}?q={search_term_string}"
-        },
-        "query-input": "required name=search_term_string"
+---
+
+## Fase 4 — Configuración del framework
+
+- [ ] **4.1** Comparar `bootstrap/app.php` con el stub de L13:
+  `https://github.com/laravel/laravel/blob/13.x/bootstrap/app.php`
+
+  Verificar firmas de `withMiddleware`, `withExceptions` y la clave `health: '/up'`.
+
+- [ ] **4.2** Comparar archivos en `config/` con los defaults de L13:
+  `https://github.com/laravel/laravel/tree/13.x/config`
+
+  Prestar atención a: `auth.php`, `session.php`, `database.php`, `logging.php`.
+
+- [ ] **4.3** Verificar versión de PHPUnit post-update:
+  ```bash
+  ./vendor/bin/phpunit --version
+  ```
+  Si subió de major version, actualizar `xsi:noNamespaceSchemaLocation` en `phpunit.xml`.
+
+---
+
+## Fase 5 — Cambios en el código de la aplicación
+
+### 5.1 Migrar accessors del estilo antiguo en `app/Models/Material.php` [CONFIRMADO]
+
+- [ ] **5.1.1** Agregar import al inicio del archivo (antes de `class Material`):
+  ```php
+  use Illuminate\Database\Eloquent\Casts\Attribute;
+  ```
+
+- [ ] **5.1.2** Reemplazar `getSizeFormattedAttribute()` (líneas 55–69):
+
+  ```php
+  // ANTES
+  protected function getSizeFormattedAttribute(): ?string
+  {
+      if (! $this->size_bytes) {
+          return null;
       }
-    }
-  ]
-}
-</script>
-@endpush
-```
-
-Nota: El bloque FAQPage ya existe en el HTML de Home. Moverlo a un `@push('jsonld')` como JSON-LD es más limpio que el microdata actual, pero el microdata existente es válido. No modificar el FAQ por ahora para evitar regresiones.
-
-- [ ] **Paso 3: Verificar con Rich Results Test**
-
-Abrir `https://search.google.com/test/rich-results` e introducir `https://profenicolas.cl/`. Verificar que detecta Person y WebSite sin errores.
-
-Alternativa local: ver source de `/` y buscar `application/ld+json`.
-
-- [ ] **Paso 4: Commit**
-
-```bash
-git add resources/views/layouts/app.blade.php \
-        resources/views/pages/home.blade.php
-git commit -m "feat(seo): add Person and WebSite JSON-LD structured data"
-```
-
----
-
-## Tarea 5: Datos estructurados — LearningResource y BreadcrumbList en materiales
-
-**Archivos:**
-- Modificar: `resources/views/materiales/show.blade.php`
-
-- [ ] **Paso 1: Añadir JSON-LD en Show**
-
-En `resources/views/materiales/show.blade.php`, al final antes de `@endsection`:
-
-```blade
-@push('jsonld')
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "LearningResource",
-      "name": "{{ $material->title }}",
-      "description": "{{ Str::limit(strip_tags($material->description ?? ''), 250) }}",
-      "url": "{{ route('materials.show', $material) }}",
-      "educationalLevel": "{{ $material->level }}",
-      "learningResourceType": "{{ $material->tipo }}",
-      "inLanguage": "es",
-      "isAccessibleForFree": true,
-      "author": {
-        "@type": "Person",
-        "name": "Nicolás González M.",
-        "@id": "{{ url('/') }}#nicolas"
-      },
-      "provider": {
-        "@type": "Person",
-        "@id": "{{ url('/') }}#nicolas"
+      if ($this->size_bytes < 1024) {
+          return $this->size_bytes.' B';
       }
-      @if($material->subject)
-      ,"teaches": "{{ $material->subject }}"
-      @endif
-    },
-    {
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Inicio",
-          "item": "{{ url('/') }}"
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "Materiales",
-          "item": "{{ route('materials.index') }}"
-        },
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "name": "{{ $material->title }}"
-        }
-      ]
-    }
-  ]
-}
-</script>
-@endpush
-```
+      if ($this->size_bytes < 1048576) {
+          return number_format($this->size_bytes / 1024, 1).' KB';
+      }
+      return number_format($this->size_bytes / 1048576, 2).' MB';
+  }
 
-- [ ] **Paso 2: Verificar**
+  // DESPUÉS
+  protected function sizeFormatted(): Attribute
+  {
+      return Attribute::make(
+          get: function (): ?string {
+              if (! $this->size_bytes) {
+                  return null;
+              }
+              if ($this->size_bytes < 1024) {
+                  return $this->size_bytes.' B';
+              }
+              if ($this->size_bytes < 1048576) {
+                  return number_format($this->size_bytes / 1024, 1).' KB';
+              }
+              return number_format($this->size_bytes / 1048576, 2).' MB';
+          }
+      );
+  }
+  ```
 
-Abrir cualquier URL de material en producción (o localmente) y pasar la URL por `https://search.google.com/test/rich-results`. Esperar que detecte "LearningResource" y "Breadcrumb".
+- [ ] **5.1.3** Reemplazar `getTipoAttribute()` (líneas 71–86):
 
-Alternativa local: ver source y buscar `application/ld+json`.
+  ```php
+  // ANTES
+  protected function getTipoAttribute()
+  {
+      if ($this->type == 'html') {
+          return 'Presentación HTML';
+      }
+      if ($this->type == 'other') {
+          return 'Otros';
+      }
+      if ($this->type == 'pdf') {
+          return 'PDF';
+      }
+      return ucfirst($this->type);
+  }
 
-- [ ] **Paso 3: Commit**
+  // DESPUÉS
+  protected function tipo(): Attribute
+  {
+      return Attribute::make(
+          get: fn (): string => match ($this->type) {
+              'html'  => 'Presentación HTML',
+              'other' => 'Otros',
+              'pdf'   => 'PDF',
+              default => ucfirst($this->type),
+          }
+      );
+  }
+  ```
 
-```bash
-git add resources/views/materiales/show.blade.php
-git commit -m "feat(seo): add LearningResource and BreadcrumbList JSON-LD to material pages"
-```
+- [ ] **5.1.4** Reemplazar `getNivelAttribute()` (líneas 88–101):
 
----
+  ```php
+  // ANTES
+  protected function getNivelAttribute()
+  {
+      $map = [
+          'colegio' => ['text-bg-warning', 'Colegio'],
+          'cft' => ['text-bg-primary', 'CFT'],
+          'particulares' => ['text-bg-success', 'Particulares'],
+          'universidad' => ['text-bg-danger',  'Universidad'],
+          'instituto' => ['text-bg-secondary', 'Instituto'],
+      ];
+      [$class, $label] = $map[$this->level] ?? ['text-bg-info', strtoupper($this->level)];
+      return '<span class="badge '.$class.'">'.$label.'</span>';
+  }
 
-## Tarea 6: Sitemap — `<lastmod>` en páginas estáticas
+  // DESPUÉS
+  protected function nivel(): Attribute
+  {
+      return Attribute::make(
+          get: function (): string {
+              $map = [
+                  'colegio'      => ['text-bg-warning',  'Colegio'],
+                  'cft'          => ['text-bg-primary',   'CFT'],
+                  'particulares' => ['text-bg-success',   'Particulares'],
+                  'universidad'  => ['text-bg-danger',    'Universidad'],
+                  'instituto'    => ['text-bg-secondary', 'Instituto'],
+              ];
+              [$class, $label] = $map[$this->level] ?? ['text-bg-info', strtoupper($this->level)];
+              return '<span class="badge '.$class.'">'.$label.'</span>';
+          }
+      );
+  }
+  ```
 
-**Archivos:**
-- Modificar: `resources/views/sitemap.blade.php`
-- Modificar: `app/Http/Controllers/PageController.php`
+  > **Compatibilidad en templates:** `Attribute::make()` convierte el nombre camelCase
+  > del método a snake_case automáticamente: `sizeFormatted()` → `$material->size_formatted`,
+  > `tipo()` → `$material->tipo`, `nivel()` → `$material->nivel`.
+  > **No se requieren cambios en Blade, Livewire ni Filament.**
 
-- [ ] **Paso 1: Pasar fecha del último material al sitemap**
+### 5.2 Breaking changes adicionales de la Fase 1 [CONDICIONAL]
 
-En `app/Http/Controllers/PageController.php`, modificar `sitemap()`:
+> Completar después de la Fase 1. Agregar un sub-paso por cada breaking change que aplique,
+> con archivo afectado, cambio exacto y referencia a la sección de la guía oficial.
 
-```php
-public function sitemap()
-{
-    $materials = Material::where('published', true)
-        ->select('code', 'updated_at')
-        ->latest()
-        ->get();
+- [ ] **5.2.x** _(completar tras Fase 1)_
 
-    $lastMaterialUpdate = $materials->first()?->updated_at ?? now();
-
-    return response()
-        ->view('sitemap', compact('materials', 'lastMaterialUpdate'))
-        ->header('Content-Type', 'application/xml');
-}
-```
-
-- [ ] **Paso 2: Añadir `<lastmod>` en páginas estáticas del sitemap**
-
-En `resources/views/sitemap.blade.php`:
-
-```xml
-<url>
-    <loc>{{ url('/') }}</loc>
-    <lastmod>{{ $lastMaterialUpdate->toAtomString() }}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-</url>
-<url>
-    <loc>{{ route('materials.index') }}</loc>
-    <lastmod>{{ $lastMaterialUpdate->toAtomString() }}</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
-</url>
-<url>
-    <loc>{{ route('about') }}</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-</url>
-<url>
-    <loc>{{ route('services') }}</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-</url>
-<url>
-    <loc>{{ route('contact') }}</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-```
-
-- [ ] **Paso 3: Verificar**
-
-```bash
-curl http://localhost:8000/sitemap.xml
-```
-
-Verificar que las URLs de `/` y `/materiales` tienen `<lastmod>` con fecha válida.
-
-- [ ] **Paso 4: Commit**
-
-```bash
-git add resources/views/sitemap.blade.php \
-        app/Http/Controllers/PageController.php
-git commit -m "feat(seo): add lastmod to static pages in sitemap"
-```
+  Áreas a verificar durante la Fase 1:
+  - `Route::view()` y `->where()` — usados en `routes/web.php`
+  - `Paginator::useBootstrapFive()` — en `app/Providers/AppServiceProvider.php`
+  - `$request->string()` y `$request->integer()` — en `MaterialController::index()`
+  - `abort_unless()` — en `MaterialController`
+  - `Str::slug()` — en `MaterialResource`
 
 ---
 
-## Checklist final
+## Fase 6 — Pipeline de assets
 
-- [ ] Revisar con `<Ctrl+U>` (source) en cada página que description, canonical y OG están presentes
-- [ ] Validar home y un material en https://search.google.com/test/rich-results
-- [ ] Verificar sitemap.xml en producción: https://profenicolas.cl/sitemap.xml
-- [ ] Verificar robots.txt sigue apuntando al sitemap correcto
+- [ ] **6.1** Verificar si hay nueva versión de `laravel-vite-plugin` requerida para L13:
+  `https://github.com/laravel/vite-plugin/releases`
+
+  Si es necesario, actualizar el constraint en `package.json`:
+  ```bash
+  npm install
+  ```
+
+- [ ] **6.2** Build de producción:
+  ```bash
+  npm run build
+  ```
+  Verificar que `public/build/manifest.json` existe con la entrada de `resources/js/app.js`.
+
+---
+
+## Fase 7 — Testing
+
+- [ ] **7.1** Limpiar cachés:
+  ```bash
+  php artisan config:clear && php artisan route:clear && php artisan view:clear && php artisan cache:clear
+  ```
+
+- [ ] **7.2** Suite completa de tests:
+  ```bash
+  composer test
+  ```
+  Todos los tests deben pasar (AboutTest, ContactFormTest, HomeTest, LayoutTest,
+  MaterialShowTest, MaterialsIndexTest, MaterialsListingTest, MaterialsSearchTest, etc.)
+
+- [ ] **7.3** Lint de código:
+  ```bash
+  ./vendor/bin/pint --test
+  ```
+  Si hay violaciones: `./vendor/bin/pint`
+
+- [ ] **7.4** Verificación manual del panel Filament (`php artisan serve`):
+  - [ ] Login en `/adminprofe` funciona
+  - [ ] Lista de materiales carga
+  - [ ] Crear material nuevo funciona (upload + generación de código)
+  - [ ] Editar material existente funciona
+
+- [ ] **7.5** Verificación de Browsershot (PDF):
+  ```bash
+  php artisan tinker
+  >>> \Spatie\Browsershot\Browsershot::url('https://example.com')->html();
+  ```
+  Si falla con "Chromium not found", verificar path del binario (instalado por Puppeteer via npm).
+
+---
+
+## Fase 8 — Checklist pre-merge
+
+- [ ] `composer test` — todos los tests en verde
+- [ ] `./vendor/bin/pint --test` — sin violaciones de estilo
+- [ ] `npm run build` — build limpio
+- [ ] `php artisan route:list` — 8 rutas esperadas, sin errores
+- [ ] `php artisan migrate --pretend` — sin migraciones inesperadas
+- [ ] Panel Filament funciona (Fase 7.4 completada)
+- [ ] Generación de PDF funciona (Fase 7.5 completada)
+- [ ] Los tres accessors de `Material.php` migrados (pasos 5.1.2–5.1.4 completados)
+
+---
+
+## Fase 9 — Deploy a producción (Laravel Forge)
+
+- [ ] **9.1** Actualizar PHP en Forge si L13 lo requiere:
+  1. Forge → servidor → PHP → Instalar PHP 8.3
+  2. Actualizar versión PHP del sitio
+  3. Actualizar versión PHP CLI de los scripts de Forge
+  4. Verificar que el sitio carga antes de continuar
+
+- [ ] **9.2** Merge y push:
+  ```bash
+  git checkout main
+  git merge feature/upgrade-laravel-13
+  git push origin main
+  ```
+
+- [ ] **9.3** Verificar que el script de deploy en Forge incluye:
+  ```bash
+  composer install --no-dev --optimize-autoloader
+  php artisan migrate --force
+  php artisan config:cache
+  php artisan route:cache
+  php artisan view:cache
+  php artisan filament:upgrade
+  ```
+
+- [ ] **9.4** Smoke test post-deploy:
+  - [ ] `https://profenicolas.cl` carga
+  - [ ] `https://profenicolas.cl/materiales` carga y búsqueda funciona
+  - [ ] `https://profenicolas.cl/adminprofe` carga
+  - [ ] Página de detalle de un material carga
+  - [ ] PDF alumno funciona: `/materiales/{code}/pdf/alumno`
+  - [ ] Health check: `GET /up` devuelve HTTP 200
+
+---
+
+## Plan de rollback
+
+Si el upgrade genera fallas críticas en producción:
+
+1. Revertir en Forge al release anterior (Forge mantiene los últimos N deployments).
+2. Si PHP fue actualizado, revertir la versión PHP del sitio a 8.2 en Forge.
+3. El tag `pre-laravel-13-upgrade` marca el commit exacto de rollback:
+   ```bash
+   git checkout pre-laravel-13-upgrade
+   ```
+
+---
+
+## Mapa de archivos
+
+| Archivo | Fase | Tipo de cambio |
+|---|---|---|
+| `composer.json` | 3 | Constraints de PHP + paquetes |
+| `app/Models/Material.php` | 5.1 | Migración de accessors (confirmado) |
+| `bootstrap/app.php` | 4.1 | Verificar / actualizar si es necesario |
+| `phpunit.xml` | 4.3 | URL del schema si PHPUnit subió de major |
+| `config/*.php` | 4.2 | Nuevas keys según investigación |
+| `package.json` | 6.1 | Bump de `laravel-vite-plugin` si es necesario |
+| `app/Providers/AppServiceProvider.php` | 5.2 | Verificar que `Paginator::useBootstrapFive()` existe |
