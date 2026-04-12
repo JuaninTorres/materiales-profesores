@@ -331,7 +331,7 @@ document.querySelectorAll('.js-copy-link').forEach(btn => {
   }
 @endphp
 <script type="application/ld+json">
-{{ json_encode($jsonData) }}
+{!! json_encode($jsonData, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}
 </script>
 @endpush
 
