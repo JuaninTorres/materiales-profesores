@@ -64,7 +64,25 @@
       "Bash(curl -s \"http://localhost:8000/?t=$\\(date +%s\\)\")",
       "Bash(curl -s http://localhost:8000/sitemap.xml)",
       "Bash(git reset:*)",
-      "Bash(./vendor/bin/pint app/Http/Controllers/MaterialController.php tests/Feature/LayoutTest.php tests/Feature/MaterialShowTest.php --verbose)"
+      "Bash(./vendor/bin/pint app/Http/Controllers/MaterialController.php tests/Feature/LayoutTest.php tests/Feature/MaterialShowTest.php --verbose)",
+      "Bash(git -C /Users/juan/Codes/materiales-profesores log --oneline -10)",
+      "Bash(git -C /Users/juan/Codes/materiales-profesores branch -a)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:filamentphp.com)",
+      "WebSearch",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(ssh -i /Users/juan/.ssh/id_rsa_profenicolas root@137.184.242.154 \"php -v\")",
+      "Bash(ssh -i /Users/juan/.ssh/id_rsa_profenicolas forge@137.184.242.154 \"php -v\")",
+      "Bash(ssh -i /Users/juan/.ssh/id_ed25519 root@137.184.242.154 \"php -v\")",
+      "Bash(ssh -i /Users/juan/.ssh/id_rsa root@137.184.242.154 \"php -v\")",
+      "Bash(php -v)",
+      "Bash(composer --version)",
+      "Bash(git tag:*)",
+      "Bash(composer update:*)",
+      "Bash(tee /tmp/composer-update.log)",
+      "Bash(./vendor/bin/phpunit --version)",
+      "Bash(./vendor/bin/pint app/Filament/Resources/MaterialResource.php)",
+      "Bash(php -l app/Filament/Resources/MaterialResource.php)"
     ]
   }
 }
