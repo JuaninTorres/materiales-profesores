@@ -239,6 +239,51 @@
       renderQuestion();
     };
 
+    // ── Modo impresión: renderizar todas las preguntas en estático ──
+    const printModo = new URLSearchParams(window.location.search).get('modo');
+    if (printModo) {
+      renderAllForPrint(printModo);
+      return;
+    }
+
+    function renderAllForPrint(modo) {
+      container.innerHTML = '';
+      const letters = ['A', 'B', 'C', 'D', 'E'];
+      QUIZ.forEach((data, qIdx) => {
+        const pregunta     = data.pregunta     || data.q    || '';
+        const alternativas = data.alternativas || data.opts || [];
+        const correcta     = data.correcta !== undefined ? data.correcta : data.ans;
+        const explicacion  = data.explicacion  || data.explanation || '';
+
+        const qEl = document.createElement('div');
+        qEl.style.marginBottom = '1rem';
+        qEl.innerHTML = `
+          <p style="font-weight:600;font-size:0.95rem;margin-bottom:0.5rem">
+            Ejercicio ${qIdx + 1}: ${pregunta}
+          </p>
+          <div>
+            ${alternativas.map((opt, i) => `
+              <div class="option-item ${modo === 'docente' && i === correcta ? 'correct' : ''}"
+                   style="cursor:default">
+                <span class="badge me-1" style="background:var(--color-primary)">${letters[i]}</span>
+                ${opt}
+              </div>
+            `).join('')}
+          </div>
+          ${modo === 'docente' && explicacion ? `
+            <div class="solution-box show" style="display:block;margin-top:0.5rem">
+              ${explicacion}
+            </div>
+          ` : ''}
+        `;
+        container.appendChild(qEl);
+      });
+
+      if (window.MathJax && MathJax.typesetPromise) {
+        MathJax.typesetPromise([container]).catch(() => {});
+      }
+    }
+
     // ── Iniciar ──
     renderQuestion();
   }

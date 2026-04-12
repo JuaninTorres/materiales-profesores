@@ -58,3 +58,56 @@ function toggleSolution(btn, solutionId) {
 }
 
 updateCounter();
+
+// ── Modo impresión (alumno / docente) ──────────────────────
+(function () {
+  const modo = new URLSearchParams(window.location.search).get('modo');
+  if (!modo) return;
+
+  document.body.classList.add('modo-' + modo);
+
+  // Desbloquear el layout de pantalla completa para que todos los slides
+  // sean visibles (Browsershot captura en screen media, no en print).
+  document.body.style.overflow  = 'visible';
+  document.body.style.height    = 'auto';
+
+  const container = document.querySelector('.presentation-container');
+  if (container) container.style.height = 'auto';
+
+  // Ocultar controles de navegación
+  const nav = document.querySelector('.navigation');
+  if (nav) nav.style.display = 'none';
+
+  const progressBar = document.querySelector('.progress-bar-container');
+  if (progressBar) progressBar.style.display = 'none';
+
+  // Mostrar todos los slides con layout vertical
+  slides.forEach(s => {
+    s.style.display   = 'flex';
+    s.style.height    = 'auto';
+    s.style.minHeight = '100vh';
+    s.style.overflow  = 'visible';
+  });
+
+  // Docente: revelar todos los solution-boxes
+  if (modo === 'docente') {
+    document.querySelectorAll('.solution-box').forEach(el => {
+      el.classList.add('show');
+      el.style.display = 'block';
+    });
+  }
+
+  // Retipografiar todos los slides con MathJax
+  function typesetAll() {
+    if (window.MathJax && MathJax.typesetPromise) {
+      MathJax.typesetPromise(Array.from(slides)).catch(() => {});
+    }
+  }
+  if (window.MathJax) {
+    if (MathJax.startup && MathJax.startup.promise) {
+      MathJax.startup.promise.then(typesetAll);
+    } else {
+      typesetAll();
+    }
+  }
+})();

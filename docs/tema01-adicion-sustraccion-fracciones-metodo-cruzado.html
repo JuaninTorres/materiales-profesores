@@ -1,0 +1,729 @@
+<!-- MATERIAL_META
+title: Adición y Sustracción de Fracciones — Método Cruzado
+description: ¿Sumar fracciones con denominadores distintos te parece complicado? 🤔 ¡El método cruzado lo hace súper directo! Aprende esta poderosa técnica para sumar y restar fracciones sin buscar el MCM. ✏️🔢
+subject: Matemática
+level: colegio
+course: 1ro Medio
+year: 2026
+semester: 1
+unit: Unidad 1: Números y Operaciones
+tema: Tema 1: Adición y Sustracción de Fracciones
+tags: [fracciones, adición, sustracción, método cruzado, operaciones]
+-->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adición y Sustracción de Fracciones — Método Cruzado · 1ro Medio</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" rel="stylesheet">
+  <script>
+    MathJax = {
+      tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$$'],['\\[','\\]']] },
+      chtml: { scale: 1.2 }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://profenicolas.cl/assets_presentaciones/base.css">
+
+  <style>
+    :root {
+      --color-primary: #6A1B9A;
+      --color-secondary: #D52B1E;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="progress-bar-container">
+    <div class="progress-sections" id="progress-sections">
+      <div class="progress-section" title="Introducción"></div>
+      <div class="progress-connector"></div>
+      <div class="progress-section" title="El Método Cruzado"></div>
+      <div class="progress-connector"></div>
+      <div class="progress-section" title="Adición"></div>
+      <div class="progress-connector"></div>
+      <div class="progress-section" title="Sustracción"></div>
+      <div class="progress-connector"></div>
+      <div class="progress-section" title="Ejercicios"></div>
+      <div class="progress-connector"></div>
+      <div class="progress-section" title="Resumen"></div>
+    </div>
+  </div>
+
+<div class="presentation-container">
+
+  <!-- ============================================================ -->
+  <!-- SECCIÓN 0 — INTRODUCCIÓN                                     -->
+  <!-- ============================================================ -->
+
+  <!-- SLIDE 1: PORTADA -->
+  <div class="slide portada active" data-section="0">
+    <div class="floating-formulas">
+      <span class="float-formula" style="left:8%;animation-delay:0s">\(\dfrac{a}{b}+\dfrac{c}{d}\)</span>
+      <span class="float-formula" style="left:25%;animation-delay:2s">\(\dfrac{a \cdot d + b \cdot c}{b \cdot d}\)</span>
+      <span class="float-formula" style="left:50%;animation-delay:4s">\(\dfrac{1}{3}+\dfrac{1}{4}\)</span>
+      <span class="float-formula" style="left:70%;animation-delay:6s">\(\dfrac{7}{12}\)</span>
+      <span class="float-formula" style="left:15%;animation-delay:8s">\(\dfrac{3}{4}-\dfrac{1}{3}\)</span>
+      <span class="float-formula" style="left:60%;animation-delay:1s">\(\dfrac{5}{12}\)</span>
+    </div>
+    <div style="position:relative;z-index:1">
+      <div class="cover-badge">1ro Medio · Unidad 1</div>
+      <h1>Adición y Sustracción de Fracciones</h1>
+      <p class="subtitle">Método Cruzado — Números y Operaciones</p>
+      <p class="teacher-name">Profesor Nicolás González · profenicolas.cl</p>
+    </div>
+    <div class="footer">
+      <span>Prof. Nicolás González</span>
+      <span>1ro Medio — 2026</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 2: OBJETIVOS -->
+  <div class="slide" data-section="0">
+    <div class="slide-header">
+      <h2 class="slide-title"><i class="bi bi-bullseye me-2"></i>Objetivos de Aprendizaje</h2>
+    </div>
+    <div class="slide-content">
+      <div class="objective-box">
+        <ul style="line-height:2.2">
+          <li>Comprender la necesidad de un método directo para operar fracciones con denominadores distintos</li>
+          <li>Aplicar el <strong>método cruzado</strong> para <strong>sumar</strong> fracciones de diferente denominador</li>
+          <li>Aplicar el <strong>método cruzado</strong> para <strong>restar</strong> fracciones de diferente denominador</li>
+          <li>Simplificar el resultado utilizando el MCD cuando sea posible</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer">
+      <span>Prof. Nicolás González</span>
+      <span>Adición y Sustracción — Método Cruzado</span>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- SECCIÓN 1 — EL MÉTODO CRUZADO                               -->
+  <!-- ============================================================ -->
+
+  <!-- SLIDE 3: SEPARADOR -->
+  <div class="slide section-divider" data-section="1">
+    <div>
+      <div class="section-number">01</div>
+      <h2>El Método Cruzado</h2>
+      <p class="section-desc">Una técnica directa para operar fracciones con denominadores distintos</p>
+    </div>
+    <div class="footer">
+      <span>Prof. Nicolás González</span>
+      <span>Adición y Sustracción — Método Cruzado</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 4: ¿POR QUÉ EL MÉTODO CRUZADO? -->
+  <div class="slide" data-section="1">
+    <div class="slide-header">
+      <h2 class="slide-title"><i class="bi bi-question-circle me-2"></i>¿Por qué el Método Cruzado?</h2>
+    </div>
+    <div class="slide-content">
+      <div class="note-box mb-4">
+        <p>Para sumar fracciones con <strong>distinto denominador</strong>, necesitamos un denominador común. Buscar el MCM puede ser tedioso...</p>
+        <p class="mt-3 text-center fs-4">\(\dfrac{2}{5} + \dfrac{1}{3} = \; ?\)</p>
+        <p class="mt-3">MCM(5, 3) = 15 → convertir cada fracción → recién operar. Son varios pasos 😅</p>
+      </div>
+      <div class="definition-box">
+        <p><strong>El método cruzado</strong> permite sumar o restar fracciones <em>directamente</em>, sin buscar el MCM, mediante una multiplicación en forma de "×".</p>
+        <p class="mt-2">Es rápido, visual y fácil de recordar. ✅</p>
+      </div>
+    </div>
+    <div class="footer">
+      <span>Prof. Nicolás González</span>
+      <span>Adición y Sustracción — Método Cruzado</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 5: LA REGLA GENERAL -->
+  <div class="slide" data-section="1">
+    <div class="slide-header">
+      <h2 class="slide-title"><i class="bi bi-diagram-3 me-2"></i>La Regla del Método Cruzado</h2>
+    </div>
+    <div class="slide-content">
+      <div class="method-box mb-4">
+        <p class="mb-3"><strong>Suma de fracciones:</strong></p>
+        <div class="formula-highlight text-center">
+          \[\dfrac{a}{b} + \dfrac{c}{d} = \dfrac{a \cdot d \;+\; b \cdot c}{b \cdot d}\]
+        </div>
+        <p class="mt-4 mb-3"><strong>Resta de fracciones:</strong></p>
+        <div class="formula-highlight text-center">
+          \[\dfrac{a}{b} - \dfrac{c}{d} = \dfrac{a \cdot d \;-\; b \cdot c}{b \cdot d}\]
+        </div>
+      </div>
+      <div class="note-box">
+        <p><i class="bi bi-lightbulb me-1"></i> <strong>El cruce:</strong> el numerador \(a\) se multiplica por el denominador \(d\), y el denominador \(b\) se multiplica por el numerador \(c\). Los denominadores siempre se multiplican entre sí.</p>
+      </div>
+    </div>
+    <div class="footer">
+      <span>Prof. Nicolás González</span>
+      <span>Adición y Sustracción — Método Cruzado</span>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- SECCIÓN 2 — ADICIÓN DE FRACCIONES                           -->
+  <!-- ============================================================ -->
+
+  <!-- SLIDE 6: SEPARADOR -->
+  <div class="slide section-divider" data-section="2">
+    <div>
+      <div class="section-number">02</div>
+      <h2>Adición de Fracciones</h2>
+      <p class="section-desc">Aplicando el método cruzado en sumas paso a paso</p>
+    </div>
+    <div class="footer">
+      <span>Prof. Nicolás González</span>
+      <span>Adición y Sustracción — Método Cruzado</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 7: EJEMPLO 1 — SUMA 1/3 + 1/4 -->
+  <div class="slide" data-section="2">
+    <div class="slide-header">
+      <h2 class="slide-title"><i class="bi bi-1-circle me-2"></i>Ejemplo 1 — Calcular \(\dfrac{1}{3} + \dfrac{1}{4}\)</h2>
+    </div>
+    <div class="slide-content">
+      <div class="example-box mb-3">
+        <div class="step">
+          <div class="step-number">1</div>
+          <div>Identificamos los valores: \(a = 1,\; b = 3,\; c = 1,\; d = 4\)</div>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <div>Aplicamos el método cruzado:
+            \[\dfrac{1}{3} + \dfrac{1}{4} = \dfrac{1 \cdot 4 \;+\; 3 \cdot 1}{3 \cdot 4}\]
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <div>Calculamos numerador y denominador:
+            \[= \dfrac{4 + 3}{12} = \dfrac{7}{12}\]
+          </div>
+        </div>
+      </div>
+      <div class="formula-box text-center">
+        \[\dfrac{1}{3} + \dfrac{1}{4} = \dfrac{7}{12}\]
+      </div>
+      <div class="note-box mt-3">
+        <p><i class="bi bi-info-circle me-1"></i> MCD(7, 12) = 1 → la fracción ya está en su mínima expresión.</p>
+      </div>
+    </div>
+    <div class="footer">
+      <span>Prof. Nicolás González</span>
+      <span>Adición y Sustracción — Método Cruzado</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 8: EJEMPLO 2 — SUMA 2/5 + 1/3 -->
+  <div class="slide" data-section="2">
+    <div class="slide-header">
+      <h2 class="slide-title"><i class="bi bi-2-circle me-2"></i>Ejemplo 2 — Calcular \(\dfrac{2}{5} + \dfrac{1}{3}\)</h2>
+    </div>
+    <div class="slide-content">
+      <div class="example-box mb-3">
+        <div class="step">
+          <div class="step-number">1</div>
+          <div>Identificamos los valores: \(a = 2,\; b = 5,\; c = 1,\; d = 3\)</div>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <div>Aplicamos el método cruzado:
+            \[\dfrac{2}{5} + \dfrac{1}{3} = \dfrac{2 \cdot 3 \;+\; 5 \cdot 1}{5 \cdot 3}\]
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <div>
+            \[= \dfrac{6 + 5}{15} = \dfrac{11}{15}\]
+          </div>
+        </div>
+      </div>
+      <div class="formula-box text-center">
+        \[\dfrac{2}{5} + \dfrac{1}{3} = \dfrac{11}{15}\]
+      </div>
+      <div class="note-box mt-3">
+        <p><i class="bi bi-check-circle me-1"></i> MCD(11, 15) = 1 → mínima expresión. ✅</p>
+      </div>
+    </div>
+    <div class="footer">
+      <span>Prof. Nicolás González</span>
+      <span>Adición y Sustracción — Método Cruzado</span>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- SECCIÓN 3 — SUSTRACCIÓN DE FRACCIONES                       -->
+  <!-- ============================================================ -->
+
+  <!-- SLIDE 9: SEPARADOR -->
+  <div class="slide section-divider" data-section="3">
+    <div>
+      <div class="section-number">03</div>
+      <h2>Sustracción de Fracciones</h2>
+      <p class="section-desc">El método cruzado también funciona para restar — ¡con una diferencia clave!</p>
+    </div>
+    <div class="footer">
+      <span>Prof. Nicolás González</span>
+      <span>Adición y Sustracción — Método Cruzado</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 10: REGLA DE RESTA -->
+  <div class="slide" data-section="3">
+    <div class="slide-header">
+      <h2 class="slide-title"><i class="bi bi-dash-circle me-2"></i>Resta con el Método Cruzado</h2>
+    </div>
+    <div class="slide-content">
+      <div class="method-box mb-4">
+        <p class="mb-3">La única diferencia con la suma es el signo del numerador:</p>
+        <div class="formula-highlight text-center">
+          \[\dfrac{a}{b} - \dfrac{c}{d} = \dfrac{a \cdot d \;-\; b \cdot c}{b \cdot d}\]
+        </div>
+      </div>
+      <div class="note-box">
+        <p><i class="bi bi-exclamation-triangle me-1"></i> <strong>¡Ojo con el orden!</strong> En la resta el orden importa. Si invertimos los cruces, el resultado cambia de signo:</p>
+        <ul class="mt-2" style="line-height:2">
+          <li>\(\dfrac{a}{b} - \dfrac{c}{d} = \dfrac{\mathbf{a \cdot d} - b \cdot c}{b \cdot d}\) ✅ — el primer cruce (\(a \cdot d\)) va primero</li>
+          <li>\(\dfrac{a}{b} - \dfrac{c}{d} \neq \dfrac{b \cdot c - a \cdot d}{b \cdot d}\) ❌ — orden invertido da resultado negativo</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer">
+      <span>Prof. Nicolás González</span>
+      <span>Adición y Sustracción — Método Cruzado</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 11: EJEMPLO 3 — RESTA 3/4 - 1/3 -->
+  <div class="slide" data-section="3">
+    <div class="slide-header">
+      <h2 class="slide-title"><i class="bi bi-3-circle me-2"></i>Ejemplo 3 — Calcular \(\dfrac{3}{4} - \dfrac{1}{3}\)</h2>
+    </div>
+    <div class="slide-content">
+      <div class="example-box mb-3">
+        <div class="step">
+          <div class="step-number">1</div>
+          <div>Identificamos los valores: \(a = 3,\; b = 4,\; c = 1,\; d = 3\)</div>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <div>Aplicamos el método cruzado:
+            \[\dfrac{3}{4} - \dfrac{1}{3} = \dfrac{3 \cdot 3 \;-\; 4 \cdot 1}{4 \cdot 3}\]
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <div>
+            \[= \dfrac{9 - 4}{12} = \dfrac{5}{12}\]
+          </div>
+        </div>
+      </div>
+      <div class="formula-box text-center">
+        \[\dfrac{3}{4} - \dfrac{1}{3} = \dfrac{5}{12}\]
+      </div>
+      <div class="note-box mt-3">
+        <p><i class="bi bi-info-circle me-1"></i> MCD(5, 12) = 1 → no se simplifica.</p>
+      </div>
+    </div>
+    <div class="footer">
+      <span>Prof. Nicolás González</span>
+      <span>Adición y Sustracción — Método Cruzado</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 12: EJEMPLO 4 — RESTA CON SIMPLIFICACIÓN 5/6 - 1/4 -->
+  <div class="slide" data-section="3">
+    <div class="slide-header">
+      <h2 class="slide-title"><i class="bi bi-4-circle me-2"></i>Ejemplo 4 — Calcular \(\dfrac{5}{6} - \dfrac{1}{4}\) y simplificar</h2>
+    </div>
+    <div class="slide-content">
+      <div class="example-box mb-3">
+        <div class="step">
+          <div class="step-number">1</div>
+          <div>Identificamos los valores: \(a = 5,\; b = 6,\; c = 1,\; d = 4\)</div>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <div>Aplicamos el método cruzado:
+            \[\dfrac{5}{6} - \dfrac{1}{4} = \dfrac{5 \cdot 4 \;-\; 6 \cdot 1}{6 \cdot 4} = \dfrac{20 - 6}{24} = \dfrac{14}{24}\]
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <div>Simplificamos — MCD(14, 24) = 2:
+            \[\dfrac{14}{24} = \dfrac{14 \div 2}{24 \div 2} = \dfrac{7}{12}\]
+          </div>
+        </div>
+      </div>
+      <div class="formula-box text-center">
+        \[\dfrac{5}{6} - \dfrac{1}{4} = \dfrac{14}{24} = \dfrac{7}{12}\]
+      </div>
+    </div>
+    <div class="footer">
+      <span>Prof. Nicolás González</span>
+      <span>Adición y Sustracción — Método Cruzado</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 13: ¿CUÁNDO SIMPLIFICAR? -->
+  <div class="slide" data-section="3">
+    <div class="slide-header">
+      <h2 class="slide-title"><i class="bi bi-funnel me-2"></i>¿Cuándo simplificar el resultado?</h2>
+    </div>
+    <div class="slide-content">
+      <div class="definition-box mb-3">
+        <p>Luego de aplicar el método cruzado, <strong>siempre verifica</strong> si el resultado puede simplificarse:</p>
+        <ol class="mt-2" style="line-height:2.2">
+          <li>Calcula el MCD entre numerador y denominador</li>
+          <li>Si MCD &gt; 1 → divide ambos por el MCD</li>
+          <li>Si MCD = 1 → la fracción ya está en mínima expresión</li>
+        </ol>
+      </div>
+      <div class="example-box">
+        <p><strong>Ejemplo rápido:</strong> \(\dfrac{1}{2} + \dfrac{1}{4}\)</p>
+        \[\dfrac{1 \cdot 4 + 2 \cdot 1}{2 \cdot 4} = \dfrac{4 + 2}{8} = \dfrac{6}{8}\]
+        <p class="mt-2">MCD(6, 8) = 2 &nbsp;→&nbsp; \(\dfrac{6}{8} = \dfrac{3}{4}\) ✅</p>
+      </div>
+    </div>
+    <div class="footer">
+      <span>Prof. Nicolás González</span>
+      <span>Adición y Sustracción — Método Cruzado</span>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- SECCIÓN 4 — EJERCICIOS                                       -->
+  <!-- ============================================================ -->
+
+  <!-- SLIDE SEPARADOR EJERCICIOS -->
+  <div class="slide section-divider ejercicios" data-section="4">
+    <div>
+      <div class="section-number">✏️</div>
+      <h2>Ejercicios</h2>
+      <p class="section-desc">Pon a prueba lo que aprendiste</p>
+    </div>
+    <div class="footer">
+      <span>Prof. Nicolás González</span>
+      <span>Adición y Sustracción — Método Cruzado</span>
+    </div>
+  </div>
+
+  <!-- EJERCICIO 1 -->
+  <div class="slide" data-section="4">
+    <div class="slide-header">
+      <h2 class="slide-title"><i class="bi bi-pencil-square me-2"></i>Ejercicio 1 de 7</h2>
+    </div>
+    <div class="slide-content">
+      <div class="exercise-box mb-3">
+        <p>Calcula usando el método cruzado:</p>
+        \[\dfrac{1}{2} + \dfrac{1}{3} = \; ?\]
+      </div>
+      <div class="options-group">
+        <div class="option-item" onclick="selectOpt(this)"><span class="badge me-2" style="background:var(--color-primary)">A</span>\(\dfrac{2}{5}\)</div>
+        <div class="option-item" onclick="selectOpt(this)"><span class="badge me-2" style="background:var(--color-primary)">B</span>\(\dfrac{2}{6}\)</div>
+        <div class="option-item" onclick="selectOpt(this)"><span class="badge me-2" style="background:var(--color-primary)">C</span>\(\dfrac{5}{6}\)</div>
+        <div class="option-item" onclick="selectOpt(this)"><span class="badge me-2" style="background:var(--color-primary)">D</span>\(\dfrac{3}{5}\)</div>
+      </div>
+      <div class="mt-3">
+        <button class="btn-verificar btn btn-sm" style="background:var(--color-primary);color:white" disabled
+                onclick="checkOpt(this, 2, 'Método cruzado: (1×3 + 2×1) / (2×3) = 5/6')">Verificar</button>
+      </div>
+      <div class="feedback-box mt-3"></div>
+    </div>
+    <div class="footer">
+      <span>Prof. Nicolás González</span>
+      <span>Adición y Sustracción — Método Cruzado</span>
+    </div>
+  </div>
+
+  <!-- EJERCICIO 2 -->
+  <div class="slide" data-section="4">
+    <div class="slide-header">
+      <h2 class="slide-title"><i class="bi bi-pencil-square me-2"></i>Ejercicio 2 de 7</h2>
+    </div>
+    <div class="slide-content">
+      <div class="exercise-box mb-3">
+        <p>Calcula usando el método cruzado:</p>
+        \[\dfrac{3}{4} - \dfrac{1}{2} = \; ?\]
+      </div>
+      <div class="options-group">
+        <div class="option-item" onclick="selectOpt(this)"><span class="badge me-2" style="background:var(--color-primary)">A</span>\(1\)</div>
+        <div class="option-item" onclick="selectOpt(this)"><span class="badge me-2" style="background:var(--color-primary)">B</span>\(\dfrac{1}{4}\)</div>
+        <div class="option-item" onclick="selectOpt(this)"><span class="badge me-2" style="background:var(--color-primary)">C</span>\(\dfrac{1}{8}\)</div>
+        <div class="option-item" onclick="selectOpt(this)"><span class="badge me-2" style="background:var(--color-primary)">D</span>\(\dfrac{1}{2}\)</div>
+      </div>
+      <div class="mt-3">
+        <button class="btn-verificar btn btn-sm" style="background:var(--color-primary);color:white" disabled
+                onclick="checkOpt(this, 1, 'Método cruzado: (3×2 − 4×1) / (4×2) = 2/8 = 1/4')">Verificar</button>
+      </div>
+      <div class="feedback-box mt-3"></div>
+    </div>
+    <div class="footer">
+      <span>Prof. Nicolás González</span>
+      <span>Adición y Sustracción — Método Cruzado</span>
+    </div>
+  </div>
+
+  <!-- EJERCICIO 3 -->
+  <div class="slide" data-section="4">
+    <div class="slide-header">
+      <h2 class="slide-title"><i class="bi bi-pencil-square me-2"></i>Ejercicio 3 de 7</h2>
+    </div>
+    <div class="slide-content">
+      <div class="exercise-box mb-3">
+        <p>Calcula usando el método cruzado:</p>
+        \[\dfrac{2}{3} + \dfrac{1}{5} = \; ?\]
+      </div>
+      <div class="options-group">
+        <div class="option-item" onclick="selectOpt(this)"><span class="badge me-2" style="background:var(--color-primary)">A</span>\(\dfrac{3}{8}\)</div>
+        <div class="option-item" onclick="selectOpt(this)"><span class="badge me-2" style="background:var(--color-primary)">B</span>\(\dfrac{11}{15}\)</div>
+        <div class="option-item" onclick="selectOpt(this)"><span class="badge me-2" style="background:var(--color-primary)">C</span>\(\dfrac{13}{15}\)</div>
+        <div class="option-item" onclick="selectOpt(this)"><span class="badge me-2" style="background:var(--color-primary)">D</span>\(\dfrac{2}{15}\)</div>
+      </div>
+      <div class="mt-3">
+        <button class="btn-verificar btn btn-sm" style="background:var(--color-primary);color:white" disabled
+                onclick="checkOpt(this, 2, 'Método cruzado: (2×5 + 3×1) / (3×5) = 13/15')">Verificar</button>
+      </div>
+      <div class="feedback-box mt-3"></div>
+    </div>
+    <div class="footer">
+      <span>Prof. Nicolás González</span>
+      <span>Adición y Sustracción — Método Cruzado</span>
+    </div>
+  </div>
+
+  <!-- EJERCICIO 4 -->
+  <div class="slide" data-section="4">
+    <div class="slide-header">
+      <h2 class="slide-title"><i class="bi bi-pencil-square me-2"></i>Ejercicio 4 de 7</h2>
+    </div>
+    <div class="slide-content">
+      <div class="exercise-box mb-3">
+        <p>Calcula usando el método cruzado:</p>
+        \[\dfrac{5}{6} - \dfrac{2}{3} = \; ?\]
+      </div>
+      <div class="options-group">
+        <div class="option-item" onclick="selectOpt(this)"><span class="badge me-2" style="background:var(--color-primary)">A</span>\(1\)</div>
+        <div class="option-item" onclick="selectOpt(this)"><span class="badge me-2" style="background:var(--color-primary)">B</span>\(\dfrac{7}{18}\)</div>
+        <div class="option-item" onclick="selectOpt(this)"><span class="badge me-2" style="background:var(--color-primary)">C</span>\(\dfrac{1}{6}\)</div>
+        <div class="option-item" onclick="selectOpt(this)"><span class="badge me-2" style="background:var(--color-primary)">D</span>\(\dfrac{3}{18}\)</div>
+      </div>
+      <div class="mt-3">
+        <button class="btn-verificar btn btn-sm" style="background:var(--color-primary);color:white" disabled
+                onclick="checkOpt(this, 2, 'Método cruzado: (5×3 − 6×2) / (6×3) = 3/18 = 1/6 (simplificando MCD=3)')">Verificar</button>
+      </div>
+      <div class="feedback-box mt-3"></div>
+    </div>
+    <div class="footer">
+      <span>Prof. Nicolás González</span>
+      <span>Adición y Sustracción — Método Cruzado</span>
+    </div>
+  </div>
+
+  <!-- EJERCICIO 5 -->
+  <div class="slide" data-section="4">
+    <div class="slide-header">
+      <h2 class="slide-title"><i class="bi bi-pencil-square me-2"></i>Ejercicio 5 de 7 — Números negativos</h2>
+    </div>
+    <div class="slide-content">
+      <div class="exercise-box mb-3">
+        <p>Calcula usando el método cruzado:</p>
+        \[\dfrac{-1}{3} + \dfrac{1}{2} = \; ?\]
+      </div>
+      <div class="options-group">
+        <div class="option-item" onclick="selectOpt(this)"><span class="badge me-2" style="background:var(--color-primary)">A</span>\(\dfrac{-1}{5}\)</div>
+        <div class="option-item" onclick="selectOpt(this)"><span class="badge me-2" style="background:var(--color-primary)">B</span>\(\dfrac{-1}{6}\)</div>
+        <div class="option-item" onclick="selectOpt(this)"><span class="badge me-2" style="background:var(--color-primary)">C</span>\(\dfrac{1}{6}\)</div>
+        <div class="option-item" onclick="selectOpt(this)"><span class="badge me-2" style="background:var(--color-primary)">D</span>\(0\)</div>
+      </div>
+      <div class="mt-3">
+        <button class="btn-verificar btn btn-sm" style="background:var(--color-primary);color:white" disabled
+                onclick="checkOpt(this, 2, 'Método cruzado: (−1×2 + 3×1) / (3×2) = (−2+3)/6 = 1/6')">Verificar</button>
+      </div>
+      <div class="feedback-box mt-3"></div>
+    </div>
+    <div class="footer">
+      <span>Prof. Nicolás González</span>
+      <span>Adición y Sustracción — Método Cruzado</span>
+    </div>
+  </div>
+
+  <!-- EJERCICIO 6 -->
+  <div class="slide" data-section="4">
+    <div class="slide-header">
+      <h2 class="slide-title"><i class="bi bi-pencil-square me-2"></i>Ejercicio 6 de 7 — Números negativos</h2>
+    </div>
+    <div class="slide-content">
+      <div class="exercise-box mb-3">
+        <p>Calcula usando el método cruzado:</p>
+        \[\dfrac{1}{4} - \dfrac{-1}{3} = \; ?\]
+      </div>
+      <div class="options-group">
+        <div class="option-item" onclick="selectOpt(this)"><span class="badge me-2" style="background:var(--color-primary)">A</span>\(\dfrac{-1}{12}\)</div>
+        <div class="option-item" onclick="selectOpt(this)"><span class="badge me-2" style="background:var(--color-primary)">B</span>\(\dfrac{1}{12}\)</div>
+        <div class="option-item" onclick="selectOpt(this)"><span class="badge me-2" style="background:var(--color-primary)">C</span>\(\dfrac{3}{12}\)</div>
+        <div class="option-item" onclick="selectOpt(this)"><span class="badge me-2" style="background:var(--color-primary)">D</span>\(\dfrac{7}{12}\)</div>
+      </div>
+      <div class="mt-3">
+        <button class="btn-verificar btn btn-sm" style="background:var(--color-primary);color:white" disabled
+                onclick="checkOpt(this, 3, 'Restar un negativo es sumar: (1×3 − 4×(−1)) / (4×3) = (3+4)/12 = 7/12')">Verificar</button>
+      </div>
+      <div class="feedback-box mt-3"></div>
+    </div>
+    <div class="footer">
+      <span>Prof. Nicolás González</span>
+      <span>Adición y Sustracción — Método Cruzado</span>
+    </div>
+  </div>
+
+  <!-- EJERCICIO 7 -->
+  <div class="slide" data-section="4">
+    <div class="slide-header">
+      <h2 class="slide-title"><i class="bi bi-pencil-square me-2"></i>Ejercicio 7 de 7 — Números negativos</h2>
+    </div>
+    <div class="slide-content">
+      <div class="exercise-box mb-3">
+        <p>Calcula usando el método cruzado:</p>
+        \[\dfrac{-2}{5} - \dfrac{1}{3} = \; ?\]
+      </div>
+      <div class="options-group">
+        <div class="option-item" onclick="selectOpt(this)"><span class="badge me-2" style="background:var(--color-primary)">A</span>\(\dfrac{-3}{8}\)</div>
+        <div class="option-item" onclick="selectOpt(this)"><span class="badge me-2" style="background:var(--color-primary)">B</span>\(\dfrac{-11}{15}\)</div>
+        <div class="option-item" onclick="selectOpt(this)"><span class="badge me-2" style="background:var(--color-primary)">C</span>\(\dfrac{11}{15}\)</div>
+        <div class="option-item" onclick="selectOpt(this)"><span class="badge me-2" style="background:var(--color-primary)">D</span>\(\dfrac{-1}{15}\)</div>
+      </div>
+      <div class="mt-3">
+        <button class="btn-verificar btn btn-sm" style="background:var(--color-primary);color:white" disabled
+                onclick="checkOpt(this, 1, 'Método cruzado: (−2×3 − 5×1) / (5×3) = (−6−5)/15 = −11/15')">Verificar</button>
+      </div>
+      <div class="feedback-box mt-3"></div>
+    </div>
+    <div class="footer">
+      <span>Prof. Nicolás González</span>
+      <span>Adición y Sustracción — Método Cruzado</span>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- SECCIÓN 5 — RESUMEN                                          -->
+  <!-- ============================================================ -->
+
+  <!-- SLIDE SEPARADOR RESUMEN -->
+  <div class="slide section-divider resumen" data-section="5">
+    <div>
+      <div class="section-number">✓</div>
+      <h2>Resumen</h2>
+      <p class="section-desc">Lo que aprendimos hoy</p>
+    </div>
+    <div class="footer">
+      <span>Prof. Nicolás González</span>
+      <span>Adición y Sustracción — Método Cruzado</span>
+    </div>
+  </div>
+
+  <!-- SLIDE RESUMEN FINAL -->
+  <div class="slide" data-section="5">
+    <div class="slide-header">
+      <h2 class="slide-title"><i class="bi bi-check-circle me-2"></i>¡Excelente trabajo!</h2>
+    </div>
+    <div class="slide-content">
+      <table class="resumen-table">
+        <thead>
+          <tr>
+            <th>Concepto</th>
+            <th>Definición / Fórmula</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Suma (método cruzado)</td>
+            <td>\(\dfrac{a}{b} + \dfrac{c}{d} = \dfrac{a \cdot d + b \cdot c}{b \cdot d}\)</td>
+          </tr>
+          <tr>
+            <td>Resta (método cruzado)</td>
+            <td>\(\dfrac{a}{b} - \dfrac{c}{d} = \dfrac{a \cdot d - b \cdot c}{b \cdot d}\)</td>
+          </tr>
+          <tr>
+            <td>Denominador del resultado</td>
+            <td>Siempre es el producto de los dos denominadores: \(b \cdot d\)</td>
+          </tr>
+          <tr>
+            <td>Simplificación</td>
+            <td>Dividir numerador y denominador por el MCD si MCD &gt; 1</td>
+          </tr>
+          <tr>
+            <td>Orden en la resta</td>
+            <td>¡Importa! El cruce \(a \cdot d\) siempre va primero en el numerador</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="mt-3 text-center opacity-75">Profesor Nicolás González · profenicolas.cl</p>
+    </div>
+    <div class="footer">
+      <span>Prof. Nicolás González</span>
+      <span>1ro Medio — 2026</span>
+    </div>
+  </div>
+
+</div><!-- /presentation-container -->
+
+<div class="navigation">
+  <button class="nav-btn" id="prev-btn" onclick="changeSlide(-1)" disabled>◀</button>
+  <span class="slide-counter" id="slide-counter">1 / 1</span>
+  <button class="nav-btn" id="next-btn" onclick="changeSlide(1)">▶</button>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://profenicolas.cl/assets_presentaciones/quiz.js"></script>
+<script src="https://profenicolas.cl/assets_presentaciones/presentation.js"></script>
+
+<script>
+  function selectOpt(el) {
+    const group = el.closest('.options-group');
+    group.querySelectorAll('.option-item').forEach(o => o.classList.remove('selected'));
+    el.classList.add('selected');
+    el.closest('.slide').querySelector('.btn-verificar').disabled = false;
+  }
+
+  function checkOpt(btn, correctIdx, explanation) {
+    const slide = btn.closest('.slide');
+    const opts  = Array.from(slide.querySelectorAll('.option-item'));
+    const sel   = opts.findIndex(o => o.classList.contains('selected'));
+    if (sel === -1) return;
+
+    const correct = sel === correctIdx;
+
+    opts.forEach((opt, i) => {
+      opt.onclick = null;
+      opt.style.cursor = 'default';
+      opt.classList.remove('selected');
+      if (i === correctIdx) opt.classList.add('correct');
+      else if (i === sel && !correct) opt.classList.add('incorrect');
+    });
+
+    const fb = slide.querySelector('.feedback-box');
+    fb.style.cssText = 'display:block;border-radius:0.5rem;padding:1rem 1.25rem;border-left:4px solid;margin-top:1rem';
+    if (correct) {
+      fb.style.background = '#e8f5e9';
+      fb.style.borderColor = '#388e3c';
+      fb.innerHTML = '✅ <strong>¡Correcto!</strong> ' + explanation;
+    } else {
+      fb.style.background = '#fce4ec';
+      fb.style.borderColor = '#c2185b';
+      fb.innerHTML = '❌ <strong>Incorrecto.</strong> ' + explanation;
+    }
+
+    btn.style.display = 'none';
+  }
+</script>
+
+</body>
+</html>

@@ -1,169 +1,338 @@
 @extends('layouts.app')
 
 @section('title', $material->title . ' · Materiales')
-@section('main_class', 'py-4')
+@section('main_class', '')
 
-@push('meta')
-    <meta name="description" content="{{ Str::limit(strip_tags($material->description), 155) }}">
-    <link rel="canonical" href="{{ route('materials.show', $material) }}">
-@endpush
+@php
+    $metaDescription = Str::limit(strip_tags($material->description ?? ''), 155)
+        ?: $material->title . ' · Material gratuito de matemática de Profe Nicolás González.';
+@endphp
+@section('description', $metaDescription)
+@section('og_type', 'article')
+@section('og_title', $material->title . ' · Profe Nicolás')
+@section('og_description', $metaDescription)
 
-@section('content')
+@if($material->type === 'image' && $material->file_path)
+    @section('og_image', asset('storage/' . $material->file_path))
+@endif
 
-{{-- Navegación --}}
-<nav class="mb-4">
-    <a href="{{ route('materials.index') }}" class="text-decoration-none text-muted small">
-        <i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Volver a Materiales
-    </a>
-</nav>
+@section('canonical', route('materials.show', $material))
 
-{{-- Cabecera + metadata --}}
-<div class="row g-4 mb-4">
+@section('full_content')
 
-    {{-- Título, descripción y tags --}}
-    <div class="col-lg-8">
-        <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
-            {!! $material->nivel !!}
-            @if($material->year)
-                <span class="text-muted small">{{ $material->year }}</span>
-            @endif
-        </div>
-
-        <h1 class="h2 fw-bold mb-2">{{ $material->title }}</h1>
-
-        @if($material->description)
-            {{-- {!! !!} es necesario aquí: Str::markdown() genera HTML seguro desde Markdown.
-                 html_input='escape' impide que el admin inyecte HTML raw. --}}
-            <div class="text-muted mb-3 material-description">
-                {!! Str::markdown($material->description, ['html_input' => 'escape']) !!}
-            </div>
-        @endif
-
-        @if(!empty($material->tags))
-            <div class="d-flex flex-wrap gap-2">
-                @foreach($material->tags as $tag)
-                    <span class="badge text-bg-light border">#{{ $tag }}</span>
-                @endforeach
-            </div>
-        @endif
-    </div>
-
-    {{-- Ficha técnica + acciones --}}
-    <div class="col-lg-4">
-        <div class="bg-body-tertiary rounded-3 p-4">
-
-            <h2 class="h6 text-uppercase text-muted fw-semibold small mb-3">Información</h2>
-
-            <dl class="row row-cols-2 g-2 mb-4 small">
-                <dt class="col text-muted fw-normal">Tipo</dt>
-                <dd class="col fw-semibold mb-0">{{ $material->tipo }}</dd>
-
-                <dt class="col text-muted fw-normal">Curso</dt>
-                <dd class="col fw-semibold mb-0">{{ $material->course }}</dd>
-
-                @if($material->subject)
-                    <dt class="col text-muted fw-normal">Asignatura</dt>
-                    <dd class="col fw-semibold mb-0">{{ $material->subject }}</dd>
-                @endif
-
-                @if($material->unit)
-                    <dt class="col text-muted fw-normal">Unidad</dt>
-                    <dd class="col fw-semibold mb-0">{{ $material->unit }}</dd>
-                @endif
-
-                @if($material->semester)
-                    <dt class="col text-muted fw-normal">Semestre</dt>
-                    <dd class="col fw-semibold mb-0">{{ $material->semester }}</dd>
-                @endif
-
-                @if($material->size_formatted)
-                    <dt class="col text-muted fw-normal">Tamaño</dt>
-                    <dd class="col fw-semibold mb-0">{{ $material->size_formatted }}</dd>
-                @endif
-
-                <dt class="col text-muted fw-normal">Código</dt>
-                <dd class="col mb-0"><code class="small">{{ $material->code }}</code></dd>
-            </dl>
-
-            {{-- Acciones --}}
-            <div class="d-grid gap-2">
-                @if($material->type === 'pdf' && $material->file_path)
-                    <a href="{{ asset('storage/' . $material->file_path) }}"
-                       class="btn btn-primary btn-sm" download>
-                        <i class="bi bi-download me-1" aria-hidden="true"></i>Descargar PDF
-                    </a>
-                @elseif($material->type === 'html' && $material->file_path)
-                    <a href="{{ route('materials.content', $material) }}"
-                       class="btn btn-primary btn-sm" target="_blank" rel="noopener">
-                        <i class="bi bi-play-circle me-1" aria-hidden="true"></i>Abrir presentación
-                    </a>
-                @elseif($material->type === 'link' && $material->link_url)
-                    <a href="{{ $material->link_url }}"
-                       class="btn btn-primary btn-sm" target="_blank" rel="noopener noreferrer">
-                        <i class="bi bi-box-arrow-up-right me-1" aria-hidden="true"></i>Abrir recurso externo
-                    </a>
-                @elseif($material->file_path)
-                    <a href="{{ asset('storage/' . $material->file_path) }}"
-                       class="btn btn-primary btn-sm" download>
-                        <i class="bi bi-download me-1" aria-hidden="true"></i>Descargar archivo
-                    </a>
-                @endif
-
-                <a href="{{ route('materials.index') }}" class="btn btn-outline-secondary btn-sm">
-                    <i class="bi bi-grid-3x3-gap me-1" aria-hidden="true"></i>Ver todos los materiales
-                </a>
-            </div>
-
-        </div>
+{{-- PAGE HEADER --}}
+<div class="material-page-header">
+    <div class="container">
+        <nav class="material-breadcrumb-nav" aria-label="Ruta de navegación">
+            <a href="{{ route('home') }}">Inicio</a>
+            <span class="mx-2" aria-hidden="true">›</span>
+            <a href="{{ route('materials.index') }}">Materiales</a>
+            <span class="mx-2" aria-hidden="true">›</span>
+            <span>{{ Str::limit($material->title, 50) }}</span>
+        </nav>
+        <h1 class="material-page-title">{{ $material->title }}</h1>
     </div>
 </div>
 
-{{-- Visor de contenido --}}
-@if($material->type === 'pdf' && $material->file_path)
-    <div class="mb-5">
-        <iframe src="{{ asset('storage/' . $material->file_path) }}"
-                class="w-100 border-0 rounded-3 shadow-sm"
-                style="height: 82vh;"
-                title="{{ $material->title }}"></iframe>
-    </div>
+{{-- MAIN --}}
+<div class="container py-5">
+    <div class="material-detail-grid">
 
-@elseif($material->type === 'image' && $material->file_path)
-    <div class="text-center mb-5">
-        <img src="{{ asset('storage/' . $material->file_path) }}"
-             alt="{{ $material->title }}"
-             class="img-fluid rounded-3 shadow-sm">
-    </div>
+        {{-- LEFT: main content --}}
+        <div>
+            <div class="d-flex flex-wrap gap-2 mb-3">
+                {!! $material->nivel !!}
+                @if($material->year)
+                    <span class="badge bg-light text-secondary border">{{ $material->year }}</span>
+                @endif
+            </div>
 
-@elseif($material->type === 'video' && $material->file_path)
-    <div class="mb-5">
-        <video controls class="w-100 rounded-3 shadow-sm">
-            <source src="{{ asset('storage/' . $material->file_path) }}">
-            Tu navegador no soporta la reproducción de video.
-        </video>
-    </div>
-@endif
-
-{{-- Materiales relacionados --}}
-@if($related->isNotEmpty())
-    <section class="border-top pt-4">
-        <h2 class="h5 fw-bold mb-3">
-            <i class="bi bi-collection text-primary me-2" aria-hidden="true"></i>Más materiales de {{ $material->course }}
-        </h2>
-        <div class="row g-3">
-            @foreach($related as $rel)
-                <div class="col-md-6 col-xl-3">
-                    <a href="{{ route('materials.show', $rel) }}"
-                       class="card border-0 bg-body-tertiary h-100 text-decoration-none text-body card-hover">
-                        <div class="card-body p-3">
-                            <div class="mb-1">{!! $rel->nivel !!}</div>
-                            <div class="fw-semibold small mb-1">{{ $rel->title }}</div>
-                            <div class="text-muted small">{{ $rel->tipo }}</div>
-                        </div>
-                    </a>
+            @if($material->description)
+                <div class="material-description text-muted mb-4">
+                    {{-- {!! !!} necesario: Str::markdown() genera HTML seguro desde Markdown.
+                         html_input='escape' impide inyección de HTML raw. --}}
+                    {!! Str::markdown($material->description, ['html_input' => 'escape']) !!}
                 </div>
-            @endforeach
+            @endif
+
+            @if(!empty($material->tags))
+                <div class="d-flex flex-wrap gap-2 mb-4">
+                    @foreach($material->tags as $tag)
+                        <span class="badge bg-light text-secondary border mat-tag">#{{ $tag }}</span>
+                    @endforeach
+                </div>
+            @endif
+
+            {{-- VIEWER --}}
+            @if($material->type === 'pdf' && $material->file_path)
+                <div class="mb-5">
+                    <div class="pdf-viewer-toolbar">
+                        <span class="pdf-viewer-title">{{ $material->title }}</span>
+                        <a href="{{ asset('storage/' . $material->file_path) }}"
+                           class="btn btn-sm btn-amber" download>
+                            <i class="bi bi-download me-1" aria-hidden="true"></i>Descargar
+                        </a>
+                    </div>
+                    <iframe src="{{ asset('storage/' . $material->file_path) }}"
+                            class="pdf-viewer"
+                            title="{{ $material->title }}"></iframe>
+                </div>
+            @elseif($material->type === 'image' && $material->file_path)
+                <div class="text-center mb-5">
+                    <img src="{{ asset('storage/' . $material->file_path) }}"
+                         alt="{{ $material->title }}"
+                         class="img-fluid rounded-3 shadow-sm">
+                </div>
+            @elseif($material->type === 'video' && $material->file_path)
+                <div class="mb-5">
+                    <video controls class="w-100 rounded-3 shadow-sm">
+                        <source src="{{ asset('storage/' . $material->file_path) }}">
+                        Tu navegador no soporta la reproducción de video.
+                    </video>
+                </div>
+            @endif
+
+            <a href="{{ route('materials.index') }}" class="text-muted text-decoration-none small">
+                <i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Volver a materiales
+            </a>
         </div>
-    </section>
-@endif
+
+        {{-- RIGHT: sidebar --}}
+        <aside>
+
+            {{-- Ficha técnica --}}
+            <div class="sidebar-card">
+                <h2 class="ficha-heading">Ficha técnica</h2>
+                <div class="ficha-tecnica">
+                    <div class="ficha-row">
+                        <span class="ficha-label">Nivel</span>
+                        <span class="ficha-value">{!! $material->nivel !!}</span>
+                    </div>
+                    @if($material->course)
+                    <div class="ficha-row">
+                        <span class="ficha-label">Curso</span>
+                        <span class="ficha-value">{{ $material->course }}</span>
+                    </div>
+                    @endif
+                    @if($material->subject)
+                    <div class="ficha-row">
+                        <span class="ficha-label">Asignatura</span>
+                        <span class="ficha-value">{{ $material->subject }}</span>
+                    </div>
+                    @endif
+                    @if($material->unit)
+                    <div class="ficha-row">
+                        <span class="ficha-label">Unidad</span>
+                        <span class="ficha-value">{{ $material->unit }}</span>
+                    </div>
+                    @endif
+                    @if($material->semester)
+                    <div class="ficha-row">
+                        <span class="ficha-label">Semestre</span>
+                        <span class="ficha-value">{{ $material->semester }}</span>
+                    </div>
+                    @endif
+                    @if($material->year)
+                    <div class="ficha-row">
+                        <span class="ficha-label">Año</span>
+                        <span class="ficha-value">{{ $material->year }}</span>
+                    </div>
+                    @endif
+                    <div class="ficha-row">
+                        <span class="ficha-label">Tipo</span>
+                        <span class="ficha-value">{{ $material->tipo }}</span>
+                    </div>
+                    @if($material->size_formatted)
+                    <div class="ficha-row">
+                        <span class="ficha-label">Tamaño</span>
+                        <span class="ficha-value">{{ $material->size_formatted }}</span>
+                    </div>
+                    @endif
+                </div>
+            </div>
+
+            {{-- Download CTA --}}
+            <div class="sidebar-card">
+                @if($material->type === 'pdf' && $material->file_path)
+                    <a href="{{ asset('storage/' . $material->file_path) }}"
+                       class="btn btn-amber w-100 mb-2" download>
+                        <i class="bi bi-download me-2" aria-hidden="true"></i>Descargar PDF
+                    </a>
+                @elseif($material->type === 'html' && $material->file_path)
+                    @php
+                        $esGuia = ($materialSubType === 'guia');
+                    @endphp
+                    <a href="{{ route('materials.content', $material) }}"
+                       class="btn btn-amber w-100 mb-2" target="_blank" rel="noopener">
+                        <i class="bi bi-{{ $esGuia ? 'journal-text' : 'play-circle' }} me-2" aria-hidden="true"></i>
+                        {{ $esGuia ? 'Abrir guía' : 'Abrir presentación' }}
+                    </a>
+                    <a href="{{ route('materials.pdf', [$material, 'alumno']) }}"
+                       class="btn btn-outline-primary w-100 mb-2">
+                        <i class="bi bi-file-earmark-pdf me-2" aria-hidden="true"></i>
+                        {{ $esGuia ? 'Imprimir guía (Alumno)' : 'Descargar PDF (Alumno)' }}
+                    </a>
+                    @auth
+                    <a href="{{ route('materials.pdf', [$material, 'docente']) }}"
+                       class="btn btn-outline-success w-100 mb-2">
+                        <i class="bi bi-file-earmark-pdf-fill me-2" aria-hidden="true"></i>
+                        {{ $esGuia ? 'Imprimir guía (Docente)' : 'Descargar PDF (Docente)' }}
+                    </a>
+                    @endauth
+                @elseif($material->type === 'link' && $material->link_url)
+                    <a href="{{ $material->link_url }}"
+                       class="btn btn-amber w-100 mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="bi bi-box-arrow-up-right me-2" aria-hidden="true"></i>Abrir recurso
+                    </a>
+                @elseif($material->file_path)
+                    <a href="{{ asset('storage/' . $material->file_path) }}"
+                       class="btn btn-amber w-100 mb-2" download>
+                        <i class="bi bi-download me-2" aria-hidden="true"></i>Descargar archivo
+                    </a>
+                @endif
+
+                {{-- Share buttons --}}
+                <div class="share-buttons mt-2">
+                    <a href="https://twitter.com/intent/tweet?url={{ urlencode(route('materials.show', $material)) }}&text={{ urlencode($material->title) }}"
+                       class="share-btn" target="_blank" rel="noopener noreferrer"
+                       aria-label="Compartir en Twitter/X"
+                       data-bs-toggle="tooltip" data-bs-placement="top" title="Compartir en X">
+                        <i class="bi bi-twitter-x" aria-hidden="true"></i>
+                    </a>
+                    <a href="https://wa.me/?text={{ urlencode($material->title . ' ' . route('materials.show', $material)) }}"
+                       class="share-btn" target="_blank" rel="noopener noreferrer"
+                       aria-label="Compartir por WhatsApp"
+                       data-bs-toggle="tooltip" data-bs-placement="top" title="Compartir por WhatsApp">
+                        <i class="bi bi-whatsapp" aria-hidden="true"></i>
+                    </a>
+                    <button type="button" class="share-btn js-copy-link"
+                            data-url="{{ route('materials.show', $material) }}"
+                            aria-label="Copiar enlace"
+                            data-bs-toggle="tooltip" data-bs-placement="top" title="Copiar enlace">
+                        <i class="bi bi-link-45deg" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+
+            {{-- Related materials --}}
+            @if($related->isNotEmpty())
+                <div class="sidebar-card">
+                    <h2 class="ficha-heading">Más de {{ $material->course }}</h2>
+                    <div class="d-flex flex-column gap-2">
+                        @foreach($related as $rel)
+                            <a href="{{ route('materials.show', $rel) }}"
+                               class="related-item text-decoration-none">
+                                <span class="related-title">{{ $rel->title }}</span>
+                                <span class="mat-type-badge mat-type-{{ $rel->type }}">{{ strtoupper($rel->type) }}</span>
+                            </a>
+                        @endforeach
+                    </div>
+                </div>
+            @endif
+
+            {{-- Services CTA --}}
+            <div class="sidebar-card sidebar-card-navy">
+                <p class="fw-700 mb-1 text-white">¿Necesitas clases?</p>
+                <p class="small mb-3 text-on-dark opacity-75">Asesorías personalizadas para tu nivel.</p>
+                <a href="{{ route('services') }}" class="btn btn-amber btn-sm w-100">
+                    Ver servicios
+                </a>
+            </div>
+
+        </aside>
+    </div>
+</div>
+
+@push('scripts')
+<script>
+document.querySelectorAll('.js-copy-link').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const url = btn.dataset.url;
+        const icon = btn.querySelector('i');
+
+        const confirm = () => {
+            icon.className = 'bi bi-check2';
+            btn.setAttribute('aria-label', 'Enlace copiado');
+            setTimeout(() => {
+                icon.className = 'bi bi-link-45deg';
+                btn.setAttribute('aria-label', 'Copiar enlace');
+            }, 2000);
+        };
+
+        if (navigator.clipboard) {
+            navigator.clipboard.writeText(url).then(confirm);
+        } else {
+            const ta = document.createElement('textarea');
+            ta.value = url;
+            ta.style.position = 'fixed';
+            ta.style.opacity = '0';
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            document.body.removeChild(ta);
+            confirm();
+        }
+    });
+});
+</script>
+@endpush
+
+@push('jsonld')
+@php
+  $jsonData = [
+    "@context" => "https://schema.org",
+    "@graph" => [
+      [
+        "@type" => "LearningResource",
+        "name" => $material->title,
+        "description" => Str::limit(strip_tags($material->description ?? ''), 250),
+        "url" => route('materials.show', $material),
+        "educationalLevel" => $material->level,
+        "learningResourceType" => $material->tipo,
+        "inLanguage" => "es",
+        "isAccessibleForFree" => true,
+        "author" => [
+          "@type" => "Person",
+          "name" => "Nicolás González M.",
+          "@id" => url('/') . "#nicolas"
+        ],
+        "provider" => [
+          "@type" => "Person",
+          "@id" => url('/') . "#nicolas"
+        ]
+      ],
+      [
+        "@type" => "BreadcrumbList",
+        "itemListElement" => [
+          [
+            "@type" => "ListItem",
+            "position" => 1,
+            "name" => "Inicio",
+            "item" => url('/')
+          ],
+          [
+            "@type" => "ListItem",
+            "position" => 2,
+            "name" => "Materiales",
+            "item" => route('materials.index')
+          ],
+          [
+            "@type" => "ListItem",
+            "position" => 3,
+            "name" => $material->title
+          ]
+        ]
+      ]
+    ]
+  ];
+
+  if ($material->subject) {
+    $jsonData["@graph"][0]["teaches"] = $material->subject;
+  }
+@endphp
+<script type="application/ld+json">
+{{ json_encode($jsonData) }}
+</script>
+@endpush
 
 @endsection

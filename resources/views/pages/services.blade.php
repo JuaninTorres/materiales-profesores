@@ -1,184 +1,176 @@
 @extends('layouts.app')
 @section('title', 'Servicios · Profe Nicolás González')
-@section('main_class', 'py-4')
+@section('description', 'Clases particulares de matemática con Nicolás González: refuerzo escolar 7° básico a 4° medio, preparación PAES y nivelación intensiva. Presencial en Quintero u online.')
+@section('main_class', '')
 
-@section('content')
+@section('full_content')
 
-{{-- Encabezado --}}
-<div class="mb-5 pb-3 border-bottom">
-    <h1 class="h2 fw-bold mb-1">
-        <i class="bi bi-stars text-primary me-2" aria-hidden="true"></i>Servicios
-    </h1>
-    <p class="text-muted mb-0">
-        Clases adaptadas a tu nivel, tu ritmo y tus objetivos. Sin precios fijos: escríbeme y lo coordinamos.
-    </p>
-</div>
-
-{{-- Servicios principales --}}
-<div class="row g-4 mb-5">
-
-    {{-- Clases particulares --}}
-    <div class="col-lg-4">
-        <div class="card border-0 shadow-sm h-100 card-hover">
-            <div class="card-body p-4 d-flex flex-column">
-                <div class="mb-3">
-                    <i class="bi bi-journal-text display-5 text-primary" aria-hidden="true"></i>
-                </div>
-                <h2 class="h5 fw-bold mb-2">Clases particulares</h2>
-                <p class="text-muted mb-3">
-                    Refuerzo personalizado para estudiantes de 7° básico a 4° medio.
-                    Trabajamos los contenidos del curso, preparamos pruebas y cerramos
-                    las brechas que el ritmo del colegio no permite cubrir.
-                </p>
-                <ul class="list-unstyled text-muted small mb-4">
-                    <li class="d-flex align-items-center gap-2 mb-2">
-                        <i class="bi bi-check2 text-success flex-shrink-0" aria-hidden="true"></i>
-                        Todas las unidades de 7° básico a 4° medio
-                    </li>
-                    <li class="d-flex align-items-center gap-2 mb-2">
-                        <i class="bi bi-check2 text-success flex-shrink-0" aria-hidden="true"></i>
-                        Preparación de pruebas y exámenes
-                    </li>
-                    <li class="d-flex align-items-center gap-2">
-                        <i class="bi bi-check2 text-success flex-shrink-0" aria-hidden="true"></i>
-                        Nivelación y refuerzo de contenidos anteriores
-                    </li>
-                </ul>
-                <a href="{{ route('contact') }}" class="btn btn-primary mt-auto">
-                    <i class="bi bi-calendar2-check me-2" aria-hidden="true"></i>Consultar
-                </a>
-            </div>
-        </div>
-    </div>
-
-    {{-- Preparación PAES --}}
-    <div class="col-lg-4">
-        <div class="card border-0 shadow-sm h-100 border-top border-4 border-warning card-hover">
-            <div class="card-body p-4 d-flex flex-column">
-                <div class="mb-3 d-flex align-items-start justify-content-between">
-                    <i class="bi bi-trophy display-5 text-warning" aria-hidden="true"></i>
-                    <span class="badge text-bg-warning text-white">Más solicitado</span>
-                </div>
-                <h2 class="h5 fw-bold mb-2">Preparación PAES</h2>
-                <p class="text-muted mb-3">
-                    Preparación enfocada en la Prueba de Acceso a la Educación Superior.
-                    Resolvemos ensayos reales, identificamos errores frecuentes y trabajamos
-                    estrategias para optimizar el puntaje.
-                </p>
-                <ul class="list-unstyled text-muted small mb-4">
-                    <li class="d-flex align-items-center gap-2 mb-2">
-                        <i class="bi bi-check2 text-success flex-shrink-0" aria-hidden="true"></i>
-                        Resolución de ensayos oficiales
-                    </li>
-                    <li class="d-flex align-items-center gap-2 mb-2">
-                        <i class="bi bi-check2 text-success flex-shrink-0" aria-hidden="true"></i>
-                        Estrategias por tipo de pregunta
-                    </li>
-                    <li class="d-flex align-items-center gap-2">
-                        <i class="bi bi-check2 text-success flex-shrink-0" aria-hidden="true"></i>
-                        Seguimiento del avance durante el año
-                    </li>
-                </ul>
-                <a href="{{ route('contact') }}" class="btn btn-warning mt-auto">
-                    <i class="bi bi-calendar2-check me-2" aria-hidden="true"></i>Consultar
-                </a>
-            </div>
-        </div>
-    </div>
-
-    {{-- Material personalizado --}}
-    <div class="col-lg-4">
-        <div class="card border-0 shadow-sm h-100 card-hover">
-            <div class="card-body p-4 d-flex flex-column">
-                <div class="mb-3">
-                    <i class="bi bi-file-earmark-ruled display-5 text-success" aria-hidden="true"></i>
-                </div>
-                <h2 class="h5 fw-bold mb-2">Material personalizado</h2>
-                <p class="text-muted mb-3">
-                    Guías, ejercicios y resúmenes elaborados según lo que el estudiante
-                    necesita. El material se adapta al nivel, al contenido y al estilo
-                    de aprendizaje de cada persona.
-                </p>
-                <ul class="list-unstyled text-muted small mb-4">
-                    <li class="d-flex align-items-center gap-2 mb-2">
-                        <i class="bi bi-check2 text-success flex-shrink-0" aria-hidden="true"></i>
-                        Guías de ejercicios a medida
-                    </li>
-                    <li class="d-flex align-items-center gap-2 mb-2">
-                        <i class="bi bi-check2 text-success flex-shrink-0" aria-hidden="true"></i>
-                        Resúmenes y esquemas de contenido
-                    </li>
-                    <li class="d-flex align-items-center gap-2">
-                        <i class="bi bi-check2 text-success flex-shrink-0" aria-hidden="true"></i>
-                        Ejercicios de repaso previo a pruebas
-                    </li>
-                </ul>
-                <a href="{{ route('contact') }}" class="btn btn-primary mt-auto">
-                    <i class="bi bi-calendar2-check me-2" aria-hidden="true"></i>Consultar
-                </a>
-            </div>
-        </div>
-    </div>
-
-</div>
-
-{{-- Detalles prácticos --}}
-<div class="bg-body-tertiary rounded-3 p-4 p-lg-5 mb-5">
-    <h2 class="h4 fw-bold mb-4">
-        <i class="bi bi-info-circle-fill text-primary me-2" aria-hidden="true"></i>Detalles prácticos
-    </h2>
-    <div class="row g-4">
-        <div class="col-sm-6 col-lg-3">
-            <div class="d-flex align-items-start gap-3">
-                <i class="bi bi-clock-fill text-primary fs-5 flex-shrink-0 mt-1" aria-hidden="true"></i>
-                <div>
-                    <div class="fw-semibold mb-1">Duración</div>
-                    <span class="text-muted small">Entre 60 y 75 minutos por sesión.</span>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6 col-lg-3">
-            <div class="d-flex align-items-start gap-3">
-                <i class="bi bi-laptop text-primary fs-5 flex-shrink-0 mt-1" aria-hidden="true"></i>
-                <div>
-                    <div class="fw-semibold mb-1">Modalidad</div>
-                    <span class="text-muted small">Presencial en Quintero y alrededores, u online desde cualquier lugar.</span>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6 col-lg-3">
-            <div class="d-flex align-items-start gap-3">
-                <i class="bi bi-people-fill text-primary fs-5 flex-shrink-0 mt-1" aria-hidden="true"></i>
-                <div>
-                    <div class="fw-semibold mb-1">Formato</div>
-                    <span class="text-muted small">Individual o en grupos pequeños de amigos o conocidos.</span>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6 col-lg-3">
-            <div class="d-flex align-items-start gap-3">
-                <i class="bi bi-calendar-week-fill text-primary fs-5 flex-shrink-0 mt-1" aria-hidden="true"></i>
-                <div>
-                    <div class="fw-semibold mb-1">Paquetes mensuales</div>
-                    <span class="text-muted small">Disponibles para quienes prefieren planificar sus clases mes a mes.</span>
-                </div>
-            </div>
-        </div>
+{{-- PAGE HEADER --}}
+<div class="page-header text-center">
+    <div class="container">
+        <p class="page-header-eyebrow">Asesorías de matemática</p>
+        <h1 class="fw-800">Servicios</h1>
+        <p class="page-header-lead">
+            Clases adaptadas a tu nivel, tu ritmo y tus objetivos.
+        </p>
     </div>
 </div>
+
+{{-- SERVICE CARDS --}}
+<section class="section">
+    <div class="container">
+        <div class="row g-4 justify-content-center">
+
+            {{-- Clases particulares --}}
+            <div class="col-lg-4">
+                <div class="service-card service-card-featured">
+                    <span class="featured-badge">Más solicitado</span>
+                    <div class="service-icon"><i class="bi bi-journal-text" aria-hidden="true"></i></div>
+                    <h2 class="h4">Clases particulares</h2>
+                    <p class="service-desc">
+                        Refuerzo personalizado para estudiantes de 7° básico a 4° medio.
+                        Trabajamos los contenidos del curso, preparamos pruebas y cerramos
+                        las brechas que el ritmo del colegio no cubre.
+                    </p>
+                    <ul class="service-includes">
+                        <li>Todas las unidades de 7° básico a 4° medio</li>
+                        <li>Preparación de pruebas y exámenes</li>
+                        <li>Nivelación y refuerzo de contenidos anteriores</li>
+                    </ul>
+                    <a href="{{ route('contact') }}" class="btn btn-amber mt-auto">
+                        <i class="bi bi-calendar2-check me-2" aria-hidden="true"></i>Consultar
+                    </a>
+                </div>
+            </div>
+
+            {{-- Preparación PAES --}}
+            <div class="col-lg-4">
+                <div class="service-card">
+                    <div class="service-icon"><i class="bi bi-trophy" aria-hidden="true"></i></div>
+                    <h2 class="h4">Preparación PAES</h2>
+                    <p class="service-desc">
+                        Preparación enfocada en la Prueba de Acceso a la Educación Superior.
+                        Resolvemos ensayos reales e identificamos errores frecuentes.
+                    </p>
+                    <ul class="service-includes">
+                        <li>Resolución de ensayos oficiales</li>
+                        <li>Estrategias por tipo de pregunta</li>
+                        <li>Seguimiento del avance durante el año</li>
+                    </ul>
+                    <a href="{{ route('contact') }}" class="btn btn-outline-primary mt-auto">
+                        <i class="bi bi-calendar2-check me-2" aria-hidden="true"></i>Consultar
+                    </a>
+                </div>
+            </div>
+
+            {{-- Nivelación intensiva --}}
+            <div class="col-lg-4">
+                <div class="service-card">
+                    <div class="service-icon"><i class="bi bi-file-earmark-ruled" aria-hidden="true"></i></div>
+                    <h2 class="h4">Nivelación intensiva</h2>
+                    <p class="service-desc">
+                        Para quienes necesitan ponerse al día rápido. Diagnóstico,
+                        plan personalizado y materiales a medida.
+                    </p>
+                    <ul class="service-includes">
+                        <li>Diagnóstico inicial de brechas</li>
+                        <li>Plan de trabajo personalizado</li>
+                        <li>Guías y materiales adaptados</li>
+                    </ul>
+                    <a href="{{ route('contact') }}" class="btn btn-outline-primary mt-auto">
+                        <i class="bi bi-calendar2-check me-2" aria-hidden="true"></i>Consultar
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{{-- PRACTICAL INFO --}}
+<section class="section bg-cream">
+    <div class="container">
+        <h2 class="fw-800 fs-2 text-center mb-5">Información práctica</h2>
+        <div class="row g-4">
+            <div class="col-sm-6">
+                <div class="practical-card">
+                    <h4><i class="bi bi-laptop" aria-hidden="true"></i>Modalidad</h4>
+                    <p>Presencial en Quintero y alrededores, u online desde cualquier lugar de Chile vía Zoom o Meet.</p>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="practical-card">
+                    <h4><i class="bi bi-clock" aria-hidden="true"></i>Horarios</h4>
+                    <p>Clases a partir de las 18:00 hrs. de lunes a viernes, y en bloques más amplios los fines de semana.</p>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="practical-card">
+                    <h4><i class="bi bi-calendar2-check" aria-hidden="true"></i>¿Cómo agendar?</h4>
+                    <p>Escríbeme por el formulario de contacto indicando tu nivel, disponibilidad y lo que necesitas trabajar.</p>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="practical-card">
+                    <h4><i class="bi bi-people" aria-hidden="true"></i>Formato</h4>
+                    <p>Individual o en grupos pequeños de amigos o compañeros. Los paquetes mensuales también están disponibles.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{{-- LEVELS --}}
+<section class="section">
+    <div class="container-narrow-md">
+        <h2 class="fw-800 fs-2 text-center mb-5">Niveles disponibles</h2>
+        <div class="levels-list">
+            <div class="level-row">
+                <span class="mat-level-dot level-dot-colegio"></span>
+                <div>
+                    <div class="level-name">Colegio</div>
+                    <div class="level-courses">7° básico a 4° medio · todas las asignaturas de matemática</div>
+                </div>
+            </div>
+            <div class="level-row">
+                <span class="mat-level-dot level-dot-paes"></span>
+                <div>
+                    <div class="level-name">PAES Matemática</div>
+                    <div class="level-courses">Preparación M1 y M2 · estrategias, ensayos, refuerzo</div>
+                </div>
+            </div>
+            <div class="level-row">
+                <span class="mat-level-dot level-dot-cft"></span>
+                <div>
+                    <div class="level-name">CFT / Instituto</div>
+                    <div class="level-courses">Matemática aplicada para formación técnico-profesional</div>
+                </div>
+            </div>
+            <div class="level-row">
+                <span class="mat-level-dot level-dot-universidad"></span>
+                <div>
+                    <div class="level-name">Universidad</div>
+                    <div class="level-courses">Cálculo, álgebra lineal, estadística, matemática discreta</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 {{-- CTA --}}
-<div class="card border-0 bg-primary text-white text-center p-4 p-lg-5">
-    <div class="card-body">
-        <i class="bi bi-chat-dots-fill display-5 mb-3 d-block opacity-75" aria-hidden="true"></i>
-        <h2 class="h4 fw-bold mb-2">¿Listo para empezar?</h2>
-        <p class="opacity-75 mb-4">
-            Escríbeme y cuéntame qué necesitas. Coordinamos horario, modalidad y el servicio que mejor se adapte a ti.
-        </p>
-        <a href="{{ route('contact') }}" class="btn btn-light btn-lg px-5 fw-semibold">
-            <i class="bi bi-envelope-fill me-2" aria-hidden="true"></i>Escríbeme
-        </a>
+<section class="cta-section">
+    <div class="container">
+        <h2>¿Listo para empezar?</h2>
+        <p class="lead">Escríbeme y coordinamos horario y modalidad.</p>
+        <div class="d-flex flex-wrap justify-content-center gap-3">
+            <a href="{{ route('contact') }}" class="btn btn-amber btn-lg px-5">
+                <i class="bi bi-envelope me-2" aria-hidden="true"></i>Contactar ahora
+            </a>
+            <a href="{{ route('materials.index') }}" class="btn btn-outline-amber btn-lg px-5">
+                <i class="bi bi-collection me-2" aria-hidden="true"></i>Ver materiales gratis
+            </a>
+        </div>
     </div>
-</div>
+</section>
 
 @endsection

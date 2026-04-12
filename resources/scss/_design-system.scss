@@ -1,0 +1,111 @@
+// ============================================================
+// DESIGN SYSTEM — Custom properties, utilities, typography
+// ============================================================
+
+:root {
+  --color-navy:       #1e3a5f;
+  --color-navy-dark:  #1a3252;
+  --color-amber:      #f59e0b;
+  --color-amber-dark: #d97706;
+  --color-cream:      #f8f5f0;
+  --color-footer:     #0f1e2e;
+  --color-footer-card:#1e2d3d;
+  scroll-behavior: smooth;
+}
+
+// ---- Backgrounds ----
+.bg-navy          { background-color: var(--color-navy) !important; }
+.bg-navy-gradient { background: linear-gradient(135deg, var(--color-navy), var(--color-navy-dark)); }
+.bg-cream         { background-color: var(--color-cream) !important; }
+.bg-footer        { background-color: var(--color-footer) !important; }
+
+// ---- Text ----
+.text-amber      { color: var(--color-amber) !important; }
+.text-on-dark    { color: #e2e8f0 !important; }
+.text-muted-dark { color: #94a3b8 !important; }
+.fw-800          { font-weight: 800 !important; }
+
+// ---- Buttons ----
+.btn-amber {
+  background-color: var(--color-amber);
+  border-color: var(--color-amber);
+  color: #1e293b;
+  font-weight: 700;
+  &:hover, &:focus {
+    background-color: var(--color-amber-dark);
+    border-color: var(--color-amber-dark);
+    color: #1e293b;
+  }
+  &:disabled { opacity: .65; }
+}
+
+.btn-outline-amber {
+  border: 2px solid var(--color-amber);
+  color: var(--color-amber);
+  font-weight: 600;
+  background-color: transparent;
+  &:hover, &:focus {
+    background-color: var(--color-amber);
+    color: #1e293b;
+  }
+}
+
+// ---- Section spacing ----
+.section    { padding-top: 4rem; padding-bottom: 4rem; }
+.section-sm { padding-top: 2.5rem; padding-bottom: 2.5rem; }
+
+// ---- Page header (navy, used on /materiales, /contacto, etc.) ----
+.page-header {
+  background-color: var(--color-navy);
+  padding: calc(3rem + 68px) 0 3.5rem;
+
+  .page-header-eyebrow {
+    font-size: .8rem;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--color-amber);
+    margin-bottom: .5rem;
+  }
+  h1 { color: #fff; margin-bottom: .5rem; }
+  .page-header-lead { color: #94a3b8; font-size: 1.05rem; }
+}
+
+// ---- Eyebrow label ----
+.eyebrow {
+  display: inline-block;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--color-amber);
+  margin-bottom: .75rem;
+}
+
+// ---- Section header (title + "ver todos" link row) ----
+.section-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  h2 { font-size: 1.5rem; font-weight: 800; color: #1e293b; margin: 0; }
+  .section-header-link {
+    font-size: .85rem;
+    color: #1a56db;
+    text-decoration: none;
+    font-weight: 600;
+    &:hover { text-decoration: underline; }
+  }
+}
+
+// ---- Narrow container (FAQ) ----
+.container-narrow    { max-width: 680px; margin-inline: auto; }
+.container-narrow-md { max-width: 640px; margin-inline: auto; }
+
+// ---- Level dot colors ----
+.level-dot-colegio     { background-color: #22c55e; }
+.level-dot-paes        { background-color: #f59e0b; }
+.level-dot-cft         { background-color: #3b82f6; }
+.level-dot-instituto   { background-color: #3b82f6; }
+.level-dot-universidad { background-color: #a855f7; }
+.level-dot-particulares{ background-color: #f59e0b; }

@@ -1,0 +1,392 @@
+<!-- MATERIAL_META
+title: Guía 9: Comparación de Fracciones — Nivel Intermedio y Avanzado
+description: ¡Lleva la comparación al siguiente nivel! 🏆 Ordena tres y cuatro fracciones, encuentra numeradores y denominadores faltantes para lograr equivalencias, detecta errores de razonamiento y resuelve problemas aplicados complejos. 20 ejercicios para dominar la comparación de fracciones.
+subject: Matemática
+level: colegio
+course: 1ro Medio
+year: 2026
+semester: 1
+unit: Unidad 1: Números y Operaciones
+tema: Tema 4: Comparación de Fracciones
+tags: [fracciones, comparación, fracciones equivalentes, ordenamiento, nivel avanzado]
+material_type: guia
+-->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guía 9: Comparación de Fracciones — Nivel Intermedio y Avanzado · 1ro Medio</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://profenicolas.cl/assets_guias/guide.css" rel="stylesheet">
+  <script>
+    MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+  <style>
+    :root {
+      --color-primary: #6A1B9A;
+      --color-secondary: #D52B1E;
+      --color-primary-light: #6A1B9A22;
+      --color-primary-mid: #6A1B9A88;
+    }
+  </style>
+</head>
+<body>
+
+<div class="guide-header" id="guide-header">
+  <div class="container">
+    <div class="guide-badge">✏️ Guía 9 · 1ro Medio · Unidad 1</div>
+    <h1 class="guide-title">Comparación de Fracciones — Nivel Intermedio y Avanzado</h1>
+    <p class="guide-subtitle">Números y Operaciones · 1° Semestre 2026</p>
+    <p class="guide-description">¡Lleva la comparación al siguiente nivel! 🏆 Ordena tres y cuatro fracciones, encuentra numeradores y denominadores faltantes para lograr equivalencias, detecta errores de razonamiento y resuelve problemas aplicados complejos. 20 ejercicios para dominar la comparación de fracciones.</p>
+  </div>
+</div>
+
+<div class="progress-sticky" id="progress-sticky">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-1">
+      <div class="progress-label" id="progress-text">0 / 20 respondidas</div>
+      <div class="progress-label" id="progress-pct">0%</div>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="progress-fill"></div>
+    </div>
+  </div>
+</div>
+
+<div class="exercises-section" id="exercises-anchor">
+  <div class="container">
+    <div class="section-heading">
+      <i class="bi bi-pencil-fill me-2"></i>Ejercicios — Comparación de Fracciones
+    </div>
+    <div id="exercises-container"></div>
+  </div>
+</div>
+
+<div class="submit-area">
+  <div class="container text-center">
+    <button class="btn-submit" id="submit-btn" onclick="submitAnswers()" disabled>
+      <i class="bi bi-send-fill me-2"></i>Enviar respuestas
+    </button>
+    <p class="pending-note" id="pending-note">Responde todos los ejercicios para habilitar el envío</p>
+  </div>
+</div>
+
+<div class="results-section" id="results-section">
+  <div class="container">
+    <div class="result-card">
+      <div class="result-header">
+        <div class="result-pct-big" id="result-pct">—%</div>
+        <div class="result-pct-label">de aprobación</div>
+      </div>
+      <div class="result-stats">
+        <div class="stat-item stat-correct">
+          <div class="stat-num" id="result-correct">—</div>
+          <div class="stat-label">Correctas</div>
+        </div>
+        <div class="stat-item stat-incorrect">
+          <div class="stat-num" id="result-incorrect">—</div>
+          <div class="stat-label">Incorrectas</div>
+        </div>
+        <div class="stat-item stat-total">
+          <div class="stat-num">20</div>
+          <div class="stat-label">Total</div>
+        </div>
+      </div>
+      <div class="motivation-msg" id="motivation-msg"></div>
+    </div>
+    <div class="section-heading">
+      <i class="bi bi-list-check me-2"></i>Revisión de respuestas
+    </div>
+    <div class="answers-section" id="answers-detail"></div>
+    <div class="text-center">
+      <button class="btn-reset" onclick="resetQuiz()">
+        <i class="bi bi-arrow-counterclockwise me-1"></i>Intentar nuevamente
+      </button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+const EXERCISES = [
+  // ── CONCEPTUALES ──
+  {
+    id: 1,
+    type: "Conceptual",
+    question: "Cuando dos fracciones tienen el mismo numerador, ¿cuál es mayor?",
+    options: [
+      "La que tiene el denominador mayor, porque el número es más grande",
+      "La que tiene el denominador menor, porque al dividir en menos partes cada parte es más grande",
+      "Son siempre equivalentes",
+      "No se puede determinar solo con el numerador"
+    ],
+    correct: 1,
+    explanation: "Con igual numerador, la fracción de menor denominador es la mayor: al dividir el todo en menos partes, cada parte es más grande. Por ejemplo: $\\dfrac{1}{3} > \\dfrac{1}{4}$ porque los tercios son más grandes que los cuartos."
+  },
+  {
+    id: 2,
+    type: "Conceptual",
+    question: "¿Cuál condición garantiza que $\\dfrac{a}{b}$ y $\\dfrac{c}{d}$ sean equivalentes?",
+    options: [
+      "Que $a = c$",
+      "$a \\times d = b \\times c$",
+      "Que $b = d$",
+      "Que $a - c = b - d$"
+    ],
+    correct: 1,
+    explanation: "La condición de equivalencia es $a \\times d = b \\times c$ (productos cruzados iguales). Esta es la forma general — no necesita que numeradores o denominadores sean iguales entre sí. Ejemplo: $\\dfrac{2}{3}$ y $\\dfrac{4}{6}$: $2 \\times 6 = 12 = 3 \\times 4$ ✅."
+  },
+  {
+    id: 3,
+    type: "Conceptual",
+    question: "Si se sabe que $\\dfrac{3}{4} > \\dfrac{5}{7}$, ¿cuál de estas afirmaciones sobre los productos cruzados es correcta?",
+    options: [
+      "$3 \\times 7 < 4 \\times 5$",
+      "$3 \\times 5 > 4 \\times 7$",
+      "$3 \\times 7 > 4 \\times 5$",
+      "$4 \\times 7 > 3 \\times 5$"
+    ],
+    correct: 2,
+    explanation: "Si $\\dfrac{a}{b} > \\dfrac{c}{d}$, entonces $a \\times d > b \\times c$. Para $\\dfrac{3}{4} > \\dfrac{5}{7}$: el primer producto es $3 \\times 7 = 21$ y el segundo es $4 \\times 5 = 20$. Como $21 > 20$, se verifica $3 \\times 7 > 4 \\times 5$ ✅."
+  },
+  {
+    id: 4,
+    type: "Análisis de errores",
+    question: "Al comparar $\\dfrac{1}{3}$ □ $\\dfrac{1}{4}$, un estudiante dice: \"$\\dfrac{1}{4} > \\dfrac{1}{3}$ porque 4 > 3\". ¿Qué error cometió?",
+    options: [
+      "Ninguno, tiene razón: 4 > 3 implica 1/4 > 1/3",
+      "Confundió numerador con denominador al leer las fracciones",
+      "Mayor denominador no implica mayor fracción: al dividir en más partes, cada parte es más pequeña, por eso $\\dfrac{1}{3} > \\dfrac{1}{4}$",
+      "Debería haber buscado el MCM antes de comparar"
+    ],
+    correct: 2,
+    explanation: "El error es conceptual: el denominador indica en cuántas partes se divide el todo. Si divides algo en 4 partes, cada parte es más pequeña que si lo divides en 3. Productos cruzados: $1 \\times 4 = 4 > 3 = 3 \\times 1$, por lo que $\\dfrac{1}{3} > \\dfrac{1}{4}$."
+  },
+  {
+    id: 5,
+    type: "Conceptual",
+    question: "¿Cuántas fracciones equivalentes a $\\dfrac{2}{3}$ existen?",
+    options: [
+      "Solo 1: la propia fracción $\\dfrac{2}{3}$",
+      "Solo 2: $\\dfrac{2}{3}$ y $\\dfrac{4}{6}$",
+      "Exactamente 3: $\\dfrac{2}{3}$, $\\dfrac{4}{6}$ y $\\dfrac{6}{9}$",
+      "Infinitas: se puede multiplicar por cualquier $k \\neq 0$"
+    ],
+    correct: 3,
+    explanation: "Multiplicando numerador y denominador por cualquier $k \\neq 0$ se obtiene una fracción equivalente: $\\dfrac{2k}{3k}$. Para k=1,2,3,4,... obtenemos $\\dfrac{2}{3}$, $\\dfrac{4}{6}$, $\\dfrac{6}{9}$, $\\dfrac{8}{12}$... Hay infinitas fracciones equivalentes a cualquier fracción."
+  },
+  // ── CÁLCULO COMPARACIÓN ──
+  {
+    id: 6,
+    type: "Cálculo",
+    question: "Compara: $\\dfrac{7}{11}$ □ $\\dfrac{5}{8}$",
+    options: [
+      "$\\dfrac{7}{11} < \\dfrac{5}{8}$",
+      "$\\dfrac{7}{11} = \\dfrac{5}{8}$",
+      "$\\dfrac{7}{11} > \\dfrac{5}{8}$",
+      "No se puede determinar"
+    ],
+    correct: 2,
+    explanation: "Productos cruzados: $7 \\times 8 = 56$ y $11 \\times 5 = 55$. Como $56 > 55$, el primer producto (de $\\dfrac{7}{11}$) es mayor → $\\dfrac{7}{11} > \\dfrac{5}{8}$. ¡La diferencia es solo 1, por eso es difícil de ver a simple vista!"
+  },
+  {
+    id: 7,
+    type: "Cálculo",
+    question: "Compara: $\\dfrac{8}{13}$ □ $\\dfrac{5}{8}$",
+    options: [
+      "$\\dfrac{8}{13} > \\dfrac{5}{8}$",
+      "$\\dfrac{8}{13} < \\dfrac{5}{8}$",
+      "$\\dfrac{8}{13} = \\dfrac{5}{8}$",
+      "No se puede determinar"
+    ],
+    correct: 1,
+    explanation: "Productos cruzados: $8 \\times 8 = 64$ y $13 \\times 5 = 65$. Como $64 < 65$, el primer producto (de $\\dfrac{8}{13}$) es menor → $\\dfrac{8}{13} < \\dfrac{5}{8}$."
+  },
+  {
+    id: 8,
+    type: "Cálculo",
+    question: "Compara: $\\dfrac{4}{7}$ □ $\\dfrac{5}{9}$",
+    options: [
+      "$\\dfrac{4}{7} < \\dfrac{5}{9}$",
+      "$\\dfrac{4}{7} = \\dfrac{5}{9}$",
+      "$\\dfrac{4}{7} > \\dfrac{5}{9}$",
+      "No se puede determinar"
+    ],
+    correct: 2,
+    explanation: "Productos cruzados: $4 \\times 9 = 36$ y $7 \\times 5 = 35$. Como $36 > 35$, el primer producto (de $\\dfrac{4}{7}$) es mayor → $\\dfrac{4}{7} > \\dfrac{5}{9}$. Diferencia de solo 1 entre los productos cruzados."
+  },
+  // ── ORDENAMIENTO DE 3 FRACCIONES ──
+  {
+    id: 9,
+    type: "Análisis",
+    question: "Ordena de menor a mayor: $\\dfrac{2}{3}$, $\\dfrac{3}{4}$, $\\dfrac{5}{7}$",
+    options: [
+      "$\\dfrac{3}{4} < \\dfrac{5}{7} < \\dfrac{2}{3}$",
+      "$\\dfrac{2}{3} < \\dfrac{3}{4} < \\dfrac{5}{7}$",
+      "$\\dfrac{2}{3} < \\dfrac{5}{7} < \\dfrac{3}{4}$",
+      "$\\dfrac{5}{7} < \\dfrac{2}{3} < \\dfrac{3}{4}$"
+    ],
+    correct: 2,
+    explanation: "$\\dfrac{2}{3}$ vs $\\dfrac{5}{7}$: $2 \\times 7=14 < 3 \\times 5=15$ → $\\dfrac{2}{3} < \\dfrac{5}{7}$. $\\dfrac{5}{7}$ vs $\\dfrac{3}{4}$: $5 \\times 4=20 < 7 \\times 3=21$ → $\\dfrac{5}{7} < \\dfrac{3}{4}$. Orden: $\\dfrac{2}{3} < \\dfrac{5}{7} < \\dfrac{3}{4}$."
+  },
+  // ── ORDENAMIENTO DE 4 FRACCIONES ──
+  {
+    id: 10,
+    type: "Análisis",
+    question: "Ordena de mayor a menor: $\\dfrac{1}{2}$, $\\dfrac{2}{3}$, $\\dfrac{3}{5}$, $\\dfrac{5}{8}$",
+    options: [
+      "$\\dfrac{2}{3} > \\dfrac{5}{8} > \\dfrac{3}{5} > \\dfrac{1}{2}$",
+      "$\\dfrac{2}{3} > \\dfrac{3}{5} > \\dfrac{5}{8} > \\dfrac{1}{2}$",
+      "$\\dfrac{5}{8} > \\dfrac{2}{3} > \\dfrac{3}{5} > \\dfrac{1}{2}$",
+      "$\\dfrac{2}{3} > \\dfrac{5}{8} > \\dfrac{1}{2} > \\dfrac{3}{5}$"
+    ],
+    correct: 0,
+    explanation: "$\\dfrac{2}{3}$ vs $\\dfrac{5}{8}$: $16 > 15$ → $\\dfrac{2}{3} > \\dfrac{5}{8}$. $\\dfrac{5}{8}$ vs $\\dfrac{3}{5}$: $25 > 24$ → $\\dfrac{5}{8} > \\dfrac{3}{5}$. $\\dfrac{3}{5}$ vs $\\dfrac{1}{2}$: $6 > 5$ → $\\dfrac{3}{5} > \\dfrac{1}{2}$. Orden: $\\dfrac{2}{3} > \\dfrac{5}{8} > \\dfrac{3}{5} > \\dfrac{1}{2}$."
+  },
+  // ── ENCONTRAR VALOR FALTANTE ──
+  {
+    id: 11,
+    type: "Completar",
+    question: "Encuentra el numerador □ tal que $\\dfrac{□}{6}$ sea equivalente a $\\dfrac{2}{3}$",
+    options: [
+      "3",
+      "4",
+      "6",
+      "2"
+    ],
+    correct: 1,
+    explanation: "Condición de equivalencia: $x \\times 3 = 6 \\times 2$, entonces $3x = 12$, por lo tanto $x = 4$. Verificación: $\\dfrac{4}{6} = \\dfrac{4 \\div 2}{6 \\div 2} = \\dfrac{2}{3}$ ✅."
+  },
+  {
+    id: 12,
+    type: "Completar",
+    question: "Encuentra el denominador □ tal que $\\dfrac{4}{□}$ sea equivalente a $\\dfrac{2}{5}$",
+    options: [
+      "8",
+      "20",
+      "10",
+      "40"
+    ],
+    correct: 2,
+    explanation: "Condición de equivalencia: $4 \\times 5 = 2 \\times x$, entonces $20 = 2x$, por lo tanto $x = 10$. Verificación: $\\dfrac{4}{10} = \\dfrac{4 \\div 2}{10 \\div 2} = \\dfrac{2}{5}$ ✅."
+  },
+  {
+    id: 13,
+    type: "Completar",
+    question: "Encuentra el valor de $x$ tal que $\\dfrac{x}{12} = \\dfrac{3}{4}$",
+    options: [
+      "$x = 8$",
+      "$x = 9$",
+      "$x = 16$",
+      "$x = 3$"
+    ],
+    correct: 1,
+    explanation: "Condición: $x \\times 4 = 12 \\times 3$, entonces $4x = 36$, por lo tanto $x = 9$. Verificación: $\\dfrac{9}{12} = \\dfrac{9 \\div 3}{12 \\div 3} = \\dfrac{3}{4}$ ✅."
+  },
+  // ── EQUIVALENCIA AVANZADA ──
+  {
+    id: 14,
+    type: "Cálculo",
+    question: "¿Son equivalentes $\\dfrac{4}{6}$ y $\\dfrac{6}{9}$?",
+    options: [
+      "No, porque $4 \\neq 6$",
+      "No, porque $6 \\neq 9$",
+      "Sí, porque ambas simplifican a $\\dfrac{2}{3}$ y $4 \\times 9 = 6 \\times 6$",
+      "No se puede determinar"
+    ],
+    correct: 2,
+    explanation: "Productos cruzados: $4 \\times 9 = 36$ y $6 \\times 6 = 36$. Como $36 = 36$, son equivalentes. Ambas simplifican a $\\dfrac{2}{3}$: $\\dfrac{4}{6} = \\dfrac{2}{3}$ (divido por 2) y $\\dfrac{6}{9} = \\dfrac{2}{3}$ (divido por 3)."
+  },
+  // ── ANÁLISIS ──
+  {
+    id: 15,
+    type: "Análisis",
+    question: "¿Cuál de estas afirmaciones es FALSA?",
+    options: [
+      "$\\dfrac{2}{4} = \\dfrac{1}{2}$ porque sus productos cruzados son iguales: $2 \\times 2 = 4 \\times 1$",
+      "Si $\\dfrac{a}{b} < \\dfrac{c}{d}$ entonces $a \\times d < b \\times c$",
+      "Para comparar fracciones con distinto denominador siempre hay que calcular el MCM",
+      "$\\dfrac{6}{9} = \\dfrac{2}{3}$ porque $6 \\times 3 = 9 \\times 2 = 18$"
+    ],
+    correct: 2,
+    explanation: "La afirmación C es falsa: el método cruzado permite comparar fracciones con distinto denominador SIN necesitar el MCM. El MCM es necesario para sumar o restar fracciones (en el método tradicional), no para compararlas. Las afirmaciones A, B y D son correctas."
+  },
+  {
+    id: 16,
+    type: "Análisis de errores",
+    question: "Al ordenar $\\dfrac{2}{5}$, $\\dfrac{3}{8}$ y $\\dfrac{1}{3}$ de mayor a menor, un alumno escribe $\\dfrac{3}{8} > \\dfrac{2}{5} > \\dfrac{1}{3}$. ¿Es correcto?",
+    options: [
+      "Sí, el orden es correcto",
+      "No: el orden correcto es $\\dfrac{2}{5} > \\dfrac{3}{8} > \\dfrac{1}{3}$",
+      "No: el orden correcto es $\\dfrac{1}{3} > \\dfrac{2}{5} > \\dfrac{3}{8}$",
+      "No: el orden correcto es $\\dfrac{2}{5} > \\dfrac{1}{3} > \\dfrac{3}{8}$"
+    ],
+    correct: 1,
+    explanation: "$\\dfrac{2}{5}$ vs $\\dfrac{3}{8}$: $2 \\times 8=16 > 5 \\times 3=15$ → $\\dfrac{2}{5} > \\dfrac{3}{8}$. $\\dfrac{3}{8}$ vs $\\dfrac{1}{3}$: $3 \\times 3=9 > 8 \\times 1=8$ → $\\dfrac{3}{8} > \\dfrac{1}{3}$. Orden correcto: $\\dfrac{2}{5} > \\dfrac{3}{8} > \\dfrac{1}{3}$."
+  },
+  // ── APLICACIÓN ──
+  {
+    id: 17,
+    type: "Aplicación",
+    question: "Tres estudiantes bebieron estas fracciones de su botella: Alicia $\\dfrac{3}{5}$, Bruno $\\dfrac{2}{3}$ y Clara $\\dfrac{5}{8}$. Ordena de menor a mayor cantidad bebida.",
+    options: [
+      "Clara < Alicia < Bruno",
+      "Alicia < Clara < Bruno",
+      "Bruno < Clara < Alicia",
+      "Clara < Bruno < Alicia"
+    ],
+    correct: 1,
+    explanation: "$\\dfrac{3}{5}$ vs $\\dfrac{5}{8}$: $3 \\times 8=24 < 5 \\times 5=25$ → Alicia < Clara. $\\dfrac{5}{8}$ vs $\\dfrac{2}{3}$: $5 \\times 3=15 < 8 \\times 2=16$ → Clara < Bruno. Orden: Alicia ($\\dfrac{3}{5}$) < Clara ($\\dfrac{5}{8}$) < Bruno ($\\dfrac{2}{3}$)."
+  },
+  {
+    id: 18,
+    type: "Aplicación",
+    question: "En una carrera, Diego avanzó $\\dfrac{7}{12}$ del recorrido y Valentina avanzó $\\dfrac{4}{7}$. ¿Quién llegó más lejos y cómo lo confirmas?",
+    options: [
+      "Valentina, porque $4 < 7$ y eso la favorece",
+      "Diego, porque $7 \\times 7 = 49 > 12 \\times 4 = 48$",
+      "Son equivalentes: $7 \\times 7 = 12 \\times 4$",
+      "Diego, porque 7 > 4 en el numerador"
+    ],
+    correct: 1,
+    explanation: "Productos cruzados: $7 \\times 7 = 49$ y $12 \\times 4 = 48$. Como $49 > 48$, el primer producto (de $\\dfrac{7}{12}$) es mayor → Diego avanzó más. La diferencia es mínima (solo 1 en los productos cruzados), pero Diego gana."
+  },
+  {
+    id: 19,
+    type: "Aplicación",
+    question: "En un concurso, los participantes resolvieron estas fracciones de un laberinto: el primero $\\dfrac{7}{10}$, el segundo $\\dfrac{4}{6}$ y el tercero $\\dfrac{3}{4}$. ¿Quién llegó más lejos?",
+    options: [
+      "El segundo ($\\dfrac{4}{6}$), porque avanzó la menor parte",
+      "El primero ($\\dfrac{7}{10}$)",
+      "El tercero ($\\dfrac{3}{4}$), porque $\\dfrac{3}{4} > \\dfrac{7}{10} > \\dfrac{4}{6}$",
+      "Son todos equivalentes"
+    ],
+    correct: 2,
+    explanation: "$\\dfrac{3}{4}$ vs $\\dfrac{7}{10}$: $3 \\times 10=30 > 4 \\times 7=28$ → $\\dfrac{3}{4} > \\dfrac{7}{10}$. $\\dfrac{7}{10}$ vs $\\dfrac{4}{6}$: $7 \\times 6=42 > 10 \\times 4=40$ → $\\dfrac{7}{10} > \\dfrac{4}{6}$. El tercero llegó más lejos: $\\dfrac{3}{4} > \\dfrac{7}{10} > \\dfrac{4}{6}$."
+  },
+  {
+    id: 20,
+    type: "Aplicación",
+    question: "Un maestro quiere dividir su clase en grupos equivalentes. El grupo A tiene $\\dfrac{6}{10}$ de los alumnos y el grupo B tiene $\\dfrac{□}{15}$. ¿Qué numerador debe tener el grupo B para que ambos grupos sean equivalentes?",
+    options: [
+      "6",
+      "9",
+      "10",
+      "12"
+    ],
+    correct: 1,
+    explanation: "Condición de equivalencia: $6 \\times 15 = 10 \\times x$, entonces $90 = 10x$, por lo tanto $x = 9$. Verificación: $\\dfrac{6}{10}$ y $\\dfrac{9}{15}$ → $6 \\times 15 = 90 = 10 \\times 9$ ✅. Ambas simplifican a $\\dfrac{3}{5}$."
+  }
+];
+</script>
+
+<script src="https://profenicolas.cl/assets_guias/guide.js"></script>
+</body>
+</html>

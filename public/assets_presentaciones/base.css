@@ -694,3 +694,139 @@ h3 { color: var(--color-primary); font-size: 1.2rem; margin: 1rem 0 0.5rem; }
   border-color: #c2185b;
   cursor: default;
 }
+
+/* ═══════════════════════════════════════════════════════════
+   MODO IMPRESIÓN / PDF — SCREEN MEDIA
+   Reglas activadas por JS al añadir .modo-alumno/.modo-docente
+   al body. No dependen de @media print, por lo que funcionan
+   incluso cuando Browsershot captura en screen media.
+═══════════════════════════════════════════════════════════ */
+
+body.modo-alumno,
+body.modo-docente {
+  overflow: visible !important;
+  height: auto !important;
+}
+
+body.modo-alumno .presentation-container,
+body.modo-docente .presentation-container {
+  height: auto !important;
+}
+
+/* Todos los slides visibles, con altura automática */
+body.modo-alumno .slide,
+body.modo-docente .slide {
+  display: flex !important;
+  height: auto !important;
+  min-height: 100vh;
+  overflow: visible !important;
+  animation: none !important;
+  page-break-after: always;
+  break-after: page;
+}
+
+body.modo-alumno .slide:last-child,
+body.modo-docente .slide:last-child {
+  page-break-after: avoid;
+  break-after: avoid;
+}
+
+/* Ocultar controles de navegación e interactividad */
+body.modo-alumno .navigation,
+body.modo-docente .navigation,
+body.modo-alumno .progress-bar-container,
+body.modo-docente .progress-bar-container,
+body.modo-alumno .btn-show-solution,
+body.modo-docente .btn-show-solution,
+body.modo-alumno .btn-show-solution-sm,
+body.modo-docente .btn-show-solution-sm,
+body.modo-alumno #quiz-actions,
+body.modo-docente #quiz-actions,
+body.modo-alumno #quiz-progress,
+body.modo-docente #quiz-progress { display: none !important; }
+
+/* Soluciones: ocultas en alumno, visibles en docente */
+body.modo-alumno  .solution-box { display: none !important; }
+body.modo-docente .solution-box { display: block !important; }
+
+/* ═══════════════════════════════════════════════════════════
+   MODO IMPRESIÓN / PDF — PRINT MEDIA (backup)
+   Activado cuando se detecta ?modo=alumno|docente en la URL.
+   El JS añade la clase .modo-alumno o .modo-docente al <body>.
+   Browsershot aplica estos estilos al generar el PDF.
+═══════════════════════════════════════════════════════════ */
+
+@media print {
+  /* ── Layout base ── */
+  body {
+    overflow: visible !important;
+    height: auto !important;
+    background: white !important;
+    font-size: 100% !important;
+    color: #000 !important;
+  }
+
+  /* ── Textos negros para legibilidad en impresión ── */
+  /* Las clases .portada y .section-divider tienen color:white explícito,
+     por lo que sus hijos heredan blanco y no se ven afectados. */
+  .definition-box, .example-box, .exercise-box,
+  .exercise-box-vertical, .method-box, .note-box,
+  .summary-box, .objective-box, .formula-box,
+  .solution-box, .footer { color: #000 !important; }
+  .resumen-table td { color: #000 !important; }
+  .presentation-container { height: auto !important; }
+
+  /* ── Mostrar todos los slides ── */
+  .slide {
+    display: flex !important;
+    height: auto !important;
+    min-height: 100vh;
+    overflow: visible !important;
+    page-break-after: always;
+    break-after: page;
+    padding: 1cm 1.5cm;
+    animation: none !important;
+  }
+  .slide:last-child {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  /* ── Ocultar controles UI ── */
+  .progress-bar-container,
+  .navigation,
+  .floating-formulas,
+  .float-formula,
+  .btn-show-solution,
+  .btn-show-solution-sm,
+  #quiz-actions,
+  #quiz-progress { display: none !important; }
+
+  /* ── Solution boxes: visibles en docente, ocultas en alumno ── */
+  body.modo-alumno  .solution-box { display: none !important; }
+  body.modo-docente .solution-box { display: block !important; }
+  body:not(.modo-alumno) .solution-box { display: block !important; }
+
+  /* ── Opciones correctas en modo docente ── */
+  body.modo-docente .option-item.correct {
+    background: #e8f5e9 !important;
+    border-color: #388e3c !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* ── Fondos de color para impresión ── */
+  .portada,
+  .section-divider,
+  .section-divider.ejercicios,
+  .section-divider.resumen {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* ── Tamaño de fuente para papel A4 ── */
+  html { font-size: 85% !important; }
+  .portada h1 { font-size: 2rem !important; }
+
+  @page { margin: 1.5cm; size: A4; }
+}

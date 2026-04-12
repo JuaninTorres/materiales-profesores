@@ -408,3 +408,70 @@ body { background: #f4f6f9; font-family: 'Segoe UI', sans-serif; margin: 0; padd
   .result-stats { grid-template-columns: repeat(3, 1fr); gap: 0.5rem; }
   .result-pct-big { font-size: 2.2rem; }
 }
+
+/* ═══════════════════════════════════════════════════════════
+   MODO IMPRESIÓN / PDF
+   El JS añade .modo-alumno o .modo-docente al <body>.
+   Browsershot aplica estos estilos al generar el PDF.
+═══════════════════════════════════════════════════════════ */
+
+@media print {
+  /* ── Ocultar controles interactivos ── */
+  .progress-sticky,
+  .submit-area,
+  .results-section,
+  .btn-reset { display: none !important; }
+
+  /* ── Tarjetas de ejercicio ── */
+  .exercise-card {
+    break-inside: avoid;
+    box-shadow: none !important;
+    border: 1px solid #dee2e6 !important;
+    border-left: 4px solid var(--color-primary) !important;
+    margin-bottom: 0.75rem;
+  }
+
+  /* ── Textos negros para legibilidad en impresión ── */
+  body { color: #000 !important; }
+  .exercise-question,
+  .explanation-box,
+  .answer-question-text,
+  .answer-body,
+  .pending-note { color: #000 !important; }
+
+  /* ── Alternativas: aspecto estático ── */
+  .option-btn {
+    cursor: default !important;
+    background: white !important;
+    border: 1px solid #dee2e6 !important;
+    color: #000 !important;
+  }
+  .option-btn .option-letter {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* ── Respuesta correcta en modo docente ── */
+  body.modo-docente .option-btn.correct {
+    background: #d4edda !important;
+    border-color: #28a745 !important;
+    color: #155724 !important;
+    font-weight: 600 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  body.modo-docente .option-btn.correct .option-letter {
+    background: #28a745 !important;
+  }
+
+  /* ── Explicación visible solo en docente ── */
+  body.modo-docente .explanation-box { display: block !important; }
+  body.modo-alumno  .explanation-box { display: none !important; }
+
+  .guide-header {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  @page { margin: 1.5cm; size: A4; }
+}

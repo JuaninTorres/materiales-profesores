@@ -1,0 +1,287 @@
+// ============================================================
+// NAVBAR
+// ============================================================
+.navbar-site {
+  background-color: transparent;
+  padding-top: .875rem;
+  padding-bottom: .875rem;
+  border-bottom: 1px solid transparent;
+  transition: background-color .3s ease, border-color .3s ease, box-shadow .3s ease;
+
+  &.scrolled {
+    background-color: var(--color-navy);
+    border-bottom-color: rgba(255,255,255,.06);
+    box-shadow: 0 2px 24px rgba(0,0,0,.35);
+  }
+
+  .navbar-brand-link {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: #fff;
+    .brand-accent { color: var(--color-amber); }
+  }
+
+  .nav-link {
+    color: rgba(255,255,255,.75);
+    font-weight: 600;
+    font-size: .9rem;
+    padding: .375rem .75rem;
+    transition: color .15s;
+    &:hover, &.active { color: #fff; }
+  }
+
+  .navbar-logo {
+    height: 36px;
+    width: auto;
+  }
+
+  .navbar-toggler {
+    border-color: rgba(255,255,255,.3);
+    padding: .3rem .6rem;
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255,255,255,0.8%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+  }
+}
+
+// ============================================================
+// FOOTER
+// ============================================================
+.site-footer {
+  background-color: var(--color-footer);
+  color: #94a3b8;
+
+  .footer-brand {
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: #fff;
+    margin-bottom: .5rem;
+  }
+
+  .footer-tagline {
+    font-size: .82rem;
+    color: #94a3b8;
+    line-height: 1.6;
+  }
+
+  .footer-col-h {
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: #64748b;
+    margin-bottom: .75rem;
+  }
+
+  .footer-link {
+    display: block;
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: .85rem;
+    padding: .2rem 0;
+    transition: color .15s;
+    &:hover { color: #fff; }
+  }
+
+  .footer-contact-row {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    font-size: .85rem;
+    color: #94a3b8;
+    margin-bottom: .5rem;
+    i { color: #64748b; flex-shrink: 0; }
+  }
+
+  .footer-bottom {
+    margin-top: 1rem;
+    border-top: 1px solid #1e2d3d;
+    padding: 1rem 0;
+    font-size: .78rem;
+    color: #64748b;
+  }
+}
+
+// ============================================================
+// MAT-CARD
+// ============================================================
+.mat-card {
+  background: #fff;
+  border: 1.5px solid #e2e8f0;
+  border-radius: .75rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: box-shadow .2s, transform .2s;
+
+  &:hover {
+    box-shadow: 0 .5rem 1.5rem rgba(0,0,0,.12);
+    transform: translateY(-2px);
+  }
+}
+
+.mat-card-top {
+  padding: 1rem 1rem .5rem;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+.mat-card-body {
+  padding: 0 1rem .75rem;
+  flex: 1;
+}
+
+.mat-card-title {
+  font-size: .95rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: .3rem;
+  line-height: 1.35;
+}
+
+.mat-card-meta {
+  font-size: .78rem;
+  color: #64748b;
+  margin-bottom: .5rem;
+}
+
+.mat-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .25rem;
+}
+
+.mat-tag {
+  font-size: .72rem !important;
+  font-weight: 500 !important;
+}
+
+.mat-card-footer {
+  padding: .75rem 1rem;
+  border-top: 1px solid #f1f5f9;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mat-pages {
+  font-size: .75rem;
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  gap: .3rem;
+}
+
+// ---- Type badges ----
+.mat-type-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .25rem;
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  padding: .2rem .55rem;
+  border-radius: 999px;
+
+  &.mat-type-pdf   { background: #fef2f2; color: #dc2626; }
+  &.mat-type-video { background: #eff6ff; color: #2563eb; }
+  &.mat-type-html  { background: #f0fdf4; color: #16a34a; }
+  &.mat-type-image { background: #fdf4ff; color: #9333ea; }
+  &.mat-type-latex { background: #fff7ed; color: #ea580c; }
+  &.mat-type-link  { background: #f0f9ff; color: #0284c7; }
+  &.mat-type-other { background: #f8fafc; color: #64748b; }
+}
+
+// ---- Level dot ----
+.mat-level-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+// ============================================================
+// FILTER BAR
+// ============================================================
+.filter-bar {
+  background: #fff;
+  border-bottom: 1px solid #e2e8f0;
+  padding: .75rem 0;
+
+  .filter-bar-search { min-width: 200px; }
+  .filter-bar-select { width: auto; min-width: 140px; }
+}
+
+// Filter badges
+.filter-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .3rem;
+  background: #eff6ff;
+  color: #1a56db;
+  border: 1px solid #bfdbfe;
+  padding: .2rem .6rem;
+  border-radius: 999px;
+  font-size: .78rem;
+  font-weight: 600;
+
+  .filter-badge-remove {
+    cursor: pointer;
+    color: #93c5fd;
+    line-height: 1;
+    &:hover { color: #1a56db; }
+  }
+}
+
+// View toggle
+.view-toggle {
+  .btn-view {
+    padding: .35rem .6rem;
+    border: 1.5px solid #e2e8f0;
+    background: #fff;
+    color: #94a3b8;
+    border-radius: .375rem;
+    cursor: pointer;
+    transition: border-color .15s, color .15s, background .15s;
+
+    &.active, &:hover {
+      border-color: #1a56db;
+      color: #1a56db;
+      background: #eff6ff;
+    }
+  }
+}
+
+// List row
+.mat-list-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: .875rem 1rem;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: .5rem;
+  color: inherit;
+  transition: box-shadow .15s;
+
+  &:hover { box-shadow: 0 2px 8px rgba(0,0,0,.08); }
+
+  .mat-list-info { flex: 1; min-width: 0; }
+  .mat-list-title {
+    font-weight: 700;
+    font-size: .92rem;
+    color: #1e293b;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .mat-list-meta { font-size: .78rem; color: #64748b; }
+}
