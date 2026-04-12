@@ -83,6 +83,7 @@ class MaterialController extends Controller
             ->showBackground()
             ->format('Letter')
             ->margins(15, 15, 15, 15)
+            ->addChromiumArguments(['--no-sandbox', '--disable-setuid-sandbox'])
             ->pdf();
 
         return response($pdf, 200, [
