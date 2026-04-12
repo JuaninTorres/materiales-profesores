@@ -63,7 +63,8 @@
       "Bash(curl -s http://localhost:8000/)",
       "Bash(curl -s \"http://localhost:8000/?t=$\\(date +%s\\)\")",
       "Bash(curl -s http://localhost:8000/sitemap.xml)",
-      "Bash(git reset:*)"
+      "Bash(git reset:*)",
+      "Bash(./vendor/bin/pint app/Http/Controllers/MaterialController.php tests/Feature/LayoutTest.php tests/Feature/MaterialShowTest.php --verbose)"
     ]
   }
 }
