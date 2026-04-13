@@ -10,7 +10,7 @@ class PageController extends Controller
     {
         $recentMaterials = Material::where('published', true)
             ->latest()
-            ->take(4)
+            ->take(6)
             ->get();
 
         return view('pages.home', compact('recentMaterials'));
